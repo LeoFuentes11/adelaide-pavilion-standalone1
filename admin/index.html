@@ -1,0 +1,2100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Adelaide Pavilion — Admin</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:    #1A5FAD;
+      --gold:     #C5972E;
+      --charcoal: #1C2B39;
+      --ivory:    #F9F6F0;
+      --white:    #FFFFFF;
+      --danger:   #c0392b;
+      --success:  #27ae60;
+      --border:   #ddd;
+      --sidebar-w: 220px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      color: var(--charcoal);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* ── Sidebar ── */
+    #sidebar {
+      width: var(--sidebar-w);
+      background: var(--charcoal);
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      z-index: 100;
+      overflow-y: auto;
+    }
+
+    #sidebar .brand {
+      padding: 20px 16px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    #sidebar .brand h1 {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    #sidebar .brand p {
+      font-size: 11px;
+      opacity: .55;
+      margin-top: 2px;
+    }
+
+    #sidebar nav {
+      flex: 1;
+      padding: 12px 0;
+    }
+
+    #sidebar nav a {
+      display: block;
+      padding: 10px 20px;
+      color: rgba(255,255,255,.75);
+      text-decoration: none;
+      font-size: 13.5px;
+      transition: background .15s, color .15s;
+      cursor: pointer;
+    }
+
+    #sidebar nav a:hover,
+    #sidebar nav a.active {
+      background: rgba(255,255,255,.08);
+      color: var(--white);
+    }
+
+    #sidebar nav a.active {
+      border-left: 3px solid var(--gold);
+      padding-left: 17px;
+    }
+
+    #sidebar .logout-btn {
+      display: block;
+      margin: 12px 16px 20px;
+      padding: 9px 14px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 6px;
+      color: rgba(255,255,255,.7);
+      font-size: 12.5px;
+      text-align: center;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background .15s;
+    }
+
+    #sidebar .logout-btn:hover { background: rgba(255,255,255,.14); }
+
+    /* ── Main area ── */
+    #main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    #topbar {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    #topbar h2 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    #save-btn {
+      padding: 9px 22px;
+      background: var(--green);
+      color: var(--white);
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity .15s;
+    }
+
+    #save-btn:disabled { opacity: .5; cursor: not-allowed; }
+    #save-btn:not(:disabled):hover { opacity: .88; }
+
+    #content-area {
+      padding: 28px;
+      flex: 1;
+    }
+
+    /* ── Toast ── */
+    #toast {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #fff;
+      box-shadow: 0 4px 18px rgba(0,0,0,.18);
+      z-index: 9999;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity .25s, transform .25s;
+      pointer-events: none;
+    }
+
+    #toast.show { opacity: 1; transform: translateY(0); }
+    #toast.success { background: var(--success); }
+    #toast.error   { background: var(--danger); }
+    #toast.warning { background: var(--gold); }
+
+    /* ── Form elements ── */
+    .form-section {
+      background: var(--white);
+      border-radius: 10px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.07);
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    .form-section-header {
+      background: #f7f8fa;
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #666;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
+    }
+
+    .form-section-header:hover { background: #eef0f3; }
+
+    .form-section-header .collapse-icon {
+      font-style: normal;
+      font-size: 16px;
+      line-height: 1;
+      color: #aaa;
+      transition: transform .2s;
+    }
+
+    .form-section.collapsed .collapse-icon { transform: rotate(-90deg); }
+
+    .form-section-body {
+      padding: 20px;
+      overflow: hidden;
+      transition: padding .2s;
+    }
+
+    .form-section.collapsed .form-section-body {
+      display: none;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 10px 20px;
+      align-items: start;
+      margin-bottom: 16px;
+    }
+
+    .field-row:last-child { margin-bottom: 0; }
+
+    .field-label {
+      padding-top: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #444;
+      line-height: 1.35;
+    }
+
+    .field-label .hint {
+      display: block;
+      font-weight: 400;
+      font-size: 11px;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    .field-control input[type="text"],
+    .field-control input[type="number"],
+    .field-control textarea {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 13.5px;
+      font-family: inherit;
+      color: var(--charcoal);
+      background: var(--white);
+      outline: none;
+      transition: border-color .15s;
+    }
+
+    .field-control input:focus,
+    .field-control textarea:focus {
+      border-color: var(--green);
+    }
+
+    .field-control textarea { resize: vertical; min-height: 80px; }
+
+    .field-control input[type="checkbox"] {
+      width: 16px; height: 16px; cursor: pointer; margin-top: 9px;
+    }
+
+    /* ── Dynamic string list ── */
+    .string-list { display: flex; flex-direction: column; gap: 8px; }
+
+    .string-list-item {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .string-list-item input { flex: 1; }
+
+    .btn-icon {
+      width: 32px; height: 32px;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      background: var(--white);
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .15s;
+      flex-shrink: 0;
+    }
+
+    .btn-icon:hover { background: #f0f2f5; }
+    .btn-icon.remove { color: var(--danger); border-color: #f5c6c3; }
+    .btn-icon.remove:hover { background: #fdf0ef; }
+
+    .btn-add {
+      margin-top: 4px;
+      padding: 6px 14px;
+      background: var(--white);
+      border: 1px dashed #aaa;
+      border-radius: 6px;
+      font-size: 12.5px;
+      color: #555;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: border-color .15s, color .15s;
+    }
+
+    .btn-add:hover { border-color: var(--green); color: var(--green); }
+
+    /* ── Object card list ── */
+    .card-list { display: flex; flex-direction: column; gap: 14px; }
+
+    .card-item {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .card-item-header {
+      background: #f7f8fa;
+      border-bottom: 1px solid var(--border);
+      padding: 9px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    .card-item-body { padding: 16px; }
+
+    .card-field-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 8px 16px;
+      align-items: start;
+      margin-bottom: 10px;
+    }
+
+    .card-field-row:last-child { margin-bottom: 0; }
+
+    .card-field-label {
+      padding-top: 7px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    #loading-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(255,255,255,.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9000;
+      font-size: 15px;
+      color: #666;
+    }
+
+    .spinner {
+      width: 24px; height: 24px;
+      border: 3px solid #ddd;
+      border-top-color: var(--green);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      margin-right: 12px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Mobile sidebar toggle ── */
+    #sidebar-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      flex-direction: column;
+      gap: 5px;
+      margin-right: 12px;
+    }
+    #sidebar-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--charcoal);
+      border-radius: 2px;
+      transition: 0.25s;
+    }
+
+    #sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 99;
+    }
+    #sidebar-overlay.visible { display: block; }
+
+    @media (max-width: 700px) {
+      #sidebar-toggle { display: flex; }
+
+      #sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.28s ease;
+        z-index: 200;
+      }
+      #sidebar.open { transform: translateX(0); }
+
+      #main { margin-left: 0; }
+      .field-row { grid-template-columns: 1fr; }
+      .card-field-row { grid-template-columns: 1fr; }
+      #topbar { padding: 14px 16px; }
+      #content-area { padding: 16px; }
+      #toast { bottom: 16px; right: 16px; left: 16px; right: 16px; }
+    }
+
+    /* ── Photo Manager ── */
+    .photo-manager { display: flex; flex-direction: column; gap: 24px; }
+
+    .photo-upload-box {
+      background: var(--white);
+      border-radius: 10px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.07);
+      padding: 24px;
+    }
+
+    .photo-upload-box h3 {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #666;
+      margin-bottom: 16px;
+    }
+
+    .photo-drop-zone {
+      border: 2px dashed #ccc;
+      border-radius: 8px;
+      padding: 32px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color .2s, background .2s;
+      margin-bottom: 16px;
+    }
+
+    .photo-drop-zone:hover,
+    .photo-drop-zone.drag-over {
+      border-color: var(--green);
+      background: #f0f6ff;
+    }
+
+    .photo-drop-zone input[type="file"] { display: none; }
+
+    .photo-drop-label {
+      font-size: 14px;
+      color: #888;
+      pointer-events: none;
+    }
+
+    .photo-drop-label strong { color: var(--green); }
+
+    .photo-preview-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .photo-preview-img {
+      width: 100px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+      display: none;
+    }
+
+    .photo-meta { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+
+    .photo-meta input {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 13.5px;
+      font-family: inherit;
+      color: var(--charcoal);
+      outline: none;
+    }
+
+    .photo-meta input:focus { border-color: var(--green); }
+
+    .btn-upload {
+      padding: 10px 24px;
+      background: var(--green);
+      color: var(--white);
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity .15s;
+    }
+
+    .btn-upload:disabled { opacity: .45; cursor: not-allowed; }
+    .btn-upload:not(:disabled):hover { opacity: .88; }
+
+    .upload-status {
+      font-size: 13px;
+      margin-top: 8px;
+      min-height: 20px;
+      color: #555;
+    }
+
+    .upload-status.ok  { color: var(--success); }
+    .upload-status.err { color: var(--danger); }
+
+    /* Gallery grid in admin */
+    .photo-grid-box {
+      background: var(--white);
+      border-radius: 10px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.07);
+      padding: 24px;
+    }
+
+    .photo-grid-box h3 {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #666;
+      margin-bottom: 16px;
+    }
+
+    .photo-admin-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 12px;
+    }
+
+    .photo-admin-card {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #f7f8fa;
+    }
+
+    .photo-admin-card img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-admin-card-info {
+      padding: 6px 8px;
+      font-size: 11px;
+      color: #555;
+      line-height: 1.3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .photo-admin-delete {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      width: 26px;
+      height: 26px;
+      background: rgba(192,57,43,.85);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      font-size: 14px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity .15s;
+    }
+
+    .photo-admin-card:hover .photo-admin-delete { opacity: 1; }
+
+    .photo-grid-empty {
+      font-size: 13.5px;
+      color: #aaa;
+      text-align: center;
+      padding: 28px 0;
+    }
+  </style>
+</head>
+<body>
+
+<div id="loading-overlay">
+  <div class="spinner"></div> Loading…
+</div>
+
+<!-- Sidebar -->
+<aside id="sidebar">
+  <div class="brand">
+    <h1>Adelaide Pavilion</h1>
+    <p>Content Manager</p>
+  </div>
+  <nav id="nav"></nav>
+  <a class="logout-btn" href="/admin-login.html?logout=1" onclick="return confirmLogout()">Log out</a>
+</aside>
+
+<!-- Sidebar overlay (mobile) -->
+<div id="sidebar-overlay"></div>
+
+<!-- Main -->
+<div id="main">
+  <div id="topbar">
+    <div style="display:flex;align-items:center;">
+      <button id="sidebar-toggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <h2 id="section-title">Loading…</h2>
+    </div>
+    <button id="save-btn" disabled>Save Changes</button>
+  </div>
+  <div id="content-area"></div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+'use strict';
+
+// ──────────────────────────────────────────────
+// Schema — mirrors _data/*.json structure
+// ──────────────────────────────────────────────
+
+var SECTIONS = [
+  {
+    id: 'contact',
+    label: 'Contact Info',
+    groups: [
+      {
+        title: 'Phone & Email',
+        fields: [
+          { key: 'phone_display', label: 'Phone (display)', type: 'string' },
+          { key: 'phone_tel',     label: 'Phone (tel: link)', type: 'string', hint: 'E.g. tel:0882127444' },
+          { key: 'email',         label: 'Email address', type: 'string' },
+          { key: 'email_href',    label: 'Email (mailto: link)', type: 'string' }
+        ]
+      },
+      {
+        title: 'Address',
+        fields: [
+          { key: 'address_footer', label: 'Address (footer)', type: 'string' },
+          { key: 'address_full',   label: 'Address (full)',   type: 'string' }
+        ]
+      },
+      {
+        title: 'Social & Maps',
+        fields: [
+          { key: 'facebook_url',  label: 'Facebook URL',    type: 'string' },
+          { key: 'instagram_url', label: 'Instagram URL',   type: 'string' },
+          { key: 'maps_url',      label: 'Google Maps URL', type: 'string' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'homepage',
+    label: 'Home Page',
+    groups: [
+      {
+        title: 'Hero',
+        fields: [
+          { key: 'hero_script',   label: 'Script (italic tagline)', type: 'string' },
+          { key: 'hero_title',    label: 'Main heading',            type: 'string' },
+          { key: 'hero_subtitle', label: 'Subtitle',                type: 'string' },
+          { key: 'hero_desc',     label: 'Description paragraph',   type: 'text' }
+        ]
+      },
+      {
+        title: 'Welcome Section',
+        fields: [
+          { key: 'welcome_subtitle', label: 'Section label',  type: 'string' },
+          { key: 'welcome_title',    label: 'Heading',         type: 'string' },
+          { key: 'welcome_para1',    label: 'Paragraph 1',     type: 'text' },
+          { key: 'welcome_para2',    label: 'Paragraph 2',     type: 'text' }
+        ]
+      },
+      {
+        title: 'Feature Strip',
+        fields: [
+          { key: 'strip_guests_label',      label: 'Item 1 — Label', type: 'string' },
+          { key: 'strip_guests_value',      label: 'Item 1 — Value', type: 'string' },
+          { key: 'strip_rooms_label',       label: 'Item 2 — Label', type: 'string' },
+          { key: 'strip_rooms_value',       label: 'Item 2 — Value', type: 'string' },
+          { key: 'strip_established_label', label: 'Item 3 — Label', type: 'string' },
+          { key: 'strip_established_value', label: 'Item 3 — Value', type: 'string' },
+          { key: 'strip_cuisine_label',     label: 'Item 4 — Label', type: 'string' },
+          { key: 'strip_cuisine_value',     label: 'Item 4 — Value', type: 'string' },
+          { key: 'strip_awards_label',      label: 'Item 5 — Label', type: 'string' },
+          { key: 'strip_awards_value',      label: 'Item 5 — Value', type: 'string' }
+        ]
+      },
+      {
+        title: 'Testimonials',
+        fields: [
+          {
+            key: 'testimonials',
+            label: 'Testimonials',
+            type: 'list-object',
+            itemFields: [
+              { key: 'quote',  label: 'Quote',  type: 'text' },
+              { key: 'author', label: 'Author', type: 'string' },
+              { key: 'event',  label: 'Event',  type: 'string' }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'about',
+    label: 'About Page',
+    groups: [
+      {
+        title: 'Hero',
+        fields: [
+          { key: 'hero_script',   label: 'Script (italic tagline)', type: 'string' },
+          { key: 'hero_title',    label: 'Main heading',            type: 'string' },
+          { key: 'hero_subtitle', label: 'Subtitle',                type: 'string' }
+        ]
+      },
+      {
+        title: 'History',
+        fields: [
+          { key: 'history_subtitle', label: 'Section label',   type: 'string' },
+          { key: 'history_title',    label: 'Section heading', type: 'string' },
+          { key: 'history_para1',    label: 'Paragraph 1',     type: 'text' },
+          { key: 'history_para2',    label: 'Paragraph 2',     type: 'text' },
+          { key: 'history_para3',    label: 'Paragraph 3',     type: 'text' },
+          { key: 'history_para4',    label: 'Paragraph 4',     type: 'text' },
+          { key: 'legacy_para',      label: 'Legacy paragraph', type: 'text' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'weddings',
+    label: 'Weddings Page',
+    groups: [
+      {
+        title: 'Hero',
+        fields: [
+          { key: 'hero_script',   label: 'Script (italic tagline)', type: 'string' },
+          { key: 'hero_title',    label: 'Main heading',            type: 'string' },
+          { key: 'hero_subtitle', label: 'Subtitle',                type: 'string' },
+          { key: 'hero_desc',     label: 'Description paragraph',   type: 'text' }
+        ]
+      },
+      {
+        title: 'Intro',
+        fields: [
+          { key: 'intro_para1', label: 'Paragraph 1', type: 'text' },
+          { key: 'intro_para2', label: 'Paragraph 2', type: 'text' }
+        ]
+      },
+      {
+        title: 'Testimonial',
+        fields: [
+          { key: 'testimonial_quote',  label: 'Quote',  type: 'text' },
+          { key: 'testimonial_author', label: 'Author', type: 'string' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'corporate',
+    label: 'Corporate Page',
+    groups: [
+      {
+        title: 'Hero',
+        fields: [
+          { key: 'hero_script',   label: 'Script (italic tagline)', type: 'string' },
+          { key: 'hero_title',    label: 'Main heading',            type: 'string' },
+          { key: 'hero_subtitle', label: 'Subtitle',                type: 'string' }
+        ]
+      },
+      {
+        title: 'Intro',
+        fields: [
+          { key: 'intro_para1', label: 'Paragraph 1', type: 'text' },
+          { key: 'intro_para2', label: 'Paragraph 2', type: 'text' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'social',
+    label: 'Social Page',
+    groups: [
+      {
+        title: 'Hero',
+        fields: [
+          { key: 'hero_script',   label: 'Script (italic tagline)', type: 'string' },
+          { key: 'hero_title',    label: 'Main heading',            type: 'string' },
+          { key: 'hero_subtitle', label: 'Subtitle',                type: 'string' }
+        ]
+      },
+      {
+        title: 'Intro',
+        fields: [
+          { key: 'intro_para1', label: 'Paragraph 1', type: 'text' },
+          { key: 'intro_para2', label: 'Paragraph 2', type: 'text' }
+        ]
+      },
+      {
+        title: 'Testimonial',
+        fields: [
+          { key: 'testimonial_quote',  label: 'Quote',  type: 'text' },
+          { key: 'testimonial_author', label: 'Author', type: 'string' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'packages',
+    label: 'Packages & Pricing',
+    groups: [
+      {
+        title: 'Page Header',
+        fields: [
+          { key: 'hero_script',   label: 'Script (italic tagline)', type: 'string' },
+          { key: 'hero_title',    label: 'Main heading',            type: 'string' },
+          { key: 'hero_subtitle', label: 'Subtitle',                type: 'string' }
+        ]
+      },
+      {
+        title: 'Package Labels & Section Headings',
+        fields: [
+          { key: 'tag_wedding',                 label: 'Wedding package badge',                       type: 'string' },
+          { key: 'tag_banquet_1',               label: 'Banquet Option 1 badge',                      type: 'string' },
+          { key: 'tag_banquet_2',               label: 'Banquet Option 2 badge',                      type: 'string' },
+          { key: 'tag_banquet_3',               label: 'Banquet Option 3 badge',                      type: 'string' },
+          { key: 'tag_banquet_4',               label: 'Banquet Option 4 badge',                      type: 'string' },
+          { key: 'tag_cocktail_social',          label: 'Social cocktail badge',                       type: 'string' },
+          { key: 'tag_casual_dining',            label: 'Casual dining badge',                         type: 'string' },
+          { key: 'tag_breakfast',               label: 'Breakfast badge',                             type: 'string' },
+          { key: 'tag_addon',                   label: 'Add-on package badge',                        type: 'string' },
+          { key: 'tag_corporate_cocktail_full', label: 'Full corporate cocktail badge',               type: 'string' },
+          { key: 'heading_breakfast_packages',  label: 'Breakfast Packages — section heading',        type: 'string' },
+          { key: 'heading_lunch_options',       label: 'Lunch Options — section heading',             type: 'string' },
+          { key: 'heading_morning_tea',         label: 'Morning/Afternoon Tea — section heading',     type: 'string' },
+          { key: 'heading_corporate_cocktail',  label: 'Corporate Cocktail — section heading',        type: 'string' },
+          { key: 'heading_room_configurations', label: 'Room Configurations — section heading',       type: 'string' }
+        ]
+      },
+      {
+        title: 'Wedding — Signature Package',
+        fields: [
+          { key: 'wedding_signature_price_2026', label: 'Price 2026 (per person)', type: 'number' },
+          { key: 'wedding_signature_price_2027', label: 'Price 2027 (per person)', type: 'number' },
+          { key: 'wedding_signature_price_2028', label: 'Price 2028 (per person)', type: 'number' },
+          { key: 'wedding_signature_price_label', label: 'Price label text', type: 'string' }
+        ]
+      },
+      {
+        title: 'Wedding — Pavilion Package',
+        fields: [
+          { key: 'wedding_pavilion_price_2026', label: 'Price 2026 (per person)', type: 'number' },
+          { key: 'wedding_pavilion_price_2027', label: 'Price 2027 (per person)', type: 'number' },
+          { key: 'wedding_pavilion_price_2028', label: 'Price 2028 (per person)', type: 'number' },
+          { key: 'wedding_pavilion_price_label', label: 'Price label text', type: 'string' }
+        ]
+      },
+      {
+        title: 'Wedding — Cocktail',
+        fields: [
+          { key: 'wedding_cocktail_price', label: 'Price per person', type: 'number' }
+        ]
+      },
+      {
+        title: 'Social Events Pricing',
+        fields: [
+          { key: 'social_two_course_main_dessert',  label: '2-course (main + dessert)',   type: 'number' },
+          { key: 'social_two_course_entree_main',   label: '2-course (entrée + main)',     type: 'number' },
+          { key: 'social_three_course_set',         label: '3-course set menu',            type: 'number' },
+          { key: 'social_three_course_alternate',   label: '3-course alternate drop',      type: 'number' },
+          { key: 'social_cocktail',                 label: 'Cocktail / standing',          type: 'number' },
+          { key: 'social_street_eats',              label: 'Street Eats',                  type: 'number' }
+        ]
+      },
+      {
+        title: 'Corporate Pricing',
+        fields: [
+          { key: 'corporate_breakfast_continental', label: 'Breakfast (continental)', type: 'number' },
+          { key: 'corporate_breakfast_hot',         label: 'Breakfast (hot)',         type: 'number' },
+          { key: 'corporate_networking',            label: 'Networking event',        type: 'number' },
+          { key: 'corporate_cocktail',              label: 'Cocktail / gala dinner',  type: 'number' }
+        ]
+      },
+      {
+        title: 'Children\'s Menu',
+        fields: [
+          { key: 'children_menu1_label',    label: 'Option 1 — heading',  type: 'string' },
+          { key: 'children_menu1',          label: 'Option 1 — price',    type: 'number' },
+          { key: 'children_menu1_items',    label: 'Option 1 — items',    type: 'list-string' },
+          { key: 'children_menu2_label',    label: 'Option 2 — heading',  type: 'string' },
+          { key: 'children_menu2',          label: 'Option 2 — price',    type: 'number' },
+          { key: 'children_menu2_items',    label: 'Option 2 — items',    type: 'list-string' },
+          { key: 'children_cocktail_label', label: 'Cocktail — heading',  type: 'string' },
+          { key: 'children_cocktail',       label: 'Cocktail — price',    type: 'number' },
+          { key: 'children_cocktail_items', label: 'Cocktail — items',    type: 'list-string' },
+          { key: 'children_note',           label: 'Footer note',         type: 'text' }
+        ]
+      },
+      {
+        title: 'Beverage — Standard Package',
+        fields: [
+          { key: 'bev_standard_2hr', label: '2-hour price', type: 'string' },
+          { key: 'bev_standard_3hr', label: '3-hour price', type: 'string' },
+          { key: 'bev_standard_4hr', label: '4-hour price', type: 'string' },
+          { key: 'bev_standard_5hr', label: '5-hour price', type: 'string' },
+          { key: 'bev_standard_includes', label: 'Included items', type: 'list-string' }
+        ]
+      },
+      {
+        title: 'Beverage — Premium Package',
+        fields: [
+          { key: 'bev_premium_surcharge', label: 'Surcharge',   type: 'string' },
+          { key: 'bev_premium_reds',      label: 'Red wines',    type: 'list-string' },
+          { key: 'bev_premium_whites',    label: 'White wines',  type: 'list-string' },
+          { key: 'bev_premium_extras',    label: 'Extras',       type: 'list-string' }
+        ]
+      },
+      {
+        title: 'Beverage — Deluxe Package',
+        fields: [
+          { key: 'bev_deluxe_surcharge', label: 'Surcharge',   type: 'string' },
+          { key: 'bev_deluxe_reds',      label: 'Red wines',    type: 'list-string' },
+          { key: 'bev_deluxe_whites',    label: 'White wines',  type: 'list-string' },
+          { key: 'bev_deluxe_extras',    label: 'Extras',       type: 'list-string' }
+        ]
+      },
+      {
+        title: 'Beverage — Non-Alcoholic',
+        fields: [
+          { key: 'bev_nonalcoholic_price',    label: 'Price',           type: 'string' },
+          { key: 'bev_nonalcoholic_includes', label: 'Included items',  type: 'list-string' }
+        ]
+      },
+      {
+        title: 'Beverage — Additional Rates',
+        fields: [
+          { key: 'bev_extension_rate',    label: 'Extension rate',       type: 'string' },
+          { key: 'bev_bottled_beer_rate', label: 'Bottled beer rate',    type: 'string' },
+          { key: 'bev_cider_rate',        label: 'Cider rate',           type: 'string' },
+          { key: 'bev_moscato_rate',      label: 'Moscato rate',         type: 'string' },
+          { key: 'bev_spirits_rate',      label: 'Spirits rate',         type: 'string' },
+          { key: 'bev_byo_label',         label: 'BYO description',      type: 'string' },
+          { key: 'bev_byo_rate',          label: 'BYO corkage rate',     type: 'string' }
+        ]
+      },
+      {
+        title: 'Wedding — Signature Package Content',
+        fields: [
+          { key: 'wedding_signature_menu',       label: 'Menu items',       type: 'list-string' },
+          { key: 'wedding_signature_bev',        label: 'Beverages',        type: 'list-string' },
+          { key: 'wedding_signature_inclusions', label: 'Inclusions',       type: 'list-string' }
+        ]
+      },
+      {
+        title: 'Wedding — Pavilion Package Content',
+        fields: [
+          { key: 'wedding_pavilion_menu',    label: 'Menu items',  type: 'list-string' },
+          { key: 'wedding_pavilion_bev',     label: 'Beverages',   type: 'list-string' },
+          { key: 'wedding_pavilion_extras',  label: 'Extras',      type: 'list-string' }
+        ]
+      },
+      {
+        title: 'Wedding — Cocktail Package Content',
+        fields: [
+          { key: 'wedding_cocktail_canapes',    label: 'Canapés',     type: 'list-string' },
+          { key: 'wedding_cocktail_bev',        label: 'Beverages',   type: 'list-string' },
+          { key: 'wedding_cocktail_inclusions', label: 'Inclusions',  type: 'list-string' }
+        ]
+      },
+      {
+        title: 'Social Events — Banquet Options Content',
+        fields: [
+          { key: 'social_banquet1_items', label: 'Banquet Option 1 items', type: 'list-string' },
+          { key: 'social_banquet2_items', label: 'Banquet Option 2 items', type: 'list-string' },
+          { key: 'social_banquet3_items', label: 'Banquet Option 3 items', type: 'list-string' },
+          { key: 'social_banquet4_items', label: 'Banquet Option 4 items', type: 'list-string' }
+        ]
+      },
+      {
+        title: 'Social Events — Cocktail & Street Eats Content',
+        fields: [
+          { key: 'social_cocktail_items',    label: 'Cocktail package items', type: 'list-string' },
+          { key: 'social_street_eats_items', label: 'Street Eats items',      type: 'list-string' }
+        ]
+      },
+      {
+        title: 'Corporate — Breakfast Content',
+        fields: [
+          { key: 'corp_continental_items', label: 'Continental items',       type: 'list-string' },
+          { key: 'corp_hot_options',        label: 'Hot Plated options',      type: 'list-string' },
+          { key: 'corp_hot_bev',            label: 'Hot Plated beverages',    type: 'list-string' }
+        ]
+      },
+      {
+        title: 'Corporate — Cocktail & Networking Content',
+        fields: [
+          { key: 'corp_networking_items', label: 'Networking items',  type: 'list-string' },
+          { key: 'corp_cocktail_items',   label: 'Cocktail items',    type: 'list-string' }
+        ]
+      },
+      {
+        title: 'Lunch Options Table',
+        fields: [
+          { key: 'lunch_r1_name',  label: 'Row 1 — Name',        type: 'string' },
+          { key: 'lunch_r1_desc',  label: 'Row 1 — Description', type: 'string' },
+          { key: 'lunch_r1_price', label: 'Row 1 — Price',       type: 'string' },
+          { key: 'lunch_r2_name',  label: 'Row 2 — Name',        type: 'string' },
+          { key: 'lunch_r2_desc',  label: 'Row 2 — Description', type: 'string' },
+          { key: 'lunch_r2_price', label: 'Row 2 — Price',       type: 'string' },
+          { key: 'lunch_r3_name',  label: 'Row 3 — Name',        type: 'string' },
+          { key: 'lunch_r3_desc',  label: 'Row 3 — Description', type: 'string' },
+          { key: 'lunch_r3_price', label: 'Row 3 — Price',       type: 'string' },
+          { key: 'lunch_r4_name',  label: 'Row 4 — Name',        type: 'string' },
+          { key: 'lunch_r4_desc',  label: 'Row 4 — Description', type: 'string' },
+          { key: 'lunch_r4_price', label: 'Row 4 — Price',       type: 'string' },
+          { key: 'lunch_r5_name',  label: 'Row 5 — Name',        type: 'string' },
+          { key: 'lunch_r5_desc',  label: 'Row 5 — Description', type: 'string' },
+          { key: 'lunch_r5_price', label: 'Row 5 — Price',       type: 'string' }
+        ]
+      },
+      {
+        title: 'Morning / Afternoon Tea — Beverages Table',
+        fields: [
+          { key: 'tea_bev_r1_name',  label: 'Row 1 — Name',  type: 'string' },
+          { key: 'tea_bev_r1_price', label: 'Row 1 — Price', type: 'string' },
+          { key: 'tea_bev_r2_name',  label: 'Row 2 — Name',  type: 'string' },
+          { key: 'tea_bev_r2_price', label: 'Row 2 — Price', type: 'string' },
+          { key: 'tea_bev_r3_name',  label: 'Row 3 — Name',  type: 'string' },
+          { key: 'tea_bev_r3_price', label: 'Row 3 — Price', type: 'string' }
+        ]
+      },
+      {
+        title: 'Morning / Afternoon Tea — Baked Selections Table',
+        fields: [
+          { key: 'tea_food_r1_name',  label: 'Row 1 — Name',  type: 'string' },
+          { key: 'tea_food_r1_price', label: 'Row 1 — Price', type: 'string' },
+          { key: 'tea_food_r2_name',  label: 'Row 2 — Name',  type: 'string' },
+          { key: 'tea_food_r2_price', label: 'Row 2 — Price', type: 'string' },
+          { key: 'tea_food_r3_name',  label: 'Row 3 — Name',  type: 'string' },
+          { key: 'tea_food_r3_price', label: 'Row 3 — Price', type: 'string' },
+          { key: 'tea_food_r4_name',  label: 'Row 4 — Name',  type: 'string' },
+          { key: 'tea_food_r4_price', label: 'Row 4 — Price', type: 'string' },
+          { key: 'tea_food_r5_name',  label: 'Row 5 — Name',  type: 'string' },
+          { key: 'tea_food_r5_price', label: 'Row 5 — Price', type: 'string' }
+        ]
+      },
+      {
+        title: 'Room Configurations — Parkview Room',
+        fields: [
+          { key: 'room_parkview_banquet',   label: 'Banquet capacity',   type: 'string' },
+          { key: 'room_parkview_cabaret',   label: 'Cabaret capacity',   type: 'string' },
+          { key: 'room_parkview_cocktail',  label: 'Cocktail capacity',  type: 'string' },
+          { key: 'room_parkview_theatre',   label: 'Theatre capacity',   type: 'string' },
+          { key: 'room_parkview_ushape',    label: 'U-Shape capacity',   type: 'string' },
+          { key: 'room_parkview_boardroom', label: 'Boardroom capacity', type: 'string' },
+          { key: 'room_parkview_classroom', label: 'Classroom capacity', type: 'string' }
+        ]
+      },
+      {
+        title: 'Room Configurations — Terrace Room',
+        fields: [
+          { key: 'room_terrace_banquet',   label: 'Banquet capacity',   type: 'string' },
+          { key: 'room_terrace_cabaret',   label: 'Cabaret capacity',   type: 'string' },
+          { key: 'room_terrace_cocktail',  label: 'Cocktail capacity',  type: 'string' },
+          { key: 'room_terrace_theatre',   label: 'Theatre capacity',   type: 'string' },
+          { key: 'room_terrace_ushape',    label: 'U-Shape capacity',   type: 'string' },
+          { key: 'room_terrace_boardroom', label: 'Boardroom capacity', type: 'string' },
+          { key: 'room_terrace_classroom', label: 'Classroom capacity', type: 'string' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'menus',
+    label: 'Menus',
+    groups: [
+      {
+        title: 'Entrees',
+        fields: [{
+          key: 'entrees', label: 'Entree items', type: 'list-object',
+          itemFields: [
+            { key: 'name',      label: 'Name',        type: 'string' },
+            { key: 'desc',      label: 'Description', type: 'text' },
+            { key: 'surcharge', label: 'Surcharge (optional)', type: 'string' }
+          ]
+        }]
+      },
+      {
+        title: 'Mains',
+        fields: [{
+          key: 'mains', label: 'Main course items', type: 'list-object',
+          itemFields: [
+            { key: 'name',      label: 'Name',        type: 'string' },
+            { key: 'desc',      label: 'Description', type: 'text' },
+            { key: 'surcharge', label: 'Surcharge (optional)', type: 'string' }
+          ]
+        }]
+      },
+      {
+        title: 'Desserts',
+        fields: [{
+          key: 'desserts', label: 'Dessert items', type: 'list-object',
+          itemFields: [
+            { key: 'name',      label: 'Name',        type: 'string' },
+            { key: 'desc',      label: 'Description', type: 'text' },
+            { key: 'surcharge', label: 'Surcharge (optional)', type: 'string' }
+          ]
+        }]
+      },
+      {
+        title: 'Hot Canapes',
+        fields: [{
+          key: 'canapes_hot', label: 'Hot canape items', type: 'list-object',
+          itemFields: [
+            { key: 'name',      label: 'Name',        type: 'string' },
+            { key: 'desc',      label: 'Description', type: 'text' },
+            { key: 'surcharge', label: 'Surcharge (optional)', type: 'string' }
+          ]
+        }]
+      },
+      {
+        title: 'Cold Canapes',
+        fields: [{
+          key: 'canapes_cold', label: 'Cold canape items', type: 'list-object',
+          itemFields: [
+            { key: 'name',      label: 'Name',        type: 'string' },
+            { key: 'desc',      label: 'Description', type: 'text' },
+            { key: 'surcharge', label: 'Surcharge (optional)', type: 'string' }
+          ]
+        }]
+      }
+    ]
+  },
+  { id: 'photos', label: 'Photos', special: true },
+  { id: 'images', label: 'Site Images', special: true }
+];
+
+// ──────────────────────────────────────────────
+// State
+// ──────────────────────────────────────────────
+
+var currentSection = SECTIONS[0];
+var currentData = {};
+
+// ──────────────────────────────────────────────
+// Toast
+// ──────────────────────────────────────────────
+
+var toastTimer;
+function showToast(msg, type) {
+  type = type || 'success';
+  var el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'show ' + type;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function() { el.className = ''; }, 3500);
+}
+
+// ──────────────────────────────────────────────
+// Loading overlay
+// ──────────────────────────────────────────────
+
+function setLoading(on) {
+  document.getElementById('loading-overlay').style.display = on ? 'flex' : 'none';
+}
+
+// ──────────────────────────────────────────────
+// Navigation
+// ──────────────────────────────────────────────
+
+function buildNav() {
+  var nav = document.getElementById('nav');
+  nav.innerHTML = '';
+  SECTIONS.forEach(function(sec) {
+    var a = document.createElement('a');
+    a.textContent = sec.label;
+    a.dataset.id = sec.id;
+    a.addEventListener('click', function() {
+      history.replaceState(null, '', '#' + sec.id);
+      switchSection(sec.id);
+    });
+    nav.appendChild(a);
+  });
+}
+
+function setActiveNav(id) {
+  document.querySelectorAll('#nav a').forEach(function(a) {
+    a.classList.toggle('active', a.dataset.id === id);
+  });
+}
+
+// ──────────────────────────────────────────────
+// Data fetching / saving
+// ──────────────────────────────────────────────
+
+function authHeaders(extra) {
+  var meta = document.querySelector('meta[name="admin-token"]');
+  var token = meta ? meta.getAttribute('content') : '';
+  var headers = Object.assign({}, extra || {});
+  if (token) headers['Authorization'] = 'Bearer ' + token;
+  return headers;
+}
+
+function fetchSection(id) {
+  return fetch('/api/admin-content?file=' + encodeURIComponent(id), {
+    headers: authHeaders()
+  }).then(function(res) {
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return res.json();
+  });
+}
+
+function saveSection(id, data) {
+  return fetch('/api/admin-save', {
+    method: 'POST',
+    headers: authHeaders({ 'Content-Type': 'application/json' }),
+    body: JSON.stringify({ file: id, data: data })
+  }).then(function(res) {
+    return res.json().then(function(json) {
+      if (!res.ok) throw new Error(json.error || 'HTTP ' + res.status);
+      return json;
+    });
+  });
+}
+
+// ──────────────────────────────────────────────
+// Read current form values back into an object
+// ──────────────────────────────────────────────
+
+function collectData(section, original) {
+  var result = Object.assign({}, original);
+
+  section.groups.forEach(function(group) {
+    group.fields.forEach(function(field) {
+      var key = field.key;
+      var type = field.type;
+      var el;
+
+      if (type === 'string' || type === 'text') {
+        el = document.querySelector('[data-field="' + key + '"]');
+        if (el) result[key] = el.value.trim();
+
+      } else if (type === 'number') {
+        el = document.querySelector('[data-field="' + key + '"]');
+        if (el) {
+          var n = parseFloat(el.value);
+          result[key] = isNaN(n) ? el.value.trim() : n;
+        }
+
+      } else if (type === 'boolean') {
+        el = document.querySelector('[data-field="' + key + '"]');
+        if (el) result[key] = el.checked;
+
+      } else if (type === 'list-string') {
+        var container = document.querySelector('[data-list="' + key + '"]');
+        if (container) {
+          result[key] = Array.from(container.querySelectorAll('input'))
+            .map(function(i) { return i.value.trim(); })
+            .filter(Boolean);
+        }
+
+      } else if (type === 'list-object') {
+        var cardList = document.querySelector('[data-card-list="' + key + '"]');
+        if (cardList) {
+          result[key] = Array.from(cardList.querySelectorAll('[data-card-index]')).map(function(card) {
+            var idx = card.dataset.cardIndex;
+            var obj = {};
+            field.itemFields.forEach(function(sf) {
+              var cel = card.querySelector('[data-card-field="' + sf.key + '"][data-card-idx="' + idx + '"]');
+              if (cel) obj[sf.key] = cel.value.trim();
+            });
+            return obj;
+          });
+        }
+      }
+    });
+  });
+
+  return result;
+}
+
+// ──────────────────────────────────────────────
+// Render helpers
+// ──────────────────────────────────────────────
+
+function makeInput(type, key, value) {
+  if (type === 'text') {
+    var ta = document.createElement('textarea');
+    ta.dataset.field = key;
+    ta.value = value != null ? value : '';
+    return ta;
+  }
+  var input = document.createElement('input');
+  if (type === 'number') {
+    input.type = 'number';
+  } else if (type === 'boolean') {
+    input.type = 'checkbox';
+    input.checked = !!value;
+  } else {
+    input.type = 'text';
+  }
+  if (type !== 'boolean') input.value = value != null ? value : '';
+  input.dataset.field = key;
+  return input;
+}
+
+function renderStringList(key, items) {
+  var wrapper = document.createElement('div');
+  wrapper.className = 'field-control';
+
+  var list = document.createElement('div');
+  list.className = 'string-list';
+  list.dataset.list = key;
+
+  function addItem(val) {
+    var row = document.createElement('div');
+    row.className = 'string-list-item';
+
+    var inp = document.createElement('input');
+    inp.type = 'text';
+    inp.value = val || '';
+    row.appendChild(inp);
+
+    var remove = document.createElement('button');
+    remove.className = 'btn-icon remove';
+    remove.title = 'Remove';
+    remove.innerHTML = '&times;';
+    remove.type = 'button';
+    remove.addEventListener('click', function() { row.remove(); });
+    row.appendChild(remove);
+
+    list.appendChild(row);
+  }
+
+  (items || []).forEach(function(v) { addItem(v); });
+
+  var addBtn = document.createElement('button');
+  addBtn.className = 'btn-add';
+  addBtn.type = 'button';
+  addBtn.textContent = '+ Add item';
+  addBtn.addEventListener('click', function() { addItem(''); });
+
+  wrapper.appendChild(list);
+  wrapper.appendChild(addBtn);
+  return wrapper;
+}
+
+var cardCounter = 0;
+
+function renderCardList(field, items) {
+  var wrapper = document.createElement('div');
+  wrapper.className = 'field-control';
+
+  var list = document.createElement('div');
+  list.className = 'card-list';
+  list.dataset.cardList = field.key;
+
+  function addCard(item) {
+    var idx = cardCounter++;
+    var card = document.createElement('div');
+    card.className = 'card-item';
+    card.dataset.cardIndex = idx;
+
+    var header = document.createElement('div');
+    header.className = 'card-item-header';
+
+    var title = document.createElement('span');
+    var cardNum = list.querySelectorAll('[data-card-index]').length + 1;
+    title.textContent = 'Item ' + cardNum;
+    header.appendChild(title);
+
+    var removeBtn = document.createElement('button');
+    removeBtn.className = 'btn-icon remove';
+    removeBtn.type = 'button';
+    removeBtn.innerHTML = '&times; Remove';
+    removeBtn.style.cssText = 'width:auto;padding:0 10px;font-size:12px;';
+    removeBtn.addEventListener('click', function() {
+      card.remove();
+      Array.from(list.querySelectorAll('[data-card-index]')).forEach(function(c, i) {
+        c.querySelector('.card-item-header span').textContent = 'Item ' + (i + 1);
+      });
+    });
+    header.appendChild(removeBtn);
+    card.appendChild(header);
+
+    var body = document.createElement('div');
+    body.className = 'card-item-body';
+
+    field.itemFields.forEach(function(sf) {
+      var row = document.createElement('div');
+      row.className = 'card-field-row';
+
+      var lbl = document.createElement('div');
+      lbl.className = 'card-field-label';
+      lbl.textContent = sf.label;
+      row.appendChild(lbl);
+
+      var ctrl = document.createElement('div');
+      var val = (item && item[sf.key]) != null ? item[sf.key] : '';
+      if (sf.type === 'text') {
+        var ta = document.createElement('textarea');
+        ta.value = val;
+        ta.dataset.cardField = sf.key;
+        ta.dataset.cardIdx = idx;
+        ctrl.appendChild(ta);
+      } else {
+        var inp = document.createElement('input');
+        inp.type = 'text';
+        inp.value = val;
+        inp.dataset.cardField = sf.key;
+        inp.dataset.cardIdx = idx;
+        ctrl.appendChild(inp);
+      }
+      row.appendChild(ctrl);
+      body.appendChild(row);
+    });
+
+    card.appendChild(body);
+    list.appendChild(card);
+  }
+
+  (items || []).forEach(function(item) { addCard(item); });
+
+  var addBtn = document.createElement('button');
+  addBtn.className = 'btn-add';
+  addBtn.type = 'button';
+  addBtn.textContent = '+ Add item';
+  addBtn.addEventListener('click', function() { addCard(null); });
+
+  wrapper.appendChild(list);
+  wrapper.appendChild(addBtn);
+  return wrapper;
+}
+
+function renderSection(section, data) {
+  var area = document.getElementById('content-area');
+  area.innerHTML = '';
+  cardCounter = 0;
+
+  section.groups.forEach(function(group) {
+    var sec = document.createElement('div');
+    sec.className = 'form-section collapsed';
+
+    var hdr = document.createElement('div');
+    hdr.className = 'form-section-header';
+
+    var titleSpan = document.createElement('span');
+    titleSpan.textContent = group.title;
+    hdr.appendChild(titleSpan);
+
+    var icon = document.createElement('i');
+    icon.className = 'collapse-icon';
+    icon.textContent = '▾';
+    hdr.appendChild(icon);
+
+    hdr.addEventListener('click', function() {
+      sec.classList.toggle('collapsed');
+    });
+
+    sec.appendChild(hdr);
+
+    var body = document.createElement('div');
+    body.className = 'form-section-body';
+
+    group.fields.forEach(function(field) {
+      var key = field.key;
+      var label = field.label;
+      var type = field.type;
+      var hint = field.hint;
+      var value = data[key];
+
+      if (type === 'list-string') {
+        var row = document.createElement('div');
+        row.className = 'field-row';
+
+        var lbl = document.createElement('div');
+        lbl.className = 'field-label';
+        lbl.textContent = label;
+        if (hint) {
+          var h = document.createElement('span');
+          h.className = 'hint';
+          h.textContent = hint;
+          lbl.appendChild(h);
+        }
+        row.appendChild(lbl);
+        row.appendChild(renderStringList(key, value));
+        body.appendChild(row);
+
+      } else if (type === 'list-object') {
+        var row2 = document.createElement('div');
+        row2.className = 'field-row';
+
+        var lbl2 = document.createElement('div');
+        lbl2.className = 'field-label';
+        lbl2.textContent = label;
+        row2.appendChild(lbl2);
+        row2.appendChild(renderCardList(field, value));
+        body.appendChild(row2);
+
+      } else {
+        var row3 = document.createElement('div');
+        row3.className = 'field-row';
+
+        var lbl3 = document.createElement('div');
+        lbl3.className = 'field-label';
+        lbl3.textContent = label;
+        if (hint) {
+          var h3 = document.createElement('span');
+          h3.className = 'hint';
+          h3.textContent = hint;
+          lbl3.appendChild(h3);
+        }
+        row3.appendChild(lbl3);
+
+        var ctrl = document.createElement('div');
+        ctrl.className = 'field-control';
+        ctrl.appendChild(makeInput(type, key, value));
+        row3.appendChild(ctrl);
+        body.appendChild(row3);
+      }
+    });
+
+    sec.appendChild(body);
+    area.appendChild(sec);
+  });
+}
+
+// ──────────────────────────────────────────────
+// Switch section
+// ──────────────────────────────────────────────
+
+function switchSection(id) {
+  var section = null;
+  for (var i = 0; i < SECTIONS.length; i++) {
+    if (SECTIONS[i].id === id) { section = SECTIONS[i]; break; }
+  }
+  if (!section) return Promise.resolve();
+
+  currentSection = section;
+  document.getElementById('section-title').textContent = section.label;
+  setActiveNav(id);
+  document.getElementById('save-btn').disabled = true;
+
+  if (section.special) {
+    setLoading(false);
+    if (id === 'photos') renderPhotos();
+    if (id === 'images') renderImages();
+    return Promise.resolve();
+  }
+
+  setLoading(true);
+
+  return fetchSection(id)
+    .then(function(data) {
+      currentData = data;
+      renderSection(section, data);
+      document.getElementById('save-btn').disabled = false;
+    })
+    .catch(function(err) {
+      showToast('Failed to load ' + section.label + ': ' + err.message, 'error');
+    })
+    .finally(function() {
+      setLoading(false);
+    });
+}
+
+// ──────────────────────────────────────────────
+// Photo Manager
+// ──────────────────────────────────────────────
+
+function renderPhotos() {
+  var area = document.getElementById('content-area');
+  area.innerHTML = '';
+
+  var mgr = document.createElement('div');
+  mgr.className = 'photo-manager';
+
+  // ── Upload box ──
+  var uploadBox = document.createElement('div');
+  uploadBox.className = 'photo-upload-box';
+  uploadBox.innerHTML = '<h3>Upload New Photo</h3>';
+
+  var dropZone = document.createElement('div');
+  dropZone.className = 'photo-drop-zone';
+  dropZone.innerHTML =
+    '<input type="file" id="photo-file-input" accept="image/jpeg,image/jpg,image/png,image/webp,image/gif">' +
+    '<label class="photo-drop-label" for="photo-file-input">' +
+    '<strong>Click to choose</strong> or drag &amp; drop an image here<br>' +
+    '<small style="font-size:12px;display:block;margin-top:6px">JPEG · PNG · WebP · GIF — max 4 MB</small>' +
+    '</label>';
+
+  var fileInput = dropZone.querySelector('#photo-file-input');
+
+  // Drag-and-drop
+  dropZone.addEventListener('dragover', function(e) { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', function() { dropZone.classList.remove('drag-over'); });
+  dropZone.addEventListener('drop', function(e) {
+    e.preventDefault();
+    dropZone.classList.remove('drag-over');
+    var files = e.dataTransfer.files;
+    if (files && files[0]) handleFileSelected(files[0]);
+  });
+  dropZone.addEventListener('click', function(e) {
+    if (e.target !== fileInput) fileInput.click();
+  });
+  fileInput.addEventListener('change', function() {
+    if (fileInput.files && fileInput.files[0]) handleFileSelected(fileInput.files[0]);
+  });
+
+  uploadBox.appendChild(dropZone);
+
+  // Preview + meta row
+  var previewRow = document.createElement('div');
+  previewRow.className = 'photo-preview-row';
+  previewRow.style.display = 'none';
+
+  var previewImg = document.createElement('img');
+  previewImg.className = 'photo-preview-img';
+  previewImg.style.display = 'block';
+
+  var meta = document.createElement('div');
+  meta.className = 'photo-meta';
+
+  var altInput = document.createElement('input');
+  altInput.type = 'text';
+  altInput.placeholder = 'Alt text (describes the image for accessibility)';
+  altInput.id = 'photo-alt';
+
+  var captionInput = document.createElement('input');
+  captionInput.type = 'text';
+  captionInput.placeholder = 'Caption (optional short description)';
+  captionInput.id = 'photo-caption';
+
+  meta.appendChild(altInput);
+  meta.appendChild(captionInput);
+  previewRow.appendChild(previewImg);
+  previewRow.appendChild(meta);
+  uploadBox.appendChild(previewRow);
+
+  var uploadBtn = document.createElement('button');
+  uploadBtn.className = 'btn-upload';
+  uploadBtn.type = 'button';
+  uploadBtn.textContent = 'Upload Photo';
+  uploadBtn.disabled = true;
+  uploadBox.appendChild(uploadBtn);
+
+  var statusEl = document.createElement('div');
+  statusEl.className = 'upload-status';
+  uploadBox.appendChild(statusEl);
+
+  mgr.appendChild(uploadBox);
+
+  // ── Gallery grid box ──
+  var gridBox = document.createElement('div');
+  gridBox.className = 'photo-grid-box';
+  gridBox.innerHTML = '<h3>Gallery Photos</h3>';
+
+  var grid = document.createElement('div');
+  grid.className = 'photo-admin-grid';
+  grid.id = 'photo-admin-grid';
+  grid.innerHTML = '<p class="photo-grid-empty">Loading photos\u2026</p>';
+  gridBox.appendChild(grid);
+
+  mgr.appendChild(gridBox);
+  area.appendChild(mgr);
+
+  // ── State ──
+  var pendingFile = null;
+  var pendingBase64 = null;
+
+  // ── Canvas compress ──
+  function compressImage(file, callback) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var img = new Image();
+      img.onload = function() {
+        var MAX = 1920;
+        var w = img.width, h = img.height;
+        if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
+        var canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        // For non-JPEG types, keep as PNG up to the size limit; JPEG at 85% quality
+        var mime = file.type === 'image/png' ? 'image/png' : 'image/jpeg';
+        var quality = mime === 'image/jpeg' ? 0.85 : undefined;
+        var dataUrl = canvas.toDataURL(mime, quality);
+        // Strip the data:...;base64, prefix
+        var base64 = dataUrl.split(',')[1];
+        callback(base64, mime);
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function handleFileSelected(file) {
+    pendingFile = file;
+    pendingBase64 = null;
+    uploadBtn.disabled = true;
+    statusEl.className = 'upload-status';
+    statusEl.textContent = 'Compressing\u2026';
+    previewRow.style.display = 'none';
+
+    compressImage(file, function(base64, mime) {
+      pendingBase64 = base64;
+      pendingFile = { name: file.name, type: mime };
+
+      // Rough size check: base64 length * 0.75 ≈ bytes
+      var approxBytes = Math.ceil(base64.length * 0.75);
+      if (approxBytes > 4 * 1024 * 1024) {
+        statusEl.className = 'upload-status err';
+        statusEl.textContent = 'Image too large after compression (' + Math.round(approxBytes / 1024) + ' KB). Please resize it first.';
+        return;
+      }
+
+      previewImg.src = 'data:' + mime + ';base64,' + base64;
+      previewRow.style.display = 'flex';
+      altInput.value = altInput.value || '';
+      captionInput.value = captionInput.value || '';
+      uploadBtn.disabled = false;
+      statusEl.className = 'upload-status';
+      statusEl.textContent = 'Ready to upload (' + Math.round(approxBytes / 1024) + ' KB)';
+    });
+  }
+
+  uploadBtn.addEventListener('click', function() {
+    if (!pendingBase64 || !pendingFile) return;
+    uploadBtn.disabled = true;
+    statusEl.className = 'upload-status';
+    statusEl.textContent = 'Uploading\u2026';
+
+    fetch('/api/admin-upload', {
+      method: 'POST',
+      headers: authHeaders({ 'Content-Type': 'application/json' }),
+      body: JSON.stringify({
+        name: pendingFile.name,
+        type: pendingFile.type,
+        data: pendingBase64,
+        alt: altInput.value.trim(),
+        caption: captionInput.value.trim()
+      })
+    })
+    .then(function(res) { return res.json().then(function(j) { return { ok: res.ok, body: j }; }); })
+    .then(function(r) {
+      if (!r.ok) throw new Error(r.body.error || 'Upload failed');
+      statusEl.className = 'upload-status ok';
+      statusEl.textContent = 'Uploaded! The photo will appear on the site after ~2 minutes.';
+      // Reset
+      pendingFile = null; pendingBase64 = null;
+      previewRow.style.display = 'none';
+      previewImg.src = '';
+      altInput.value = ''; captionInput.value = '';
+      fileInput.value = '';
+      uploadBtn.disabled = true;
+      // Refresh grid
+      loadGrid();
+    })
+    .catch(function(err) {
+      statusEl.className = 'upload-status err';
+      statusEl.textContent = 'Error: ' + err.message;
+      uploadBtn.disabled = false;
+    });
+  });
+
+  // ── Load + render grid ──
+  function loadGrid() {
+    grid.innerHTML = '<p class="photo-grid-empty">Loading photos\u2026</p>';
+    fetch('/_data/gallery.json?_=' + Date.now())
+      .then(function(res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
+      .then(function(items) { renderGrid(items); })
+      .catch(function(err) {
+        grid.innerHTML = '<p class="photo-grid-empty">Could not load photos: ' + err.message + '</p>';
+      });
+  }
+
+  function renderGrid(items) {
+    grid.innerHTML = '';
+    if (!items || items.length === 0) {
+      grid.innerHTML = '<p class="photo-grid-empty">No photos yet.</p>';
+      return;
+    }
+    items.forEach(function(item) {
+      var card = document.createElement('div');
+      card.className = 'photo-admin-card';
+
+      var img = document.createElement('img');
+      img.src = '/' + item.src;
+      img.alt = item.alt || '';
+      img.loading = 'lazy';
+      card.appendChild(img);
+
+      var info = document.createElement('div');
+      info.className = 'photo-admin-card-info';
+      info.title = item.caption || item.alt || '';
+      info.textContent = item.caption || item.alt || item.src.split('/').pop();
+      card.appendChild(info);
+
+      var delBtn = document.createElement('button');
+      delBtn.className = 'photo-admin-delete';
+      delBtn.type = 'button';
+      delBtn.title = 'Delete photo';
+      delBtn.innerHTML = '&times;';
+      delBtn.addEventListener('click', function() {
+        if (!confirm('Delete this photo?\n\n' + (item.caption || item.src) + '\n\nThis cannot be undone.')) return;
+        delBtn.disabled = true;
+        delBtn.textContent = '\u2026';
+        fetch('/api/admin-delete-photo', {
+          method: 'POST',
+          headers: authHeaders({ 'Content-Type': 'application/json' }),
+          body: JSON.stringify({ src: item.src })
+        })
+        .then(function(res) { return res.json().then(function(j) { return { ok: res.ok, body: j }; }); })
+        .then(function(r) {
+          if (!r.ok) throw new Error(r.body.error || 'Delete failed');
+          showToast('Photo deleted.', 'success');
+          card.remove();
+          if (grid.querySelectorAll('.photo-admin-card').length === 0) {
+            grid.innerHTML = '<p class="photo-grid-empty">No photos yet.</p>';
+          }
+        })
+        .catch(function(err) {
+          showToast('Delete failed: ' + err.message, 'error');
+          delBtn.disabled = false;
+          delBtn.innerHTML = '&times;';
+        });
+      });
+      card.appendChild(delBtn);
+
+      grid.appendChild(card);
+    });
+  }
+
+  loadGrid();
+}
+
+// ──────────────────────────────────────────────
+// Images tab — named image slot management
+// ──────────────────────────────────────────────
+
+function renderImages() {
+  var area = document.getElementById('content-area');
+  area.innerHTML = '<p style="color:#888;padding:16px">Loading image slots\u2026</p>';
+
+  fetch('/_data/images.json?_=' + Date.now())
+    .then(function(res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
+    .then(function(images) {
+      area.innerHTML = '';
+
+      var intro = document.createElement('p');
+      intro.style.cssText = 'margin-bottom:20px;color:#555;font-size:13.5px;line-height:1.6;';
+      intro.textContent = 'Replace any hero banner, CTA banner, or featured image. ' +
+        'Images are compressed and uploaded to the repository — changes go live within 2 minutes.';
+      area.appendChild(intro);
+
+      var grid = document.createElement('div');
+      grid.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;';
+      area.appendChild(grid);
+
+      Object.keys(images).forEach(function(slot) {
+        var entry = images[slot];
+        var card = document.createElement('div');
+        card.style.cssText = 'background:#fff;border:1px solid #e0e0e0;border-radius:8px;overflow:hidden;display:flex;flex-direction:column;';
+
+        // Thumbnail
+        var thumb = document.createElement('div');
+        thumb.style.cssText = 'position:relative;height:160px;background:#f0f0f0;overflow:hidden;';
+        var img = document.createElement('img');
+        img.src = '/' + entry.src + '?_=' + Date.now();
+        img.alt = entry.label;
+        img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;';
+        img.loading = 'lazy';
+        thumb.appendChild(img);
+        card.appendChild(thumb);
+
+        // Card body
+        var body = document.createElement('div');
+        body.style.cssText = 'padding:12px 14px;flex:1;display:flex;flex-direction:column;gap:8px;';
+
+        var label = document.createElement('div');
+        label.style.cssText = 'font-size:13px;font-weight:600;color:#222;';
+        label.textContent = entry.label;
+        body.appendChild(label);
+
+        var slotTag = document.createElement('div');
+        slotTag.style.cssText = 'font-size:11px;color:#888;font-family:monospace;';
+        slotTag.textContent = slot;
+        body.appendChild(slotTag);
+
+        // File input (hidden)
+        var fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = 'image/jpeg,image/jpg,image/png,image/webp,image/gif';
+        fileInput.style.display = 'none';
+        fileInput.dataset.slot = slot;
+        body.appendChild(fileInput);
+
+        // Status
+        var status = document.createElement('div');
+        status.style.cssText = 'font-size:12px;min-height:16px;';
+        body.appendChild(status);
+
+        // Replace button
+        var replaceBtn = document.createElement('button');
+        replaceBtn.type = 'button';
+        replaceBtn.textContent = 'Replace Image';
+        replaceBtn.style.cssText = 'margin-top:auto;padding:8px 14px;background:var(--green);color:#fff;border:none;border-radius:5px;cursor:pointer;font-size:13px;font-weight:600;';
+        body.appendChild(replaceBtn);
+
+        card.appendChild(body);
+        grid.appendChild(card);
+
+        // Wiring
+        replaceBtn.addEventListener('click', function() { fileInput.click(); });
+
+        fileInput.addEventListener('change', function() {
+          var file = fileInput.files && fileInput.files[0];
+          if (!file) return;
+
+          status.style.color = '#888';
+          status.textContent = 'Compressing\u2026';
+          replaceBtn.disabled = true;
+
+          compressForSlot(file, function(base64, mime) {
+            var approxBytes = Math.ceil(base64.length * 0.75);
+            if (approxBytes > 4 * 1024 * 1024) {
+              status.style.color = '#c00';
+              status.textContent = 'Too large after compression. Please resize first.';
+              replaceBtn.disabled = false;
+              return;
+            }
+
+            status.textContent = 'Uploading (' + Math.round(approxBytes / 1024) + ' KB)\u2026';
+
+            fetch('/api/admin-replace-image', {
+              method: 'POST',
+              headers: authHeaders({ 'Content-Type': 'application/json' }),
+              body: JSON.stringify({ slot: slot, name: file.name, type: mime, data: base64 })
+            })
+            .then(function(res) { return res.json().then(function(j) { return { ok: res.ok, body: j }; }); })
+            .then(function(r) {
+              if (!r.ok) throw new Error(r.body.error || 'Upload failed');
+              status.style.color = '#27ae60';
+              status.textContent = 'Updated! Live in ~2 min.';
+              // Update thumbnail to new image
+              img.src = '/' + r.body.src + '?_=' + Date.now();
+              replaceBtn.disabled = false;
+              fileInput.value = '';
+            })
+            .catch(function(err) {
+              status.style.color = '#c00';
+              status.textContent = 'Error: ' + err.message;
+              replaceBtn.disabled = false;
+            });
+          });
+        });
+      });
+    })
+    .catch(function(err) {
+      area.innerHTML = '<p style="color:#c00;padding:16px">Could not load image slots: ' + err.message + '</p>';
+    });
+}
+
+function compressForSlot(file, callback) {
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var image = new Image();
+    image.onload = function() {
+      var MAX = 1920;
+      var w = image.width, h = image.height;
+      if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
+      var canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(image, 0, 0, w, h);
+      var mime = file.type === 'image/png' ? 'image/png' : 'image/jpeg';
+      var quality = mime === 'image/jpeg' ? 0.85 : undefined;
+      var dataUrl = canvas.toDataURL(mime, quality);
+      callback(dataUrl.split(',')[1], mime);
+    };
+    image.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+// ──────────────────────────────────────────────
+// Save handler
+// ──────────────────────────────────────────────
+
+document.getElementById('save-btn').addEventListener('click', function() {
+  var btn = document.getElementById('save-btn');
+  btn.disabled = true;
+  btn.textContent = 'Saving\u2026';
+
+  var newData = collectData(currentSection, currentData);
+
+  saveSection(currentSection.id, newData)
+    .then(function(result) {
+      currentData = newData;
+      if (result.warning) {
+        showToast(result.warning, 'warning');
+      } else {
+        showToast('Changes saved successfully!', 'success');
+      }
+    })
+    .catch(function(err) {
+      showToast('Save failed: ' + err.message, 'error');
+    })
+    .finally(function() {
+      btn.disabled = false;
+      btn.textContent = 'Save Changes';
+    });
+});
+
+// ──────────────────────────────────────────────
+// Logout
+// ──────────────────────────────────────────────
+
+function confirmLogout() {
+  return confirm('Log out of the admin panel?');
+}
+
+// ──────────────────────────────────────────────
+// Init
+// ──────────────────────────────────────────────
+
+(function init() {
+  buildNav();
+  var hash = window.location.hash.replace('#', '') || '';
+  var initial = '';
+  for (var i = 0; i < SECTIONS.length; i++) {
+    if (SECTIONS[i].id === hash) { initial = hash; break; }
+  }
+  if (!initial) initial = SECTIONS[0].id;
+  switchSection(initial);
+})();
+
+// ── Mobile sidebar toggle ──
+(function() {
+  var toggle = document.getElementById('sidebar-toggle');
+  var sidebar = document.getElementById('sidebar');
+  var overlay = document.getElementById('sidebar-overlay');
+
+  function openSidebar() {
+    sidebar.classList.add('open');
+    overlay.classList.add('visible');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('visible');
+    document.body.style.overflow = '';
+  }
+
+  toggle.addEventListener('click', openSidebar);
+  overlay.addEventListener('click', closeSidebar);
+
+  // Close sidebar when a nav link is tapped on mobile
+  var navEl = document.getElementById('nav');
+  navEl.addEventListener('click', function(e) {
+    if (e.target.tagName === 'A' && window.innerWidth <= 700) {
+      closeSidebar();
+    }
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+PLACE ALL PHOTOS IN THIS FOLDER
+================================
+
+See README.md for the complete image replacement guide with:
+- Full list of required file names
+- Recommended dimensions for each image
+- Compression tips for fast loading
+
+Root images (hero shots, room photos, etc.) go directly in this folder.
+Gallery photos go in the gallery/ subfolder.
+
+Quick reference:
+- hero-pavilion.jpg         1920x1080  Home page hero
+- parkview-room.jpg         1200x900   Parkview Room
+- terrace-room.jpg          1200x900   Terrace Room
+- weddings-hero.jpg         1920x1080  Weddings hero
+- corporate-hero.jpg        1920x800   Corporate hero
+- social-hero.jpg           1920x800   Social hero
+- cta-bg.jpg                1920x600   CTA banner background
+- cuisine.jpg               900x675    Food photography
+... (see README.md for full list)

@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Packages & Pricing — Adelaide Pavilion | Wedding, Corporate & Social Event Packages</title>
+  <meta name="description" content="View Adelaide Pavilion's complete packages and pricing for weddings, corporate events, and social celebrations. Signature, Pavilion, Cocktail, Banquet packages with full menus and beverage options." />
+  <link rel="preload" as="image" href="images/packages-hero.jpg" fetchpriority="high" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Great+Vibes&family=Lato:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .menu-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; }
+    @media(max-width:600px){ .menu-col { grid-template-columns: 1fr; } }
+    .menu-item { padding: 10px 0; border-bottom: 1px solid #f0ede7; }
+    .menu-item-name { font-family:'Playfair Display',serif; font-size:1rem; color:var(--green); margin-bottom:3px; }
+    .menu-item-desc { font-family:'Lato',sans-serif; font-size:0.82rem; color:#777; line-height:1.55; }
+    .menu-item-surcharge { font-family:'Lato',sans-serif; font-size:0.75rem; color:var(--gold-dark); font-weight:600; }
+    .bev-card { background:var(--white); border-radius:6px; padding:28px; box-shadow:var(--shadow); border:1px solid rgba(62,174,224,0.2); }
+    .bev-card-name { font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--green); margin-bottom:4px; }
+    .bev-card-price { font-family:'Playfair Display',serif; font-size:1.8rem; color:var(--gold); margin-bottom:12px; }
+    .addon-table { width:100%; border-collapse:collapse; }
+    .addon-table td { font-family:'Lato',sans-serif; font-size:0.88rem; padding:9px 12px; border-bottom:1px solid #ede9e1; color:#444; }
+    .addon-table tr:last-child td { border:none; }
+    .addon-table .addon-name { color:var(--charcoal); }
+    .addon-table .addon-price { font-weight:700; color:var(--green); white-space:nowrap; text-align:right; }
+  </style>
+</head>
+<body data-page="packages">
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="images/logo.png" alt="Adelaide Pavilion" class="nav-logo-img" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+      <li><a href="weddings.html" class="nav-link">Weddings</a></li>
+      <li><a href="corporate.html" class="nav-link">Corporate</a></li>
+      <li><a href="social.html" class="nav-link">Social Events</a></li>
+      <li><a href="packages.html" class="nav-link active">Packages</a></li>
+      <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+      <li><a href="contact.html" class="nav-cta">Enquire Now</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="weddings.html">Weddings</a>
+    <a href="corporate.html">Corporate</a><a href="social.html">Social Events</a>
+    <a href="packages.html">Packages & Pricing</a><a href="gallery.html">Gallery</a>
+    <a href="contact.html" class="mobile-cta">Enquire Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero-sub">
+  <div class="hero-bg" data-cms-bg="hero_packages" style="background-image:url('images/packages-hero.jpg');"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-sub-content">
+    <div class="hero-script" data-cms="hero_script">Tailored to Perfection</div>
+    <h1 class="hero-title" data-cms="hero_title">Packages &amp; Pricing</h1>
+    <p style="font-family:'Lato',sans-serif;font-size:1rem;color:rgba(255,255,255,0.8);letter-spacing:0.08em;margin-top:8px;" data-cms="hero_subtitle">Complete menus, beverage options &amp; transparent pricing</p>
+  </div>
+</header>
+
+<!-- TAB NAV -->
+<div data-tabs>
+  <div style="background:var(--white);border-bottom:1px solid var(--cream);position:sticky;top:64px;z-index:900;">
+    <div class="container">
+      <div class="tab-buttons">
+        <button class="tab-btn active" data-tab="weddings">Weddings</button>
+        <button class="tab-btn" data-tab="social">Social Events</button>
+        <button class="tab-btn" data-tab="corporate">Corporate</button>
+        <button class="tab-btn" data-tab="beverages">Beverages</button>
+        <button class="tab-btn" data-tab="menus">Full Menus</button>
+        <button class="tab-btn" data-tab="addons">Add-Ons</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== WEDDINGS ==================== -->
+  <div class="tab-content active" data-tab-content="weddings" id="weddings">
+    <section class="section-pad panel-ivory">
+      <div class="container">
+        <div class="text-center fade-up" style="max-width:640px;margin:0 auto 52px;">
+          <div class="section-subtitle">Wedding Packages</div>
+          <h2 class="section-title">Your Wedding, Your Way</h2>
+          <div class="section-divider"></div>
+          <p style="font-family:'Lato',sans-serif;font-size:0.95rem;color:#555;line-height:1.85;">All wedding packages include: Event Coordinator, 5-Hour Room Hire, grounds access for photos, Standard 5-Hour Beverage Package, AV, linen, table numbers, printed menus, cake &amp; bridal table, onsite parking.</p>
+        </div>
+
+        <!-- Package cards -->
+        <div class="pkg-grid">
+          <!-- Signature -->
+          <div class="pkg-card fade-up">
+            <div class="pkg-header">
+              <div class="pkg-tag" data-cms="tag_wedding">Wedding Package</div>
+              <div class="pkg-name">Signature</div>
+              <div style="font-family:'Lato',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.7);">5-Hour Package</div>
+              <div class="pkg-price-wrap">
+                <div class="pkg-price"><sup>$</sup><span data-cms="wedding_signature_price_2026">140</span></div>
+                <div class="pkg-price-label" data-cms="wedding_signature_price_label">per person · 2026 &nbsp;|&nbsp; $150pp 2027 &nbsp;|&nbsp; $160pp 2028</div>
+              </div>
+            </div>
+            <div class="pkg-body">
+              <div class="pkg-section-label">Menu</div>
+              <ul class="pkg-list" data-bev="wedding_signature_menu">
+                <li>Entrée — One selection from the entrée menu</li>
+                <li>Main — One selection from the main menu</li>
+                <li>Dessert — Celebration Cake (your cake cut &amp; served)</li>
+                <li>Dinner Rolls &amp; Butter</li>
+                <li>Coffee, Teas &amp; Chocolates with dessert</li>
+              </ul>
+              <div class="pkg-section-label">Beverages (Standard — included)</div>
+              <ul class="pkg-list" data-bev="wedding_signature_bev">
+                <li>House Beer &amp; Cascade Premium Light</li>
+                <li>Svelte Sauvignon Blanc &amp; Svelte Shiraz</li>
+                <li>Willowglen Sparkling Brut (on demand)</li>
+                <li>Assorted Soft Drinks &amp; Orange Juice</li>
+              </ul>
+              <div class="pkg-section-label">Inclusions</div>
+              <ul class="pkg-list" data-bev="wedding_signature_inclusions">
+                <li>Dedicated Event Coordinator</li>
+                <li>5-Hour Room Hire</li>
+                <li>Grounds access for photographs</li>
+                <li>Complimentary AV System</li>
+                <li>Tablecloths &amp; Overlays (Black or White)</li>
+                <li>Linen Serviettes (White)</li>
+                <li>Cake Table, Bridal &amp; Gift Table Skirting</li>
+                <li>Printed Menus (2 per table), Table Numbers</li>
+                <li>Onsite Parking (subject to availability)</li>
+              </ul>
+            </div>
+            <div class="pkg-footer">
+              <a href="contact.html" class="btn btn-outline-green" style="width:100%;text-align:center;">Enquire About This Package</a>
+            </div>
+          </div>
+
+          <!-- Pavilion (featured) -->
+          <div class="pkg-card featured fade-up" data-delay="100">
+            <div class="pkg-header">
+              <div class="pkg-tag" data-cms="tag_wedding">Wedding Package</div>
+              <div class="pkg-name">Pavilion</div>
+              <div style="font-family:'Lato',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.7);">5-Hour Package</div>
+              <div class="pkg-price-wrap">
+                <div class="pkg-price"><sup>$</sup><span data-cms="wedding_pavilion_price_2026">150</span></div>
+                <div class="pkg-price-label" data-cms="wedding_pavilion_price_label">per person · 2026 &nbsp;|&nbsp; $160pp 2027 &nbsp;|&nbsp; $170pp 2028</div>
+              </div>
+            </div>
+            <div class="pkg-body">
+              <div class="pkg-section-label">Menu (individually served or shared)</div>
+              <ul class="pkg-list" data-bev="wedding_pavilion_menu">
+                <li>Entrée — Choice of <strong>two</strong> selections</li>
+                <li>Main — Choice of <strong>two</strong> selections</li>
+                <li>Dessert — Celebration Cake (your cake cut &amp; served)</li>
+                <li>Dinner Rolls &amp; Butter</li>
+                <li>Coffee, Teas &amp; Chocolates with dessert</li>
+              </ul>
+              <div class="pkg-section-label">Beverages (Standard — included)</div>
+              <ul class="pkg-list" data-bev="wedding_pavilion_bev">
+                <li>House Beer &amp; Cascade Premium Light</li>
+                <li>Svelte Sauvignon Blanc &amp; Svelte Shiraz</li>
+                <li>Willowglen Sparkling Brut (on demand)</li>
+                <li>Assorted Soft Drinks &amp; Orange Juice</li>
+              </ul>
+              <div class="pkg-section-label">All Signature Inclusions, Plus</div>
+              <ul class="pkg-list" data-bev="wedding_pavilion_extras">
+                <li>More menu choice — perfect for diverse tastes</li>
+                <li>Alternate-serve option available</li>
+              </ul>
+            </div>
+            <div class="pkg-footer">
+              <a href="contact.html" class="btn btn-gold" style="width:100%;text-align:center;">Enquire About This Package</a>
+            </div>
+          </div>
+
+          <!-- Cocktail -->
+          <div class="pkg-card fade-up" data-delay="200">
+            <div class="pkg-header">
+              <div class="pkg-tag" data-cms="tag_wedding">Wedding Package</div>
+              <div class="pkg-name">Cocktail Celebration</div>
+              <div style="font-family:'Lato',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.7);">5-Hour Package</div>
+              <div class="pkg-price-wrap">
+                <div class="pkg-price"><sup>$</sup><span data-cms="wedding_cocktail_price">102</span></div>
+                <div class="pkg-price-label">per person · includes beverages</div>
+              </div>
+            </div>
+            <div class="pkg-body">
+              <div class="pkg-section-label">Canapés (2-Hour Service)</div>
+              <ul class="pkg-list" data-bev="wedding_cocktail_canapes">
+                <li>7 Hot Canapés — your selection</li>
+                <li>6 Cold Canapés — your selection</li>
+                <li>See Full Canapé Menu below</li>
+              </ul>
+              <div class="pkg-section-label">Beverages (Standard 5-Hour — included)</div>
+              <ul class="pkg-list" data-bev="wedding_cocktail_bev">
+                <li>House Beer &amp; Cascade Premium Light</li>
+                <li>Svelte Sauvignon Blanc &amp; Svelte Shiraz</li>
+                <li>Willowglen Sparkling Brut (on demand)</li>
+                <li>Assorted Soft Drinks &amp; Orange Juice</li>
+              </ul>
+              <div class="pkg-section-label">Inclusions</div>
+              <ul class="pkg-list" data-bev="wedding_cocktail_inclusions">
+                <li>All standard wedding inclusions</li>
+                <li>Upgrades available (minimum spend applies)</li>
+              </ul>
+            </div>
+            <div class="pkg-footer">
+              <a href="contact.html" class="btn btn-outline-green" style="width:100%;text-align:center;">Enquire About This Package</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kids menu -->
+        <div style="background:var(--white);border-radius:8px;padding:32px;margin-top:40px;box-shadow:var(--shadow);">
+          <div class="section-subtitle">Children's Menu</div>
+          <h3 style="font-size:1.4rem;margin-bottom:16px;">Kids &amp; Young Guests</h3>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
+            <div>
+              <div style="font-family:'Lato',sans-serif;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px;" data-cms="children_menu1_label">Option 1 — $40 per child (under 12)</div>
+              <ul class="pkg-list" data-bev="children_menu1_items"><li>Crumbed Chicken Tenderloins &amp; Chips</li><li>Ice Cream</li><li>Soft Drinks &amp; Orange Juice</li></ul>
+            </div>
+            <div>
+              <div style="font-family:'Lato',sans-serif;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px;" data-cms="children_menu2_label">Option 2 — $48 per child (under 12)</div>
+              <ul class="pkg-list" data-bev="children_menu2_items"><li>Pasta Napolitana</li><li>Crumbed Chicken Tenderloins &amp; Chips</li><li>Ice Cream</li><li>Soft Drinks &amp; Orange Juice</li></ul>
+            </div>
+            <div>
+              <div style="font-family:'Lato',sans-serif;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px;" data-cms="children_cocktail_label">Cocktail Kids Menu — $35 per child (under 12)</div>
+              <ul class="pkg-list" data-bev="children_cocktail_items"><li>Chicken Strips &amp; Chips</li><li>Ice Cream</li><li>Soft Drinks &amp; Orange Juice</li></ul>
+            </div>
+          </div>
+          <div class="notice-box" style="margin-top:16px;margin-bottom:0;"><strong>Note:</strong> <span data-cms="children_note">Older children and young adults (9–17 years) may prefer to have the main menu. Supplier meals (main course from menu) are available at $50 per person.</span></div>
+        </div>
+
+        <!-- Ceremony sites -->
+        <div style="background:var(--green);border-radius:8px;padding:32px;margin-top:32px;color:#fff;">
+          <div style="font-family:'Lato',sans-serif;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:12px;">Nearby Ceremony Sites</div>
+          <h3 style="color:#fff;font-size:1.4rem;margin-bottom:16px;">Veale Gardens Ceremony Locations</h3>
+          <p style="font-family:'Lato',sans-serif;font-size:0.88rem;color:rgba(255,255,255,0.8);margin-bottom:16px;">Veale Gardens offers numerous stunning outdoor ceremony locations just steps from the Pavilion. To arrange use of these spaces, contact Adelaide City Council on <strong style="color:var(--gold);">(08) 8203 7203</strong>.</p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;">
+            <span style="font-family:'Lato',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.75);">• Rock Pool 1 &amp; 2</span>
+            <span style="font-family:'Lato',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.75);">• Hypar</span>
+            <span style="font-family:'Lato',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.75);">• Adelaide Qingdao Rose Garden</span>
+            <span style="font-family:'Lato',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.75);">• Sheoak Grove</span>
+            <span style="font-family:'Lato',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.75);">• Rose Garden</span>
+            <span style="font-family:'Lato',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.75);">• Wisteria Pergola</span>
+            <span style="font-family:'Lato',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.75);">• Nurses Memorial Sunken Garden</span>
+            <span style="font-family:'Lato',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.75);">• Eastern Garden</span>
+            <span style="font-family:'Lato',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.75);">• Rose Garden Lawns East</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==================== SOCIAL EVENTS ==================== -->
+  <div class="tab-content" data-tab-content="social" id="social">
+    <section class="section-pad panel-ivory">
+      <div class="container">
+        <div class="text-center fade-up" style="max-width:640px;margin:0 auto 52px;">
+          <div class="section-subtitle">Social Event Packages</div>
+          <h2 class="section-title">Celebrate Life's Greatest Moments</h2>
+          <div class="section-divider"></div>
+          <p style="font-family:'Lato',sans-serif;font-size:0.95rem;color:#555;line-height:1.85;">Birthdays, anniversaries, christenings, engagements, gala dinners — all catered with the same elegance and care. Beverage packages are additional to food pricing below.</p>
+        </div>
+
+        <!-- Banquet options -->
+        <div style="margin-bottom:48px;">
+          <h3 style="font-size:1.6rem;margin-bottom:24px;">Banquet Packages</h3>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;">
+            <div class="pkg-card fade-up">
+              <div class="pkg-header">
+                <div class="pkg-tag" data-cms="tag_banquet_1">Banquet Option 1</div>
+                <div class="pkg-name">Two Course</div>
+                <div style="font-family:'Lato',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.7);">Main + Dessert</div>
+                <div class="pkg-price-wrap"><div class="pkg-price"><sup>$</sup><span data-cms="social_two_course_main_dessert">50</span></div><div class="pkg-price-label">per person · food only</div></div>
+              </div>
+              <div class="pkg-body">
+                <ul class="pkg-list" data-bev="social_banquet1_items">
+                  <li>Main — One selection</li>
+                  <li>Dessert — One selection</li>
+                  <li>Served with seasonal vegetables</li>
+                </ul>
+              </div>
+              <div class="pkg-footer"><a href="contact.html" class="btn btn-outline-green" style="width:100%;text-align:center;">Enquire</a></div>
+            </div>
+            <div class="pkg-card fade-up" data-delay="80">
+              <div class="pkg-header">
+                <div class="pkg-tag" data-cms="tag_banquet_2">Banquet Option 2</div>
+                <div class="pkg-name">Two Course</div>
+                <div style="font-family:'Lato',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.7);">Entrée + Main</div>
+                <div class="pkg-price-wrap"><div class="pkg-price"><sup>$</sup><span data-cms="social_two_course_entree_main">55</span></div><div class="pkg-price-label">per person · food only</div></div>
+              </div>
+              <div class="pkg-body">
+                <ul class="pkg-list" data-bev="social_banquet2_items">
+                  <li>Entrée — One selection</li>
+                  <li>Main — One selection</li>
+                  <li>Served with dinner rolls &amp; seasonal veg</li>
+                </ul>
+              </div>
+              <div class="pkg-footer"><a href="contact.html" class="btn btn-outline-green" style="width:100%;text-align:center;">Enquire</a></div>
+            </div>
+            <div class="pkg-card featured fade-up" data-delay="160">
+              <div class="pkg-header">
+                <div class="pkg-tag" data-cms="tag_banquet_3">Banquet Option 3</div>
+                <div class="pkg-name">Three Course Set</div>
+                <div style="font-family:'Lato',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.7);">Entrée + Main + Dessert</div>
+                <div class="pkg-price-wrap"><div class="pkg-price"><sup>$</sup><span data-cms="social_three_course_set">63</span></div><div class="pkg-price-label">per person · food only</div></div>
+              </div>
+              <div class="pkg-body">
+                <ul class="pkg-list" data-bev="social_banquet3_items">
+                  <li>Entrée — One selection</li>
+                  <li>Main — One selection</li>
+                  <li>Dessert — One selection</li>
+                  <li>Freshly brewed coffee &amp; teas included</li>
+                  <li>Option to add Soup: +$10pp</li>
+                  <li>Option: Cake in lieu of Dessert: −$2pp</li>
+                </ul>
+              </div>
+              <div class="pkg-footer"><a href="contact.html" class="btn btn-gold" style="width:100%;text-align:center;">Enquire</a></div>
+            </div>
+            <div class="pkg-card fade-up" data-delay="240">
+              <div class="pkg-header">
+                <div class="pkg-tag" data-cms="tag_banquet_4">Banquet Option 4</div>
+                <div class="pkg-name">Three Course Alternate</div>
+                <div style="font-family:'Lato',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.7);">Choice of Two per Course</div>
+                <div class="pkg-price-wrap"><div class="pkg-price"><sup>$</sup><span data-cms="social_three_course_alternate">73</span></div><div class="pkg-price-label">per person · food only</div></div>
+              </div>
+              <div class="pkg-body">
+                <ul class="pkg-list" data-bev="social_banquet4_items">
+                  <li>Entrée — Choice of <strong>two</strong> selections</li>
+                  <li>Main — Choice of <strong>two</strong> selections</li>
+                  <li>Dessert — Choice of <strong>two</strong> selections</li>
+                  <li>Freshly brewed coffee &amp; teas included</li>
+                  <li>Option to add Soup: +$10pp</li>
+                  <li>Option: Cake in lieu of Dessert: −$2pp</li>
+                </ul>
+              </div>
+              <div class="pkg-footer"><a href="contact.html" class="btn btn-outline-green" style="width:100%;text-align:center;">Enquire</a></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cocktail + Street Eats -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:40px;">
+          <div class="pkg-card fade-up">
+            <div class="pkg-header">
+              <div class="pkg-tag" data-cms="tag_cocktail_social">Cocktail Package</div>
+              <div class="pkg-name">Cocktail Celebration</div>
+              <div style="font-family:'Lato',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.7);">2-Hour Canapé Service</div>
+              <div class="pkg-price-wrap"><div class="pkg-price"><sup>$</sup><span data-cms="social_cocktail">45</span></div><div class="pkg-price-label">per person · plus beverages</div></div>
+            </div>
+            <div class="pkg-body">
+              <ul class="pkg-list" data-bev="social_cocktail_items">
+                <li>7 Hot Canapés — your selection</li>
+                <li>6 Cold Canapés — your selection</li>
+                <li>Beverage packages from $24pp (separate)</li>
+                <li>Upgrades available (min. spend applies)</li>
+              </ul>
+            </div>
+            <div class="pkg-footer"><a href="contact.html" class="btn btn-outline-green" style="width:100%;text-align:center;">Enquire</a></div>
+          </div>
+          <div class="pkg-card fade-up" data-delay="120">
+            <div class="pkg-header">
+              <div class="pkg-tag" data-cms="tag_casual_dining">Casual Dining</div>
+              <div class="pkg-name">Street Eats</div>
+              <div style="font-family:'Lato',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.7);">2-Hour Service</div>
+              <div class="pkg-price-wrap"><div class="pkg-price"><sup>$</sup><span data-cms="social_street_eats">48</span></div><div class="pkg-price-label">per person · plus beverages</div></div>
+            </div>
+            <div class="pkg-body">
+              <ul class="pkg-list" data-bev="social_street_eats_items">
+                <li>Beef Sliders — ground beef, melted cheese, tomato relish on brioche</li>
+                <li>Arancini — cracked pepper &amp; lemon with mozzarella</li>
+                <li>Fish + Chips — crumbed fish with chips</li>
+                <li>Banh Mi Bao Buns — pork belly, pickled carrot, kewpie mayo</li>
+                <li>Chicken Yiros Plate — spiced chicken, pita, tomato, tzatziki</li>
+              </ul>
+            </div>
+            <div class="pkg-footer"><a href="contact.html" class="btn btn-outline-green" style="width:100%;text-align:center;">Enquire</a></div>
+          </div>
+        </div>
+        <style>@media(max-width:768px){.tab-content [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}}</style>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==================== CORPORATE ==================== -->
+  <div class="tab-content" data-tab-content="corporate" id="corporate">
+    <section class="section-pad panel-ivory">
+      <div class="container">
+        <div class="text-center fade-up" style="max-width:640px;margin:0 auto 52px;">
+          <div class="section-subtitle">Corporate Packages</div>
+          <h2 class="section-title">Elevate Your Corporate Events</h2>
+          <div class="section-divider"></div>
+        </div>
+
+        <!-- Breakfast -->
+        <h3 style="font-size:1.6rem;margin-bottom:24px;" class="fade-up"><span data-cms="heading_breakfast_packages">Breakfast Packages</span> <span style="font-family:'Lato',sans-serif;font-size:0.8rem;color:#888;font-weight:400;">(min. 25 guests · 2-hour service · beverages included)</span></h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:48px;">
+          <div class="pkg-card fade-up">
+            <div class="pkg-header">
+              <div class="pkg-tag" data-cms="tag_breakfast">Breakfast</div><div class="pkg-name">Continental</div>
+              <div style="font-family:'Lato',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.7);">Buffet Style</div>
+              <div class="pkg-price-wrap"><div class="pkg-price"><sup>$</sup><span data-cms="corporate_breakfast_continental">30</span></div><div class="pkg-price-label">per person · incl. 2hr beverages</div></div>
+            </div>
+            <div class="pkg-body">
+              <ul class="pkg-list" data-bev="corp_continental_items">
+                <li>Sliced Fresh Fruit</li><li>Assorted Sweet Muffins</li>
+                <li>Ham &amp; Cheese Croissants</li><li>Toast with assorted preserves</li>
+                <li>Yoghurt with muesli and honey</li>
+                <li>2hr: OJ, filtered water, fresh coffee &amp; teas</li>
+              </ul>
+            </div>
+            <div class="pkg-footer"><a href="contact.html" class="btn btn-outline-green" style="width:100%;text-align:center;">Enquire</a></div>
+          </div>
+          <div class="pkg-card featured fade-up" data-delay="100">
+            <div class="pkg-header">
+              <div class="pkg-tag" data-cms="tag_breakfast">Breakfast</div><div class="pkg-name">Hot Plated</div>
+              <div style="font-family:'Lato',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.7);">Individual Serve</div>
+              <div class="pkg-price-wrap"><div class="pkg-price"><sup>$</sup><span data-cms="corporate_breakfast_hot">32</span></div><div class="pkg-price-label">per person · incl. 2hr beverages</div></div>
+            </div>
+            <div class="pkg-body">
+              <div style="font-family:'Lato',sans-serif;font-size:0.78rem;color:#888;margin-bottom:8px;">Choose one of:</div>
+              <ul class="pkg-list" data-bev="corp_hot_options">
+                <li><strong>Full Breakfast</strong> — scrambled eggs, bacon, grilled tomato, gourmet sausage, toast</li>
+                <li><strong>Sourdough Eggs Benedict</strong> — toast, ham, poached egg, hollandaise</li>
+                <li><strong>Spanish Tortilla</strong> — served with smoked salmon OR fresh mushrooms</li>
+              </ul>
+              <ul class="pkg-list" style="margin-top:8px;" data-bev="corp_hot_bev">
+                <li>2hr: OJ, filtered water, fresh coffee &amp; teas</li>
+              </ul>
+            </div>
+            <div class="pkg-footer"><a href="contact.html" class="btn btn-gold" style="width:100%;text-align:center;">Enquire</a></div>
+          </div>
+        </div>
+
+        <!-- Lunch -->
+        <h3 style="font-size:1.6rem;margin-bottom:24px;" class="fade-up" data-cms="heading_lunch_options">Lunch Options</h3>
+        <div class="price-table-wrap fade-up" style="margin-bottom:48px;"><table class="price-table">
+          <thead><tr><th>Option</th><th>Description</th><th>Price</th></tr></thead>
+          <tbody>
+            <tr><td><strong data-cms="lunch_r1_name">Focaccia Lunch</strong></td><td data-cms="lunch_r1_desc">Focaccia with meat &amp; vegetable fillings, plus cocktail-sized savoury pastry</td><td class="price-cell" data-cms="lunch_r1_price">$18.90pp</td></tr>
+            <tr><td><strong data-cms="lunch_r2_name">Gourmet Salad Lunch</strong></td><td data-cms="lunch_r2_desc">Chef's selection of meat, gourmet salad &amp; leafy green salad, bread rolls &amp; butter</td><td class="price-cell" data-cms="lunch_r2_price">$18.90pp</td></tr>
+            <tr><td><strong data-cms="lunch_r3_name">Low Carb Lunch</strong></td><td data-cms="lunch_r3_desc">Chef's selection of wraps with meats, vegetables, salad fillings &amp; condiments</td><td class="price-cell" data-cms="lunch_r3_price">$24.00pp</td></tr>
+            <tr><td><strong data-cms="lunch_r4_name">Lunch Buffet</strong></td><td data-cms="lunch_r4_desc">Asian Beef Salad, Spinach &amp; Ricotta Ravioli, Tuscan Chicken, Garden Salad, Gourmet Salad, Bread Rolls, Fresh Fruit Platter, Local Cheese Selection</td><td class="price-cell" data-cms="lunch_r4_price">$40.00pp</td></tr>
+            <tr><td><strong data-cms="lunch_r5_name">Hot Working Lunch</strong></td><td data-cms="lunch_r5_desc">Two pre-selected main courses (alternately served), bread rolls, soup or frittata, seasonal veg, gourmet salad</td><td class="price-cell" data-cms="lunch_r5_price">$40.00pp</td></tr>
+          </tbody>
+        </table></div>
+
+        <!-- Morning/Afternoon Tea -->
+        <h3 style="font-size:1.6rem;margin-bottom:24px;" class="fade-up" data-cms="heading_morning_tea">Morning / Afternoon Tea</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:48px;">
+          <div class="fade-up">
+            <div class="section-subtitle" style="margin-bottom:12px;">Beverage Selections</div>
+            <table class="addon-table">
+              <tr><td class="addon-name" data-cms="tea_bev_r1_name">Coffee &amp; teas — ½ hour service</td><td class="addon-price" data-cms="tea_bev_r1_price">$6.50pp</td></tr>
+              <tr><td class="addon-name" data-cms="tea_bev_r2_name">Coffee &amp; teas — all-day continuous</td><td class="addon-price" data-cms="tea_bev_r2_price">$17.50pp</td></tr>
+              <tr><td class="addon-name" data-cms="tea_bev_r3_name">Orange juice or soft drinks</td><td class="addon-price" data-cms="tea_bev_r3_price">$4.50pp</td></tr>
+            </table>
+          </div>
+          <div class="fade-up" data-delay="100">
+            <div class="section-subtitle" style="margin-bottom:12px;">House-Made Baked Selections</div>
+            <table class="addon-table">
+              <tr><td class="addon-name" data-cms="tea_food_r1_name">Muffins / Banana &amp; Date Loaf / Chocolate Brownies / Carrot Cake</td><td class="addon-price" data-cms="tea_food_r1_price">$5.50pp</td></tr>
+              <tr><td class="addon-name" data-cms="tea_food_r2_name">Scones with preserves &amp; cream / Spinach &amp; Ricotta Triangles / Ham &amp; Cheese Croissants</td><td class="addon-price" data-cms="tea_food_r2_price">$5.90pp</td></tr>
+              <tr><td class="addon-name" data-cms="tea_food_r3_name">Biscuits (assorted classics)</td><td class="addon-price" data-cms="tea_food_r3_price">$3.00pp</td></tr>
+              <tr><td class="addon-name" data-cms="tea_food_r4_name">Assorted Danishes</td><td class="addon-price" data-cms="tea_food_r4_price">$5.50pp</td></tr>
+              <tr><td class="addon-name" data-cms="tea_food_r5_name">Sliced fresh seasonal fruit platters</td><td class="addon-price" data-cms="tea_food_r5_price">$6.50pp</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- Corporate cocktail/networking -->
+        <h3 style="font-size:1.6rem;margin-bottom:24px;" class="fade-up" data-cms="heading_corporate_cocktail">Corporate Cocktail &amp; Networking</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:48px;">
+          <div class="pkg-card fade-up">
+            <div class="pkg-header">
+              <div class="pkg-tag" data-cms="tag_addon">Add-On Package</div><div class="pkg-name">Networking</div>
+              <div style="font-family:'Lato',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.7);">1-Hour Post-Presentation</div>
+              <div class="pkg-price-wrap"><div class="pkg-price"><sup>$</sup><span data-cms="corporate_networking">38</span></div><div class="pkg-price-label">per person · min. 30 guests</div></div>
+            </div>
+            <div class="pkg-body">
+              <ul class="pkg-list" data-bev="corp_networking_items">
+                <li>Chef's Selection: 3 Hot + 3 Cold Canapés</li>
+                <li>1-Hour Standard Beverage Package</li>
+                <li>Beer, wine, sparkling, soft drinks &amp; OJ</li>
+              </ul>
+            </div>
+            <div class="pkg-footer"><a href="contact.html" class="btn btn-outline-green" style="width:100%;text-align:center;">Enquire</a></div>
+          </div>
+          <div class="pkg-card featured fade-up" data-delay="100">
+            <div class="pkg-header">
+              <div class="pkg-tag" data-cms="tag_corporate_cocktail_full">Full Corporate Cocktail</div><div class="pkg-name">Cocktail Package</div>
+              <div style="font-family:'Lato',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.7);">5-Hour Event Package</div>
+              <div class="pkg-price-wrap"><div class="pkg-price"><sup>$</sup><span data-cms="corporate_cocktail">83</span></div><div class="pkg-price-label">per person · all-inclusive</div></div>
+            </div>
+            <div class="pkg-body">
+              <ul class="pkg-list" data-bev="corp_cocktail_items">
+                <li>2-Hour Canapé Service: 7 Hot + 6 Cold</li>
+                <li>5-Hour Standard Beverage Package</li>
+                <li>Beer, wine, sparkling, soft drinks &amp; OJ</li>
+                <li>Dedicated Event Coordinator</li>
+                <li>AV Equipment included</li>
+              </ul>
+            </div>
+            <div class="pkg-footer"><a href="contact.html" class="btn btn-gold" style="width:100%;text-align:center;">Enquire</a></div>
+          </div>
+        </div>
+
+        <!-- Banquet (corporate uses same as social) -->
+        <div class="notice-box">
+          <strong>Banquet Packages:</strong> Corporate events also have access to the full range of Banquet Packages (Options 1–4, $50–$73pp) detailed in the Social Events tab. Beverage packages are additional — see the Beverages tab.
+        </div>
+
+        <!-- Room capacities -->
+        <h3 style="font-size:1.6rem;margin-top:40px;margin-bottom:24px;" class="fade-up" data-cms="heading_room_configurations">Room Configurations</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;">
+          <div class="fade-up">
+            <div style="font-family:'Lato',sans-serif;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:12px;">The Parkview Room — 263 m²</div>
+            <table class="price-table">
+              <thead><tr><th>Configuration</th><th>Capacity</th></tr></thead>
+              <tbody>
+                <tr><td>Banquet</td><td class="price-cell" data-cms="room_parkview_banquet">230</td></tr>
+                <tr><td>Cabaret</td><td class="price-cell" data-cms="room_parkview_cabaret">180</td></tr>
+                <tr><td>Cocktail</td><td class="price-cell" data-cms="room_parkview_cocktail">260</td></tr>
+                <tr><td>Theatre</td><td class="price-cell" data-cms="room_parkview_theatre">250</td></tr>
+                <tr><td>U-Shape</td><td class="price-cell" data-cms="room_parkview_ushape">45</td></tr>
+                <tr><td>Boardroom</td><td class="price-cell" data-cms="room_parkview_boardroom">55</td></tr>
+                <tr><td>Classroom</td><td class="price-cell" data-cms="room_parkview_classroom">100</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="fade-up" data-delay="100">
+            <div style="font-family:'Lato',sans-serif;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:12px;">The Terrace Room — 160 m²</div>
+            <table class="price-table">
+              <thead><tr><th>Configuration</th><th>Capacity</th></tr></thead>
+              <tbody>
+                <tr><td>Banquet</td><td class="price-cell" data-cms="room_terrace_banquet">100</td></tr>
+                <tr><td>Cabaret</td><td class="price-cell" data-cms="room_terrace_cabaret">80</td></tr>
+                <tr><td>Cocktail</td><td class="price-cell" data-cms="room_terrace_cocktail">150</td></tr>
+                <tr><td>Theatre</td><td class="price-cell" data-cms="room_terrace_theatre">90</td></tr>
+                <tr><td>U-Shape</td><td class="price-cell" data-cms="room_terrace_ushape">35</td></tr>
+                <tr><td>Boardroom</td><td class="price-cell" data-cms="room_terrace_boardroom">40</td></tr>
+                <tr><td>Classroom</td><td class="price-cell" data-cms="room_terrace_classroom">30</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==================== BEVERAGES ==================== -->
+  <div class="tab-content" data-tab-content="beverages">
+    <section class="section-pad panel-ivory">
+      <div class="container">
+        <div class="text-center fade-up" style="max-width:600px;margin:0 auto 52px;">
+          <div class="section-subtitle">Beverage Packages</div>
+          <h2 class="section-title">Wines, Beers &amp; Beyond</h2>
+          <div class="section-divider"></div>
+          <p style="font-family:'Lato',sans-serif;font-size:0.95rem;color:#555;line-height:1.85;">All wedding packages include the Standard 5-Hour package. For social and corporate events, add a beverage package to your food package. Upgrade to Premium or Deluxe for premium wine selections.</p>
+        </div>
+
+        <!-- Beverage tiers -->
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-bottom:48px;">
+          <!-- Standard -->
+          <div class="bev-card fade-up">
+            <div class="bev-card-name">Standard Package</div>
+            <div style="font-family:'Lato',sans-serif;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:12px;">Included in all wedding packages</div>
+            <table class="addon-table" style="margin-bottom:16px;">
+              <tr><td>2 Hours</td><td class="addon-price" data-cms="bev_standard_2hr">$24pp</td></tr>
+              <tr><td>3 Hours</td><td class="addon-price" data-cms="bev_standard_3hr">$28pp</td></tr>
+              <tr><td>4 Hours</td><td class="addon-price" data-cms="bev_standard_4hr">$33pp</td></tr>
+              <tr><td>5 Hours</td><td class="addon-price" data-cms="bev_standard_5hr">$38pp</td></tr>
+            </table>
+            <div style="font-family:'Lato',sans-serif;font-size:0.78rem;color:#888;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.1em;">Includes</div>
+            <ul class="pkg-list" data-bev="bev_standard_includes">
+              <li>House Beer</li><li>Cascade Premium Light</li>
+              <li>Svelte Sauvignon Blanc</li><li>Svelte Shiraz</li>
+              <li>Willowglen Sparkling Brut (on demand)</li>
+              <li>Assorted Soft Drinks &amp; Orange Juice</li>
+            </ul>
+          </div>
+          <!-- Premium -->
+          <div class="bev-card featured fade-up" data-delay="100" style="border:2px solid var(--gold);position:relative;">
+            <div style="position:absolute;top:-1px;right:16px;background:var(--gold);color:#fff;font-family:'Lato',sans-serif;font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;padding:4px 12px;border-radius:0 0 4px 4px;">Popular Upgrade</div>
+            <div class="bev-card-name">Premium Package</div>
+            <div style="font-family:'Lato',sans-serif;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:12px;" data-cms="bev_premium_surcharge">Standard price + $10pp</div>
+            <div style="font-family:'Lato',sans-serif;font-size:0.78rem;color:#888;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.1em;">Select One Red + One White</div>
+            <ul class="pkg-list" style="margin-bottom:12px;" data-bev="bev_premium_reds">
+              <li><strong>Red:</strong> Hedonist Shiraz (McLaren Vale)</li>
+              <li>Barristers Block Tempranillo Cab Shiraz (Adelaide Hills)</li>
+              <li>Tomich Hill Cabernet Sauvignon (Coonawarra)</li>
+              <li>Hedonist Grenache (McLaren Vale)</li>
+            </ul>
+            <ul class="pkg-list" style="margin-bottom:12px;" data-bev="bev_premium_whites">
+              <li><strong>White:</strong> Brothers at War Riesling (Barossa Valley)</li>
+              <li>Serafino Bellissimo Pinot Grigio (McLaren Vale)</li>
+              <li>Clouded Isle Sauvignon Blanc (Marlborough NZ)</li>
+              <li>Serafino Chardonnay (McLaren Vale)</li>
+            </ul>
+            <ul class="pkg-list" data-bev="bev_premium_extras">
+              <li>House Beer &amp; Cascade Premium Light</li>
+              <li>Hardy's The Riddle Brut Reserve (South/East Australia)</li>
+              <li>Assorted Soft Drinks &amp; OJ</li>
+            </ul>
+          </div>
+          <!-- Deluxe -->
+          <div class="bev-card fade-up" data-delay="200">
+            <div class="bev-card-name">Deluxe Package</div>
+            <div style="font-family:'Lato',sans-serif;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:12px;" data-cms="bev_deluxe_surcharge">Standard price + $15pp</div>
+            <div style="font-family:'Lato',sans-serif;font-size:0.78rem;color:#888;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.1em;">Select One Red + One White</div>
+            <ul class="pkg-list" style="margin-bottom:12px;" data-bev="bev_deluxe_reds">
+              <li><strong>Red:</strong> Brothers at War Fist Fight Shiraz (Barossa Valley)</li>
+              <li>Barristers Block Pinot Noir (Adelaide Hills)</li>
+              <li>Barristers Block Wrattonbully Cabernet Sauv.</li>
+            </ul>
+            <ul class="pkg-list" style="margin-bottom:12px;" data-bev="bev_deluxe_whites">
+              <li><strong>White:</strong> Barristers Block Sauvignon Blanc (Adelaide Hills)</li>
+              <li>Barristers Block Pinot Gris (Adelaide Hills)</li>
+              <li>Barristers Block Rosé (Adelaide Hills)</li>
+            </ul>
+            <ul class="pkg-list" data-bev="bev_deluxe_extras">
+              <li>House Beer &amp; Cascade Premium Light</li>
+              <li>Tomich Hill Sparkling (Adelaide Hills)</li>
+              <li>Assorted Soft Drinks &amp; OJ</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Non-alcoholic + extras -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;">
+          <div class="bev-card fade-up">
+            <div class="bev-card-name">Non-Alcoholic Package</div>
+            <div style="font-family:'Lato',sans-serif;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:12px;" data-cms="bev_nonalcoholic_price">$27pp · 4-hour minimum</div>
+            <ul class="pkg-list" data-bev="bev_nonalcoholic_includes">
+              <li>Assorted Soft Drinks</li>
+              <li>Orange Juice</li>
+              <li>Add Sparkling Grape Juice: +$4.00pp</li>
+            </ul>
+            <div class="notice-box" style="margin-top:12px;margin-bottom:0;">Cash bar and bar tab options also available — speak with our Events Team.</div>
+          </div>
+          <div class="bev-card fade-up" data-delay="100">
+            <div class="bev-card-name">Beverage Extras</div>
+            <div style="font-family:'Lato',sans-serif;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:12px;">Optional Add-Ons</div>
+            <table class="addon-table">
+              <tr><td>Beverage Package Extension</td><td class="addon-price" data-cms="bev_extension_rate">$6.50pp/hr</td></tr>
+              <tr><td>Bottled Beer Upgrade (replaces house beer)</td><td class="addon-price" data-cms="bev_bottled_beer_rate">from $3.00pp</td></tr>
+              <tr><td>Cider</td><td class="addon-price" data-cms="bev_cider_rate">$3.00pp</td></tr>
+              <tr><td>Moscato</td><td class="addon-price" data-cms="bev_moscato_rate">$3.00pp</td></tr>
+              <tr><td>Spirits</td><td class="addon-price" data-cms="bev_spirits_rate">POA</td></tr>
+              <tr><td data-cms="bev_byo_label">BYO Spirits (weddings only, max 1 bottle/10 adults)</td><td class="addon-price" data-cms="bev_byo_rate">No corkage</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==================== FULL MENUS ==================== -->
+  <div class="tab-content" data-tab-content="menus" id="menus">
+    <section class="section-pad panel-ivory">
+      <div class="container">
+        <div class="text-center fade-up" style="max-width:600px;margin:0 auto 48px;">
+          <div class="section-subtitle">Full Menu Selections</div>
+          <h2 class="section-title">French &amp; Mediterranean Inspired</h2>
+          <div class="section-divider"></div>
+        </div>
+
+        <!-- Entrees -->
+        <div style="background:var(--white);border-radius:8px;padding:36px;box-shadow:var(--shadow);margin-bottom:32px;">
+          <h3 style="font-size:1.5rem;margin-bottom:6px;">Entrée Selections</h3>
+          <p style="font-family:'Lato',sans-serif;font-size:0.85rem;color:#888;margin-bottom:20px;">Served with dinner rolls &amp; butter. Items marked * carry a $3.50pp surcharge.</p>
+          <div class="menu-col" data-menu="entrees"></div>
+        </div>
+
+        <!-- Mains -->
+        <div style="background:var(--white);border-radius:8px;padding:36px;box-shadow:var(--shadow);margin-bottom:32px;">
+          <h3 style="font-size:1.5rem;margin-bottom:6px;">Main Selections</h3>
+          <p style="font-family:'Lato',sans-serif;font-size:0.85rem;color:#888;margin-bottom:20px;">Served with seasonal vegetables. Vegetarian options available on request.</p>
+          <div class="menu-col" data-menu="mains"></div>
+        </div>
+
+        <!-- Desserts -->
+        <div style="background:var(--white);border-radius:8px;padding:36px;box-shadow:var(--shadow);margin-bottom:32px;">
+          <h3 style="font-size:1.5rem;margin-bottom:6px;">Dessert Selections</h3>
+          <p style="font-family:'Lato',sans-serif;font-size:0.85rem;color:#888;margin-bottom:20px;">Served with freshly brewed coffee, aromatic teas and chocolates.</p>
+          <div class="menu-col" data-menu="desserts"></div>
+        </div>
+
+        <!-- Canapés -->
+        <div style="background:var(--white);border-radius:8px;padding:36px;box-shadow:var(--shadow);">
+          <h3 style="font-size:1.5rem;margin-bottom:20px;">Canapé Selections</h3>
+          <p style="font-family:'Lato',sans-serif;font-size:0.85rem;color:#888;margin-bottom:24px;">Cocktail packages: select 7 Hot + 6 Cold. Dessert canapés and mini meals can substitute or be added on.</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+            <div>
+              <div style="font-family:'Lato',sans-serif;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:12px;">Hot Canapés</div>
+              <div data-menu="canapes_hot"></div>
+            </div>
+            <div>
+              <div style="font-family:'Lato',sans-serif;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:12px;">Cold Canapés</div>
+              <div data-menu="canapes_cold"></div>
+            </div>
+          </div>
+          <div style="margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:28px;">
+            <div>
+              <div style="font-family:'Lato',sans-serif;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px;">Dessert Canapés — substitute or +$4.50pp/selection</div>
+              <ul class="pkg-list">
+                <li>Mini Berry Panna Cotta</li><li>Mini Lemon Curd Tarts</li>
+                <li>Chocolate Mousse Kisses</li>
+                <li>Seasonal Fruit Dipped in Belgian Chocolate</li>
+                <li>Profiteroles — filled with crème pâtissière</li>
+              </ul>
+            </div>
+            <div>
+              <div style="font-family:'Lato',sans-serif;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px;">Mini Meals — substitute 2 selections or +$6.00pp/selection</div>
+              <ul class="pkg-list">
+                <li>Fish &amp; Chips</li><li>Chicken Strips &amp; Chips</li>
+                <li>Beef Tortellini</li><li>Mini Burgers</li>
+                <li>Green Chicken Curry &amp; Pilaf Rice</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==================== ADD-ONS ==================== -->
+  <div class="tab-content" data-tab-content="addons">
+    <section class="section-pad panel-ivory">
+      <div class="container">
+        <div class="text-center fade-up" style="max-width:600px;margin:0 auto 48px;">
+          <div class="section-subtitle">Enhancements</div>
+          <h2 class="section-title">Add-Ons &amp; Upgrades</h2>
+          <div class="section-divider"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px;">
+          <div style="background:var(--white);border-radius:8px;padding:28px;box-shadow:var(--shadow);" class="fade-up">
+            <h3 style="font-size:1.3rem;margin-bottom:16px;">Starters on Arrival</h3>
+            <table class="addon-table">
+              <tr><td>½hr Pre-Dinner Beverages &amp; Canapés (Chef's: 2 Hot + 1 Cold)</td><td class="addon-price">$18.00pp</td></tr>
+              <tr><td>— Served outdoors (additional)</td><td class="addon-price">+$3.50pp</td></tr>
+              <tr><td>European Platter (bocconcini, cheddar, olives, small goods, mushrooms, cornichons, mini frittata, Turkish bread) — per table</td><td class="addon-price">$10.00pp</td></tr>
+              <tr><td>European Platter — individual serves</td><td class="addon-price">$12.50pp</td></tr>
+              <tr><td>Prawn Platter (SA King Prawns, 3pp)</td><td class="addon-price">$15.00pp</td></tr>
+              <tr><td>Mediterranean Delight Platter (Turkish bread, house-made dips)</td><td class="addon-price">$6.00pp</td></tr>
+            </table>
+          </div>
+          <div style="background:var(--white);border-radius:8px;padding:28px;box-shadow:var(--shadow);" class="fade-up" data-delay="80">
+            <h3 style="font-size:1.3rem;margin-bottom:16px;">Additional Courses</h3>
+            <table class="addon-table">
+              <tr><td>Additional Entrée selection</td><td class="addon-price">+$5.00pp</td></tr>
+              <tr><td>Additional Main selection</td><td class="addon-price">+$7.00pp</td></tr>
+              <tr><td>Additional Dessert selection (banquet)</td><td class="addon-price">+$5.00pp</td></tr>
+              <tr><td>Additional Dessert selection (events)</td><td class="addon-price">+$4.00pp</td></tr>
+              <tr><td>Add Soup (Options 3 &amp; 4 only)</td><td class="addon-price">+$10.00pp</td></tr>
+              <tr><td>Celebration Cake in lieu of Dessert (Options 3 &amp; 4 only)</td><td class="addon-price">−$2.00pp</td></tr>
+            </table>
+          </div>
+          <div style="background:var(--white);border-radius:8px;padding:28px;box-shadow:var(--shadow);" class="fade-up" data-delay="160">
+            <h3 style="font-size:1.3rem;margin-bottom:16px;">To Finish</h3>
+            <table class="addon-table">
+              <tr><td>Fresh Seasonal Fruit Platter</td><td class="addon-price">$6.50pp</td></tr>
+              <tr><td>Trio Cheese Platter with seasonal greens</td><td class="addon-price">$6.50pp</td></tr>
+              <tr><td>Wedding Cake cut &amp; served on platter with dessert</td><td class="addon-price">$2.00pp</td></tr>
+              <tr><td>Cakeage — cut &amp; served buffet style</td><td class="addon-price">$1.00pp</td></tr>
+              <tr><td>Cakeage — cut, plated &amp; waited to guests</td><td class="addon-price">$3.00pp</td></tr>
+            </table>
+          </div>
+          <div style="background:var(--white);border-radius:8px;padding:28px;box-shadow:var(--shadow);" class="fade-up" data-delay="80">
+            <h3 style="font-size:1.3rem;margin-bottom:16px;">Décor &amp; Theming</h3>
+            <p style="font-family:'Lato',sans-serif;font-size:0.88rem;color:#555;margin-bottom:12px;">Available to book through Adelaide Pavilion's office (prices on request):</p>
+            <ul class="pkg-list">
+              <li>Chair Hire</li><li>Chair Covers &amp; Sashes</li>
+              <li>Ceiling Lighting</li><li>Ceiling Draping</li>
+              <li>Backdrops</li><li>Stage</li>
+            </ul>
+            <div class="notice-box" style="margin-top:12px;margin-bottom:0;font-size:0.82rem;">All contracted vendors must have a registered ABN and current public liability insurance.</div>
+          </div>
+          <div style="background:var(--white);border-radius:8px;padding:28px;box-shadow:var(--shadow);" class="fade-up" data-delay="160">
+            <h3 style="font-size:1.3rem;margin-bottom:16px;">Important Notes &amp; Surcharges</h3>
+            <table class="addon-table">
+              <tr><td>Public Holiday surcharge</td><td class="addon-price">POA</td></tr>
+              <tr><td>Glitter / confetti / streamers cleaning fee</td><td class="addon-price">$250</td></tr>
+              <tr><td>Late contractor bump-out fee (after 30 min)</td><td class="addon-price">$220 incl. GST</td></tr>
+              <tr><td>Wedding postponement processing fee</td><td class="addon-price">$500</td></tr>
+              <tr><td>Credit card surcharge</td><td class="addon-price">Applies</td></tr>
+              <tr><td>Smoked salmon / prawn entrée surcharge</td><td class="addon-price">$3.50pp</td></tr>
+            </table>
+            <div class="notice-box" style="margin-top:12px;margin-bottom:0;font-size:0.82rem;"><strong>Pricing notes:</strong> All prices include GST. CPI adjustments apply to bookings made over 12 months in advance. 2026/27/28 wedding package pricing locked at time of booking.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div><!-- end data-tabs -->
+
+<!-- CTA -->
+<div class="cta-banner">
+  <div class="cta-banner-bg" data-cms-bg="cta_packages" style="background-image:url('images/cta-bg.jpg');"></div>
+  <div class="cta-banner-content fade-in">
+    <div class="script-accent" style="font-size:2.5rem;margin-bottom:8px;">Ready to Book?</div>
+    <h2>Let's Create Something Beautiful Together</h2>
+    <p>Contact our team to discuss your perfect package and check availability for your date.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="contact.html" class="btn btn-gold">Enquire Now</a>
+      <a href="tel:0882127444" class="btn btn-outline-white">Call 08 8212 7444</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-logo">Adelaide Pavilion</div>
+        <div class="footer-brand-tagline">Veale Gardens, Adelaide</div>
+        <p class="footer-brand-desc">An iconic garden venue in the heart of Adelaide since 1963. French and Mediterranean inspired cuisine, panoramic views, and unforgettable moments.</p>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/adelaidepavilion" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+          <a href="https://www.instagram.com/adelaidepavilion" target="_blank" rel="noopener" aria-label="Instagram">in</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigate</div>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+          <li><a href="weddings.html">Weddings</a></li><li><a href="corporate.html">Corporate</a></li>
+          <li><a href="social.html">Social Events</a></li><li><a href="packages.html">Packages</a></li>
+          <li><a href="gallery.html">Gallery</a></li><li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Packages</div>
+        <ul class="footer-links">
+          <li><a href="packages.html#weddings">Wedding Packages</a></li>
+          <li><a href="packages.html">Social Event Packages</a></li>
+          <li><a href="packages.html">Corporate Packages</a></li>
+          <li><a href="packages.html">Beverage Packages</a></li>
+          <li><a href="packages.html">Full Menus</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact Us</div>
+        <div class="footer-contact-item"><span class="footer-contact-icon">📍</span><div class="footer-contact-text">Veale Gardens, Cnr South Terrace &amp; Peacock Road, Adelaide SA 5000</div></div>
+        <div class="footer-contact-item"><span class="footer-contact-icon">📞</span><div class="footer-contact-text"><a href="tel:0882127444" data-cms-href="phone_tel" data-cms="phone_display">08 8212 7444</a></div></div>
+        <div class="footer-contact-item"><span class="footer-contact-icon">✉</span><div class="footer-contact-text"><a href="mailto:contact@adelaidepavilion.com.au" data-cms-href="email_href" data-cms="email">contact@adelaidepavilion.com.au</a></div></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© <span class="js-year"></span> Adelaide Pavilion. All rights reserved.</div>
+      <div class="footer-bottom-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms-conditions.html">Terms &amp; Conditions</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/cms-loader.js" defer></script>
+<script src="js/main.js" defer></script>
+</body>
+</html>

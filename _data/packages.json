@@ -1,0 +1,289 @@
+{
+  "hero_script": "Tailored to Perfection",
+  "tag_wedding": "Wedding Package",
+  "tag_banquet_1": "Banquet Option 1",
+  "tag_banquet_2": "Banquet Option 2",
+  "tag_banquet_3": "Banquet Option 3",
+  "tag_banquet_4": "Banquet Option 4",
+  "tag_cocktail_social": "Cocktail Package",
+  "tag_casual_dining": "Casual Dining",
+  "tag_breakfast": "Breakfast",
+  "tag_addon": "Add-On Package",
+  "tag_corporate_cocktail_full": "Full Corporate Cocktail",
+  "heading_breakfast_packages": "Breakfast Packages",
+  "heading_lunch_options": "Lunch Options",
+  "heading_morning_tea": "Morning / Afternoon Tea",
+  "heading_corporate_cocktail": "Corporate Cocktail & Networking",
+  "heading_room_configurations": "Room Configurations",
+  "hero_title": "Packages & Pricing",
+  "hero_subtitle": "Complete menus, beverage options & transparent pricing",
+  "wedding_signature_price_2026": 140,
+  "wedding_signature_price_2027": 150,
+  "wedding_signature_price_2028": 160,
+  "wedding_signature_price_label": "per person · 2026  |  $150pp 2027  |  $160pp 2028",
+  "wedding_pavilion_price_2026": 150,
+  "wedding_pavilion_price_2027": 160,
+  "wedding_pavilion_price_2028": 170,
+  "wedding_pavilion_price_label": "per person · 2026  |  $160pp 2027  |  $170pp 2028",
+  "wedding_cocktail_price": 102,
+  "social_two_course_main_dessert": 50,
+  "social_two_course_entree_main": 55,
+  "social_three_course_set": 63,
+  "social_three_course_alternate": 73,
+  "social_cocktail": 45,
+  "social_street_eats": 48,
+  "corporate_breakfast_continental": 30,
+  "corporate_breakfast_hot": 32,
+  "corporate_networking": 38,
+  "corporate_cocktail": 83,
+  "children_menu1": 40,
+  "children_menu1_label": "Option 1 — $40 per child (under 12)",
+  "children_menu1_items": [
+    "Crumbed Chicken Tenderloins & Chips",
+    "Ice Cream",
+    "Soft Drinks & Orange Juice"
+  ],
+  "children_menu2": 48,
+  "children_menu2_label": "Option 2 — $48 per child (under 12)",
+  "children_menu2_items": [
+    "Pasta Napolitana",
+    "Crumbed Chicken Tenderloins & Chips",
+    "Ice Cream",
+    "Soft Drinks & Orange Juice"
+  ],
+  "children_cocktail": 35,
+  "children_cocktail_label": "Cocktail Kids Menu — $35 per child (under 12)",
+  "children_cocktail_items": [
+    "Chicken Strips & Chips",
+    "Ice Cream",
+    "Soft Drinks & Orange Juice"
+  ],
+  "children_note": "Older children and young adults (9–17 years) may prefer to have the main menu. Supplier meals (main course from menu) are available at $50 per person.",
+  "bev_standard_2hr": "$24pp",
+  "bev_standard_3hr": "$28pp",
+  "bev_standard_4hr": "$33pp",
+  "bev_standard_5hr": "$38pp",
+  "bev_standard_includes": [
+    "House Beer",
+    "Cascade Premium Light",
+    "Svelte Sauvignon Blanc",
+    "Svelte Shiraz TESTING OBJECT",
+    "Willowglen Sparkling Brut (on demand)",
+    "Assorted Soft Drinks & Orange Juice"
+  ],
+  "bev_premium_surcharge": "Standard price + $10pp",
+  "bev_premium_reds": [
+    "Hedonist Shiraz (McLaren Vale)",
+    "Barristers Block Tempranillo Cab Shiraz (Adelaide Hills)",
+    "Tomich Hill Cabernet Sauvignon (Coonawarra)",
+    "Hedonist Grenache (McLaren Vale)"
+  ],
+  "bev_premium_whites": [
+    "Brothers at War Riesling (Barossa Valley)",
+    "Serafino Bellissimo Pinot Grigio (McLaren Vale)",
+    "Clouded Isle Sauvignon Blanc (Marlborough NZ)",
+    "Serafino Chardonnay (McLaren Vale)"
+  ],
+  "bev_premium_extras": [
+    "House Beer & Cascade Premium Light",
+    "Hardy's The Riddle Brut Reserve (South/East Australia)",
+    "Assorted Soft Drinks & OJ"
+  ],
+  "bev_deluxe_surcharge": "Standard price + $15pp",
+  "bev_deluxe_reds": [
+    "Brothers at War Fist Fight Shiraz (Barossa Valley)",
+    "Barristers Block Pinot Noir (Adelaide Hills)",
+    "Barristers Block Wrattonbully Cabernet Sauv."
+  ],
+  "bev_deluxe_whites": [
+    "Barristers Block Sauvignon Blanc (Adelaide Hills)",
+    "Barristers Block Pinot Gris (Adelaide Hills)",
+    "Barristers Block Rosé (Adelaide Hills)"
+  ],
+  "bev_deluxe_extras": [
+    "House Beer & Cascade Premium Light",
+    "Tomich Hill Sparkling (Adelaide Hills)",
+    "Assorted Soft Drinks & OJ"
+  ],
+  "bev_nonalcoholic_price": "$27pp · 4-hour minimum",
+  "bev_nonalcoholic_includes": [
+    "Assorted Soft Drinks",
+    "Orange Juice",
+    "Add Sparkling Grape Juice: +$4.00pp"
+  ],
+  "bev_extension_rate": "$6.50pp/hr",
+  "bev_bottled_beer_rate": "from $3.00pp",
+  "bev_cider_rate": "$3.00pp",
+  "bev_moscato_rate": "$3.00pp",
+  "bev_spirits_rate": "Enquire",
+  "bev_byo_label": "BYO Spirits (weddings only, max 1 bottle/10 adults)",
+  "bev_byo_rate": "No corkage",
+  "wedding_signature_menu": [
+    "Entrée — One selection from the entrée menu",
+    "Main — One selection from the main menu",
+    "Dessert — Celebration Cake (your cake cut & served)",
+    "Dinner Rolls & Butter",
+    "Coffee, Teas & Chocolates with dessert"
+  ],
+  "wedding_signature_bev": [
+    "House Beer & Cascade Premium Light",
+    "Svelte Sauvignon Blanc & Svelte Shiraz",
+    "Willowglen Sparkling Brut (on demand)",
+    "Assorted Soft Drinks & Orange Juice"
+  ],
+  "wedding_signature_inclusions": [
+    "Dedicated Event Coordinator",
+    "5-Hour Room Hire",
+    "Grounds access for photographs",
+    "Complimentary AV System",
+    "Tablecloths & Overlays (Black or White)",
+    "Linen Serviettes (White)",
+    "Cake Table, Bridal & Gift Table Skirting",
+    "Printed Menus (2 per table), Table Numbers",
+    "Onsite Parking (subject to availability)"
+  ],
+  "wedding_pavilion_menu": [
+    "Entrée — Choice of two selections",
+    "Main — Choice of two selections",
+    "Dessert — Celebration Cake (your cake cut & served)",
+    "Dinner Rolls & Butter",
+    "Coffee, Teas & Chocolates with dessert"
+  ],
+  "wedding_pavilion_bev": [
+    "House Beer & Cascade Premium Light",
+    "Svelte Sauvignon Blanc & Svelte Shiraz",
+    "Willowglen Sparkling Brut (on demand)",
+    "Assorted Soft Drinks & Orange Juice"
+  ],
+  "wedding_pavilion_extras": [
+    "More menu choice — perfect for diverse tastes",
+    "Alternate-serve option available"
+  ],
+  "wedding_cocktail_canapes": [
+    "7 Hot Canapés — your selection",
+    "6 Cold Canapés — your selection",
+    "See Full Canapé Menu below"
+  ],
+  "wedding_cocktail_bev": [
+    "House Beer & Cascade Premium Light",
+    "Svelte Sauvignon Blanc & Svelte Shiraz",
+    "Willowglen Sparkling Brut (on demand)",
+    "Assorted Soft Drinks & Orange Juice"
+  ],
+  "wedding_cocktail_inclusions": [
+    "All standard wedding inclusions",
+    "Upgrades available (minimum spend applies)"
+  ],
+  "social_banquet1_items": [
+    "Main — One selection",
+    "Dessert — One selection",
+    "Served with seasonal vegetables"
+  ],
+  "social_banquet2_items": [
+    "Entrée — One selection",
+    "Main — One selection",
+    "Served with dinner rolls & seasonal veg"
+  ],
+  "social_banquet3_items": [
+    "Entrée — One selection",
+    "Main — One selection",
+    "Dessert — One selection",
+    "Freshly brewed coffee & teas included",
+    "Option to add Soup: +$10pp",
+    "Option: Cake in lieu of Dessert: −$2pp"
+  ],
+  "social_banquet4_items": [
+    "Entrée — Choice of two selections",
+    "Main — Choice of two selections",
+    "Dessert — Choice of two selections",
+    "Freshly brewed coffee & teas included",
+    "Option to add Soup: +$10pp",
+    "Option: Cake in lieu of Dessert: −$2pp"
+  ],
+  "social_cocktail_items": [
+    "7 Hot Canapés — your selection",
+    "6 Cold Canapés — your selection",
+    "Beverage packages from $24pp (separate)",
+    "Upgrades available (min. spend applies)"
+  ],
+  "social_street_eats_items": [
+    "Beef Sliders — ground beef, melted cheese, tomato relish on brioche",
+    "Arancini — cracked pepper & lemon with mozzarella",
+    "Fish + Chips — crumbed fish with chips",
+    "Banh Mi Bao Buns — pork belly, pickled carrot, kewpie mayo",
+    "Chicken Yiros Plate — spiced chicken, pita, tomato, tzatziki"
+  ],
+  "corp_continental_items": [
+    "Sliced Fresh Fruit",
+    "Assorted Sweet Muffins",
+    "Ham & Cheese Croissants",
+    "Toast with assorted preserves",
+    "Yoghurt with muesli and honey",
+    "2hr: OJ, filtered water, fresh coffee & teas"
+  ],
+  "corp_hot_options": [
+    "Full Breakfast — scrambled eggs, bacon, grilled tomato, gourmet sausage, toast",
+    "Sourdough Eggs Benedict — toast, ham, poached egg, hollandaise",
+    "Spanish Tortilla — served with smoked salmon OR fresh mushrooms"
+  ],
+  "corp_hot_bev": [
+    "2hr: OJ, filtered water, fresh coffee & teas"
+  ],
+  "corp_networking_items": [
+    "Chef's Selection: 3 Hot + 3 Cold Canapés",
+    "1-Hour Standard Beverage Package",
+    "Beer, wine, sparkling, soft drinks & OJ"
+  ],
+  "corp_cocktail_items": [
+    "2-Hour Canapé Service: 7 Hot + 6 Cold",
+    "5-Hour Standard Beverage Package",
+    "Beer, wine, sparkling, soft drinks & OJ",
+    "Dedicated Event Coordinator",
+    "AV Equipment included"
+  ],
+  "lunch_r1_name": "Focaccia Lunch TESTING !!",
+  "lunch_r1_desc": "Focaccia with meat & vegetable fillings, plus cocktail-sized savoury pastry",
+  "lunch_r1_price": "$18.90pp",
+  "lunch_r2_name": "Gourmet Salad Lunch",
+  "lunch_r2_desc": "Chef's selection of meat, gourmet salad & leafy green salad, bread rolls & butter",
+  "lunch_r2_price": "$18.90pp",
+  "lunch_r3_name": "Low Carb Lunch",
+  "lunch_r3_desc": "Chef's selection of wraps with meats, vegetables, salad fillings & condiments",
+  "lunch_r3_price": "$24.00pp",
+  "lunch_r4_name": "Lunch Buffet",
+  "lunch_r4_desc": "Asian Beef Salad, Spinach & Ricotta Ravioli, Tuscan Chicken, Garden Salad, Gourmet Salad, Bread Rolls, Fresh Fruit Platter, Local Cheese Selection",
+  "lunch_r4_price": "$40.00pp",
+  "lunch_r5_name": "Hot Working Lunch",
+  "lunch_r5_desc": "Two pre-selected main courses (alternately served), bread rolls, soup or frittata, seasonal veg, gourmet salad",
+  "lunch_r5_price": "$40.00pp",
+  "tea_bev_r1_name": "Coffee & teas — ½ hour service",
+  "tea_bev_r1_price": "$6.50pp",
+  "tea_bev_r2_name": "Coffee & teas — all-day continuous",
+  "tea_bev_r2_price": "$17.50pp",
+  "tea_bev_r3_name": "Orange juice or soft drinks",
+  "tea_bev_r3_price": "$4.50pp",
+  "tea_food_r1_name": "Muffins / Banana & Date Loaf / Chocolate Brownies / Carrot Cake",
+  "tea_food_r1_price": "$5.50pp",
+  "tea_food_r2_name": "Scones with preserves & cream / Spinach & Ricotta Triangles / Ham & Cheese Croissants",
+  "tea_food_r2_price": "$5.90pp",
+  "tea_food_r3_name": "Biscuits (assorted classics)",
+  "tea_food_r3_price": "$3.00pp",
+  "tea_food_r4_name": "Assorted Danishes",
+  "tea_food_r4_price": "$5.50pp",
+  "tea_food_r5_name": "Sliced fresh seasonal fruit platters",
+  "tea_food_r5_price": "$6.50pp",
+  "room_parkview_banquet": "230",
+  "room_parkview_cabaret": "180",
+  "room_parkview_cocktail": "260",
+  "room_parkview_theatre": "250",
+  "room_parkview_ushape": "45",
+  "room_parkview_boardroom": "55",
+  "room_parkview_classroom": "100",
+  "room_terrace_banquet": "100",
+  "room_terrace_cabaret": "80",
+  "room_terrace_cocktail": "150",
+  "room_terrace_theatre": "90",
+  "room_terrace_ushape": "35",
+  "room_terrace_boardroom": "40",
+  "room_terrace_classroom": "30"
+}

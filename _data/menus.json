@@ -1,0 +1,282 @@
+{
+  "entrees": [
+    {
+      "name": "Thai Pumpkin Soup CMS TEST",
+      "desc": "Thick, coriander, lemongrass, touch of chilli",
+      "surcharge": ""
+    },
+    {
+      "name": "Potato, Bacon & Leek Soup",
+      "desc": "Thick and creamy, chunky bacon",
+      "surcharge": ""
+    },
+    {
+      "name": "Caprese Plate",
+      "desc": "FiordiLatte, tomato, basil, pear, white balsamico, vincotto, crostini",
+      "surcharge": ""
+    },
+    {
+      "name": "Spinach & Ricotta Ravioli",
+      "desc": "Napolitana sauce, shaved parmesan",
+      "surcharge": ""
+    },
+    {
+      "name": "Beef Ragu",
+      "desc": "Orecchiette pasta, slow-cooked beef & pork sauce, parmigiano",
+      "surcharge": ""
+    },
+    {
+      "name": "Chicken Tortellini",
+      "desc": "Rose sauce, basil, pecorino",
+      "surcharge": ""
+    },
+    {
+      "name": "Salt & Pepper Calamari",
+      "desc": "Mixed greens, lime and coriander dressing",
+      "surcharge": ""
+    },
+    {
+      "name": "Smoked Salmon & Avocado Timbale",
+      "desc": "Greens, lemon garlic dressing",
+      "surcharge": "+$3.50pp"
+    },
+    {
+      "name": "NT Barramundi",
+      "desc": "Leek pilaf, lemon, dill, rocket",
+      "surcharge": ""
+    },
+    {
+      "name": "Beetroot Salad",
+      "desc": "Lentils, pearl barley, almond, pinenuts, goat cheese, vinaigrette",
+      "surcharge": ""
+    },
+    {
+      "name": "Prawn & Avocado Salad",
+      "desc": "Avocado cheek, ocean prawns, tangy lime & dill vinaigrette OR marie rose",
+      "surcharge": "+$3.50pp"
+    },
+    {
+      "name": "Leek & Feta Tart",
+      "desc": "Shortcrust pastry, leek, feta, caramelised onion, thyme, warm with fresh salad greens",
+      "surcharge": ""
+    },
+    {
+      "name": "Mushroom Arancini",
+      "desc": "Porcini, swiss brown, parmesan, tomato coulis, bitter greens",
+      "surcharge": ""
+    },
+    {
+      "name": "Beef Medallions",
+      "desc": "Moroccan spiced beef fillet, rosemary and garlic sweet potatoes",
+      "surcharge": ""
+    },
+    {
+      "name": "Lemon Chicken à la Grecque",
+      "desc": "Marinated thigh fillet, bed of salad",
+      "surcharge": ""
+    },
+    {
+      "name": "Thai Chicken Salad",
+      "desc": "Marinated sliced chicken breast, garden greens, lime, ginger & coriander dressing",
+      "surcharge": ""
+    },
+    {
+      "name": "Pork Belly",
+      "desc": "SA roasted pork belly, pumpkin & sweet potato purée, warm honey balsamic glaze",
+      "surcharge": ""
+    },
+    {
+      "name": "Nick's Special Soup",
+      "desc": "yummy food",
+      "surcharge": ""
+    }
+  ],
+  "mains": [
+    {
+      "name": "Fillet Steak",
+      "desc": "Served medium, potato dauphinoise, light red wine jus",
+      "surcharge": ""
+    },
+    {
+      "name": "Lamb Shanks",
+      "desc": "Red sauce, rosemary, thyme, mirepoix, dry sherry, pommes purée",
+      "surcharge": ""
+    },
+    {
+      "name": "Pork French Cut Lette",
+      "desc": "Char-grilled, Beurre Maître d'Hôtel, apple and fennel slaw",
+      "surcharge": ""
+    },
+    {
+      "name": "Chicken Passanda",
+      "desc": "Chicken thigh fillet, fragrant almond & yoghurt curry, rice, eggplant",
+      "surcharge": ""
+    },
+    {
+      "name": "Supreme of Chicken",
+      "desc": "Crispy skin chicken breast, brie and mustard cream sauce, pangrattato",
+      "surcharge": ""
+    },
+    {
+      "name": "Chicken Méditerranée",
+      "desc": "Marinated spiced thigh fillet, banquet of Mediterranean vegetables",
+      "surcharge": ""
+    },
+    {
+      "name": "Chicken Mignon",
+      "desc": "Chicken breast wrapped in bacon, mushroom sauce",
+      "surcharge": ""
+    },
+    {
+      "name": "Lemon Herb NT Barramundi",
+      "desc": "Oven baked fillet, lemon and extra virgin olive oil dressing",
+      "surcharge": ""
+    },
+    {
+      "name": "Crispy Atlantic Salmon",
+      "desc": "Grilled, greens, lemon and dill aioli, roast baby potatoes",
+      "surcharge": ""
+    }
+  ],
+  "desserts": [
+    {
+      "name": "Apple Brûlée",
+      "desc": "Smooth creamy crème brûlée, spiced baked apple",
+      "surcharge": ""
+    },
+    {
+      "name": "Sweet Dreams",
+      "desc": "Choux pastry puffs, crème pâtissière custard, spiral of chocolate sauce",
+      "surcharge": ""
+    },
+    {
+      "name": "Strawberries & Cream",
+      "desc": "Vanilla pannacotta, strawberry salad, biscotti",
+      "surcharge": ""
+    },
+    {
+      "name": "Brandy-Snap Basket Semifreddo",
+      "desc": "Boysenberry ice-cream, mixed berry compote",
+      "surcharge": ""
+    },
+    {
+      "name": "Chocolate Mousse & Friends",
+      "desc": "Traditional French recipe, strawberries, nutty biscotti",
+      "surcharge": ""
+    },
+    {
+      "name": "Vanilla Bean Semifreddo",
+      "desc": "Creamy semi-frozen parfait, vanilla beans, pecans, Pavilion chocolate sauce",
+      "surcharge": ""
+    },
+    {
+      "name": "Brownie Points",
+      "desc": "Dark Callebaut chocolate, Frangelico laced sauce, mélange of nuts",
+      "surcharge": ""
+    },
+    {
+      "name": "Apple Pie",
+      "desc": "Pâte sucrée, apple & sultana filling, cascading cream, vanilla ice cream",
+      "surcharge": ""
+    },
+    {
+      "name": "Baklava Semifreddo",
+      "desc": "Traditional creamy parfait, nuts & spices of Anatolian baklava, honey syrup",
+      "surcharge": ""
+    },
+    {
+      "name": "Sticky Pudding",
+      "desc": "Steamed sticky date pudding, vanilla ice cream, butterscotch sauce",
+      "surcharge": ""
+    }
+  ],
+  "canapes_hot": [
+    {
+      "name": "Lemon Pepper Arancini",
+      "desc": "Cracked pepper & lemon zest rice balls, crumbed & fried",
+      "surcharge": ""
+    },
+    {
+      "name": "Beer Battered Prawns",
+      "desc": "Asian seasoning, lemongrass dipping sauce",
+      "surcharge": ""
+    },
+    {
+      "name": "Chick Stix",
+      "desc": "Char-grilled lemon & paprika chicken skewers",
+      "surcharge": ""
+    },
+    {
+      "name": "Chorizo Bombs",
+      "desc": "Baked chorizo with haloumi cheese",
+      "surcharge": ""
+    },
+    {
+      "name": "Spiced Lamb Pastry Bites",
+      "desc": "Red wine & thyme lamb with mushroom, cocktail sausage rolls, tomato & basil relish",
+      "surcharge": ""
+    },
+    {
+      "name": "Spanabites",
+      "desc": "Spinach & ricotta spanakopita in filo pastry",
+      "surcharge": ""
+    },
+    {
+      "name": "Savoury Spring Rolls",
+      "desc": "Julienne Asian vegetables, wonton paper, Asian sauce",
+      "surcharge": ""
+    },
+    {
+      "name": "Meatballs",
+      "desc": "Prime ground lamb, tomato, onion, black olives, spices, light tomato curry sauce",
+      "surcharge": ""
+    },
+    {
+      "name": "Grilled Saganaki",
+      "desc": "Char-grilled cheese Greek style",
+      "surcharge": ""
+    }
+  ],
+  "canapes_cold": [
+    {
+      "name": "Oysters (Fresh SA)",
+      "desc": "Natural / Vodka & Lime / Chilli & Coriander Sauce",
+      "surcharge": ""
+    },
+    {
+      "name": "Bruschetta Italiano",
+      "desc": "Toasted baguette, tomato, basil, garlic",
+      "surcharge": ""
+    },
+    {
+      "name": "Smoked Salmon Sandwiches",
+      "desc": "Fresh smoked salmon, dill and cheese",
+      "surcharge": ""
+    },
+    {
+      "name": "Sushi",
+      "desc": "Pickled Asian vegetables & rice, nori paper, honey soy & wasabi dipping sauce",
+      "surcharge": ""
+    },
+    {
+      "name": "Mexican Zucchini Slice",
+      "desc": "Julienne zucchini, capsicum, tomato, egg, cheese, oven baked",
+      "surcharge": ""
+    },
+    {
+      "name": "Roast Beef Scrolls",
+      "desc": "Rare roast beef, olive & mushroom tapenade, fruit chutney",
+      "surcharge": ""
+    },
+    {
+      "name": "Gourmet Dips Selection",
+      "desc": "Baguette crostini with house-made seasonal dips",
+      "surcharge": ""
+    },
+    {
+      "name": "Cheese & Greens Board",
+      "desc": "Fine cheese with seasonal fresh greens",
+      "surcharge": ""
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "hero_homepage": {
+    "src": "images/hero-pavilion.jpg",
+    "label": "Homepage — hero banner"
+  },
+  "hero_weddings": {
+    "src": "images/managed/1775711215748-hero_weddings.jpg",
+    "label": "Weddings — hero banner"
+  },
+  "hero_corporate": {
+    "src": "images/corporate-hero.jpg",
+    "label": "Corporate — hero banner"
+  },
+  "hero_social": {
+    "src": "images/social-hero.jpg",
+    "label": "Social Events — hero banner"
+  },
+  "hero_about": {
+    "src": "images/about-hero.jpg",
+    "label": "About — hero banner"
+  },
+  "hero_gallery": {
+    "src": "images/weddings-hero.jpg",
+    "label": "Gallery — hero banner"
+  },
+  "hero_contact": {
+    "src": "images/contact-hero.jpg",
+    "label": "Contact — hero banner"
+  },
+  "hero_packages": {
+    "src": "images/packages-hero.jpg",
+    "label": "Packages — hero banner"
+  },
+  "cta_homepage": {
+    "src": "images/cta-bg.jpg",
+    "label": "Homepage — CTA banner"
+  },
+  "cta_weddings": {
+    "src": "images/weddings-cta.jpg",
+    "label": "Weddings — CTA banner"
+  },
+  "cta_social": {
+    "src": "images/social-cta.jpg",
+    "label": "Social Events — CTA banner"
+  },
+  "cta_about": {
+    "src": "images/cta-bg.jpg",
+    "label": "About — CTA banner"
+  },
+  "cta_gallery": {
+    "src": "images/cta-bg.jpg",
+    "label": "Gallery — CTA banner"
+  },
+  "cta_packages": {
+    "src": "images/cta-bg.jpg",
+    "label": "Packages — CTA banner"
+  },
+  "room_parkview": {
+    "src": "images/parkview-room.jpg",
+    "label": "Rooms — Parkview Room panel"
+  },
+  "room_terrace": {
+    "src": "images/terrace-room.jpg",
+    "label": "Rooms — Terrace Room panel"
+  },
+  "about_venue": {
+    "src": "images/about-venue.jpg",
+    "label": "About — venue photo (img)"
+  }
+}

@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Environment variables — NEVER commit this
+.env
+
+# SQLite database — contains client content, back up separately
+db/cms.db
+db/cms.db-wal
+db/cms.db-shm
+
+# Uploaded images (managed separately, back up the images/ directory)
+images/gallery/
+images/managed/
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Claude Code dev files — local only, never push
+CLAUDE.md
+.mcp.json

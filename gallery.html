@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery — Adelaide Pavilion | Weddings, Events & Venue Photos</title>
+  <meta name="description" content="Browse the Adelaide Pavilion gallery — wedding receptions, corporate events, social celebrations, cuisine, and venue photos in Veale Gardens, Adelaide." />
+  <link rel="preload" as="image" href="images/weddings-hero.jpg" fetchpriority="high" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Great+Vibes&family=Lato:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .gallery-grid-lg { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+    @media(max-width:768px){ .gallery-grid-lg { grid-template-columns:1fr 1fr; } }
+    @media(max-width:480px){ .gallery-grid-lg { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="Adelaide Pavilion" class="nav-logo-img" /></a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link">Home</a></li><li><a href="about.html" class="nav-link">About</a></li>
+      <li><a href="weddings.html" class="nav-link">Weddings</a></li><li><a href="corporate.html" class="nav-link">Corporate</a></li>
+      <li><a href="social.html" class="nav-link">Social Events</a></li><li><a href="packages.html" class="nav-link">Packages</a></li>
+      <li><a href="gallery.html" class="nav-link active">Gallery</a></li>
+      <li><a href="contact.html" class="nav-cta">Enquire Now</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="weddings.html">Weddings</a>
+    <a href="corporate.html">Corporate</a><a href="social.html">Social Events</a>
+    <a href="packages.html">Packages & Pricing</a><a href="gallery.html">Gallery</a>
+    <a href="contact.html" class="mobile-cta">Enquire Now</a>
+  </div>
+</nav>
+
+<header class="hero-sub">
+  <div class="hero-bg" data-cms-bg="hero_gallery" style="background-image:url('images/weddings-hero.jpg');"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-sub-content">
+    <div class="hero-script">A Picture Worth a Thousand Words</div>
+    <h1 class="hero-title">Gallery</h1>
+    <p style="font-family:'Lato',sans-serif;font-size:1rem;color:rgba(255,255,255,0.8);margin-top:8px;letter-spacing:0.08em;">Weddings · Corporate Events · Social Celebrations · Cuisine · Venue</p>
+  </div>
+</header>
+
+<section class="section-pad panel-ivory">
+  <div class="container">
+    <div class="text-center fade-up" style="max-width:580px;margin:0 auto 44px;">
+      <div class="section-subtitle">Our Gallery</div>
+      <h2 class="section-title">Moments That Last a Lifetime</h2>
+      <div class="section-divider"></div>
+      <p style="font-family:'Lato',sans-serif;font-size:0.95rem;color:#555;line-height:1.85;">Explore some of the beautiful events, moments, and spaces that make Adelaide Pavilion so special. Click any image to view in full screen.</p>
+    </div>
+
+    <!-- Gallery grid — populated from _data/gallery.json -->
+    <div class="gallery-grid-lg" id="galleryGrid"></div>
+
+    <script>
+    (function() {
+      var grid = document.getElementById('galleryGrid');
+      var DELAYS = [0, 60, 120];
+
+      fetch('/_data/gallery.json')
+        .then(function(r) { return r.json(); })
+        .then(function(items) {
+          var lightboxItems = [];
+
+          items.forEach(function(item, i) {
+            var div = document.createElement('div');
+            div.className = 'gallery-item fade-up';
+            var delay = DELAYS[i % 3];
+            if (delay) div.dataset.delay = delay;
+            div.dataset.caption = item.caption || '';
+
+            var img = document.createElement('img');
+            img.src = item.src;
+            img.alt = item.alt || '';
+            if (i > 0) { img.loading = 'lazy'; img.decoding = 'async'; }
+            div.appendChild(img);
+
+            var overlay = document.createElement('div');
+            overlay.className = 'gallery-overlay';
+            overlay.innerHTML = '<span class="gallery-overlay-icon">+</span>';
+            div.appendChild(overlay);
+
+            grid.appendChild(div);
+
+            var idx = i;
+            lightboxItems.push({ src: item.src, alt: item.alt || '', caption: item.caption || '' });
+            div.addEventListener('click', function() { openLightbox(idx); });
+          });
+
+          // Scroll animations for injected items
+          var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(e) {
+              if (e.isIntersecting) {
+                var d = parseInt(e.target.dataset.delay || '0', 10);
+                setTimeout(function() { e.target.classList.add('visible'); }, d);
+                observer.unobserve(e.target);
+              }
+            });
+          }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+          grid.querySelectorAll('.fade-up').forEach(function(el) { observer.observe(el); });
+
+          // Lightbox wiring — uses the lightbox DOM already in the page
+          var lightbox = document.getElementById('lightbox');
+          var lightboxImg = document.getElementById('lightboxImg');
+          var lightboxCaption = document.getElementById('lightboxCaption');
+          var currentIndex = 0;
+
+          function openLightbox(idx) {
+            currentIndex = idx;
+            var it = lightboxItems[idx];
+            if (!it || !lightbox) return;
+            lightboxImg.src = it.src;
+            lightboxImg.alt = it.alt;
+            if (lightboxCaption) lightboxCaption.textContent = it.caption;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          }
+
+          function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+          }
+
+          document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+          document.getElementById('lightboxPrev').addEventListener('click', function() {
+            openLightbox((currentIndex - 1 + lightboxItems.length) % lightboxItems.length);
+          });
+          document.getElementById('lightboxNext').addEventListener('click', function() {
+            openLightbox((currentIndex + 1) % lightboxItems.length);
+          });
+          lightbox.addEventListener('click', function(e) { if (e.target === lightbox) closeLightbox(); });
+          document.addEventListener('keydown', function(e) {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') openLightbox((currentIndex - 1 + lightboxItems.length) % lightboxItems.length);
+            if (e.key === 'ArrowRight') openLightbox((currentIndex + 1) % lightboxItems.length);
+          });
+        })
+        .catch(function() {
+          grid.innerHTML = '<p style="text-align:center;color:#888;padding:40px 0">Gallery unavailable — please try again shortly.</p>';
+        });
+    })();
+    </script>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-banner">
+  <div class="cta-banner-bg" data-cms-bg="cta_gallery" style="background-image:url('images/cta-bg.jpg');"></div>
+  <div class="cta-banner-content fade-in">
+    <div class="script-accent" style="font-size:2.5rem;margin-bottom:8px;">Inspired?</div>
+    <h2>Let's Create Your Moment</h2>
+    <p>Enquire today and let our team help you plan an event as beautiful as these.</p>
+    <a href="contact.html" class="btn btn-gold">Enquire Now</a>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div><div class="footer-brand-logo">Adelaide Pavilion</div><div class="footer-brand-tagline">Veale Gardens, Adelaide</div><p class="footer-brand-desc">An iconic garden venue in the heart of Adelaide since 1963.</p><div class="footer-social"><a href="https://www.facebook.com/adelaidepavilion" target="_blank" rel="noopener">f</a><a href="https://www.instagram.com/adelaidepavilion" target="_blank" rel="noopener">in</a></div></div>
+      <div><div class="footer-col-title">Navigate</div><ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="weddings.html">Weddings</a></li><li><a href="corporate.html">Corporate</a></li><li><a href="social.html">Social Events</a></li><li><a href="packages.html">Packages</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><div class="footer-col-title">Gallery</div><ul class="footer-links"><li><a href="gallery.html">All Photos</a></li><li><a href="gallery.html">Weddings</a></li><li><a href="gallery.html">Corporate</a></li><li><a href="gallery.html">Social Events</a></li><li><a href="gallery.html">Venue &amp; Rooms</a></li><li><a href="gallery.html">Gardens</a></li></ul></div>
+      <div><div class="footer-col-title">Contact Us</div><div class="footer-contact-item"><span class="footer-contact-icon">📍</span><div class="footer-contact-text">Veale Gardens, Cnr South Terrace &amp; Peacock Road, Adelaide SA 5000</div></div><div class="footer-contact-item"><span class="footer-contact-icon">📞</span><div class="footer-contact-text"><a href="tel:0882127444" data-cms-href="phone_tel" data-cms="phone_display">08 8212 7444</a></div></div><div class="footer-contact-item"><span class="footer-contact-icon">✉</span><div class="footer-contact-text"><a href="mailto:contact@adelaidepavilion.com.au" data-cms-href="email_href" data-cms="email">contact@adelaidepavilion.com.au</a></div></div></div>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© <span class="js-year"></span> Adelaide Pavilion. All rights reserved.</div><div class="footer-bottom-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms-conditions.html">Terms &amp; Conditions</a></div></div>
+  </div>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">✕</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous">‹</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="" />
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next">›</button>
+</div>
+
+<script src="js/cms-loader.js" defer></script>
+<script src="js/main.js" defer></script>
+</body>
+</html>
