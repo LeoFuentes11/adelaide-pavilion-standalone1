@@ -122,11 +122,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Activate tab from URL hash (e.g. packages.html#menus)
-  const hash = window.location.hash.replace('#', '');
-  if (hash) {
-    const matchBtn = document.querySelector(`.tab-btn[data-tab="${hash}"]`);
-    if (matchBtn) matchBtn.click();
+  // Activate tab from URL hash — supports section hashes (#weddings) and element hashes (#pkg-wedding-signature)
+  const initHash = window.location.hash.slice(1);
+  if (initHash) {
+    const tabBtn = document.querySelector(`.tab-btn[data-tab="${initHash}"]`);
+    if (tabBtn) {
+      tabBtn.click();
+    } else {
+      const target = document.getElementById(initHash);
+      if (target) {
+        const panel = target.closest('[data-tab-content]');
+        if (panel) {
+          const tabContainer = panel.closest('[data-tabs]');
+          tabContainer?.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+          tabContainer?.querySelector(`.tab-btn[data-tab="${panel.dataset.tabContent}"]`)?.classList.add('active');
+          tabContainer?.querySelectorAll('.tab-content').forEach(c => {
+            c.classList.toggle('active', c === panel);
+          });
+          requestAnimationFrame(() => {
+            const navH = document.getElementById('navbar')?.offsetHeight || 80;
+            const tabBarH = document.querySelector('[data-tabs] > div')?.offsetHeight || 52;
+            const top = target.getBoundingClientRect().top + window.scrollY - navH - tabBarH - 12;
+            window.scrollTo({ top, behavior: 'smooth' });
+          });
+        }
+      }
+    }
   }
 
   /* ---------- Accordion ---------- */
@@ -316,5 +337,41 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.js-year').forEach(el => {
     el.textContent = new Date().getFullYear();
   });
+
+  /* ---------- Equalise pkg-header heights per row ---------- */
+  function equalisePackageHeaders() {
+    document.querySelectorAll('.pkg-grid').forEach(grid => {
+      const headers = Array.from(grid.querySelectorAll('.pkg-card .pkg-header'));
+
+      // Reset so we measure natural heights
+      headers.forEach(h => { h.style.minHeight = ''; });
+
+      // Group headers by the top offset of their parent card (= same row)
+      const rows = new Map();
+      headers.forEach(h => {
+        const card = h.closest('.pkg-card');
+        const top  = card ? card.getBoundingClientRect().top + window.scrollY : 0;
+        const key  = Math.round(top); // round to avoid sub-pixel drift
+        if (!rows.has(key)) rows.set(key, []);
+        rows.get(key).push(h);
+      });
+
+      // Set every header in a row to the tallest in that row
+      rows.forEach(rowHeaders => {
+        const maxH = Math.max(...rowHeaders.map(h => h.offsetHeight));
+        rowHeaders.forEach(h => { h.style.minHeight = maxH + 'px'; });
+      });
+    });
+  }
+
+  // Run after fonts/images have loaded, and again on resize
+  window.addEventListener('load', equalisePackageHeaders);
+  window.addEventListener('resize', () => {
+    // Debounce slightly so it doesn't fire on every px during drag
+    clearTimeout(window._eqTimer);
+    window._eqTimer = setTimeout(equalisePackageHeaders, 120);
+  });
+  // Also run now in case load already fired
+  equalisePackageHeaders();
 
 });

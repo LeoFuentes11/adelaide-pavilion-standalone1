@@ -384,7 +384,7 @@ h1,h2,h3,h4,h5 {
 .room-stat strong { color: var(--gold); }
 
 /* ---------- Pricing Tables ---------- */
-.pkg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
+.pkg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
 .pkg-card {
   background: var(--white);
   border-radius: 8px;
@@ -403,12 +403,14 @@ h1,h2,h3,h4,h5 {
   font-family: 'Lato', sans-serif; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;
   padding: 4px 14px; border-radius: 0 0 4px 4px;
 }
-.pkg-header { padding: 32px 28px 24px; background: var(--green); color: var(--white); }
+.pkg-header { padding: 28px 22px 22px; background: var(--green); color: var(--white); min-height: 220px; display: flex; flex-direction: column; justify-content: flex-start; }
+.pkg-card.featured .pkg-header { padding-top: 31px; }
+[data-page="social"] .pkg-card.featured::before { content: 'Most Popular'; }
 .pkg-tag { font-family: 'Lato', sans-serif; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
 .pkg-name { font-family: 'Playfair Display', serif; font-size: 1.7rem; color: var(--white); margin-bottom: 6px; }
 .pkg-price-wrap { margin-top: 16px; }
-.pkg-price { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--gold); line-height: 1; }
-.pkg-price sup { font-size: 1.4rem; vertical-align: super; }
+.pkg-price { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--gold); line-height: 1; display: flex; align-items: flex-start; gap: 3px; }
+.pkg-price sup { font-size: 1rem; font-weight: 600; margin-top: 7px; vertical-align: top; line-height: 1; font-style: normal; }
 .pkg-price-label { font-family: 'Lato', sans-serif; font-size: 0.78rem; color: rgba(255,255,255,0.7); letter-spacing: 0.1em; margin-top: 4px; }
 .pkg-body { padding: 28px; flex: 1; }
 .pkg-section-label { font-family: 'Lato', sans-serif; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin: 20px 0 10px; border-bottom: 1px solid var(--cream); padding-bottom: 6px; }

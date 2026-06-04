@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -95,7 +95,7 @@
         <!-- Package cards -->
         <div class="pkg-grid">
           <!-- Signature -->
-          <div class="pkg-card fade-up">
+          <div class="pkg-card fade-up" id="pkg-wedding-signature">
             <div class="pkg-header">
               <div class="pkg-tag" data-cms="tag_wedding">Wedding Package</div>
               <div class="pkg-name">Signature</div>
@@ -140,7 +140,7 @@
           </div>
 
           <!-- Pavilion (featured) -->
-          <div class="pkg-card featured fade-up" data-delay="100">
+          <div class="pkg-card featured fade-up" data-delay="100" id="pkg-wedding-pavilion">
             <div class="pkg-header">
               <div class="pkg-tag" data-cms="tag_wedding">Wedding Package</div>
               <div class="pkg-name">Pavilion</div>
@@ -178,7 +178,7 @@
           </div>
 
           <!-- Cocktail -->
-          <div class="pkg-card fade-up" data-delay="200">
+          <div class="pkg-card fade-up" data-delay="200" id="pkg-wedding-cocktail">
             <div class="pkg-header">
               <div class="pkg-tag" data-cms="tag_wedding">Wedding Package</div>
               <div class="pkg-name">Cocktail Celebration</div>
@@ -271,7 +271,7 @@
         <div style="margin-bottom:48px;">
           <h3 style="font-size:1.6rem;margin-bottom:24px;">Banquet Packages</h3>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;">
-            <div class="pkg-card fade-up">
+            <div class="pkg-card fade-up" id="pkg-social-banquet-1">
               <div class="pkg-header">
                 <div class="pkg-tag" data-cms="tag_banquet_1">Banquet Option 1</div>
                 <div class="pkg-name">Two Course</div>
@@ -287,7 +287,7 @@
               </div>
               <div class="pkg-footer"><a href="contact.html" class="btn btn-outline-green" style="width:100%;text-align:center;">Enquire</a></div>
             </div>
-            <div class="pkg-card fade-up" data-delay="80">
+            <div class="pkg-card fade-up" data-delay="80" id="pkg-social-banquet-2">
               <div class="pkg-header">
                 <div class="pkg-tag" data-cms="tag_banquet_2">Banquet Option 2</div>
                 <div class="pkg-name">Two Course</div>
@@ -303,7 +303,7 @@
               </div>
               <div class="pkg-footer"><a href="contact.html" class="btn btn-outline-green" style="width:100%;text-align:center;">Enquire</a></div>
             </div>
-            <div class="pkg-card featured fade-up" data-delay="160">
+            <div class="pkg-card featured fade-up" data-delay="160" id="pkg-social-banquet-3">
               <div class="pkg-header">
                 <div class="pkg-tag" data-cms="tag_banquet_3">Banquet Option 3</div>
                 <div class="pkg-name">Three Course Set</div>
@@ -322,7 +322,7 @@
               </div>
               <div class="pkg-footer"><a href="contact.html" class="btn btn-gold" style="width:100%;text-align:center;">Enquire</a></div>
             </div>
-            <div class="pkg-card fade-up" data-delay="240">
+            <div class="pkg-card fade-up" data-delay="240" id="pkg-social-banquet-4">
               <div class="pkg-header">
                 <div class="pkg-tag" data-cms="tag_banquet_4">Banquet Option 4</div>
                 <div class="pkg-name">Three Course Alternate</div>
@@ -346,7 +346,7 @@
 
         <!-- Cocktail + Street Eats -->
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:40px;">
-          <div class="pkg-card fade-up">
+          <div class="pkg-card fade-up" id="pkg-social-cocktail">
             <div class="pkg-header">
               <div class="pkg-tag" data-cms="tag_cocktail_social">Cocktail Package</div>
               <div class="pkg-name">Cocktail Celebration</div>
@@ -363,7 +363,7 @@
             </div>
             <div class="pkg-footer"><a href="contact.html" class="btn btn-outline-green" style="width:100%;text-align:center;">Enquire</a></div>
           </div>
-          <div class="pkg-card fade-up" data-delay="120">
+          <div class="pkg-card fade-up" data-delay="120" id="pkg-social-street-eats">
             <div class="pkg-header">
               <div class="pkg-tag" data-cms="tag_casual_dining">Casual Dining</div>
               <div class="pkg-name">Street Eats</div>
@@ -398,7 +398,7 @@
         </div>
 
         <!-- Breakfast -->
-        <h3 style="font-size:1.6rem;margin-bottom:24px;" class="fade-up"><span data-cms="heading_breakfast_packages">Breakfast Packages</span> <span style="font-family:'Lato',sans-serif;font-size:0.8rem;color:#888;font-weight:400;">(min. 25 guests · 2-hour service · beverages included)</span></h3>
+        <h3 style="font-size:1.6rem;margin-bottom:24px;" class="fade-up" id="pkg-corporate-breakfast"><span data-cms="heading_breakfast_packages">Breakfast Packages</span> <span style="font-family:'Lato',sans-serif;font-size:0.8rem;color:#888;font-weight:400;">(min. 25 guests · 2-hour service · beverages included)</span></h3>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:48px;">
           <div class="pkg-card fade-up">
             <div class="pkg-header">
@@ -438,7 +438,7 @@
         </div>
 
         <!-- Lunch -->
-        <h3 style="font-size:1.6rem;margin-bottom:24px;" class="fade-up" data-cms="heading_lunch_options">Lunch Options</h3>
+        <h3 style="font-size:1.6rem;margin-bottom:24px;" class="fade-up" id="pkg-corporate-fullday" data-cms="heading_lunch_options">Lunch Options</h3>
         <div class="price-table-wrap fade-up" style="margin-bottom:48px;"><table class="price-table">
           <thead><tr><th>Option</th><th>Description</th><th>Price</th></tr></thead>
           <tbody>
@@ -476,7 +476,7 @@
         <!-- Corporate cocktail/networking -->
         <h3 style="font-size:1.6rem;margin-bottom:24px;" class="fade-up" data-cms="heading_corporate_cocktail">Corporate Cocktail &amp; Networking</h3>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:48px;">
-          <div class="pkg-card fade-up">
+          <div class="pkg-card fade-up" id="pkg-corporate-networking">
             <div class="pkg-header">
               <div class="pkg-tag" data-cms="tag_addon">Add-On Package</div><div class="pkg-name">Networking</div>
               <div style="font-family:'Lato',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.7);">1-Hour Post-Presentation</div>
@@ -491,7 +491,7 @@
             </div>
             <div class="pkg-footer"><a href="contact.html" class="btn btn-outline-green" style="width:100%;text-align:center;">Enquire</a></div>
           </div>
-          <div class="pkg-card featured fade-up" data-delay="100">
+          <div class="pkg-card featured fade-up" id="pkg-corporate-evening" data-delay="100">
             <div class="pkg-header">
               <div class="pkg-tag" data-cms="tag_corporate_cocktail_full">Full Corporate Cocktail</div><div class="pkg-name">Cocktail Package</div>
               <div style="font-family:'Lato',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.7);">5-Hour Event Package</div>
