@@ -1165,7 +1165,8 @@ var SECTIONS = [
     ]
   },
   { id: 'photos', label: 'Photos', special: true },
-  { id: 'images', label: 'Site Images', special: true }
+  { id: 'images', label: 'Site Images', special: true },
+  { id: 'pdfs',   label: 'PDF Packages', special: true }
 ];
 
 // ──────────────────────────────────────────────
@@ -1578,6 +1579,7 @@ function switchSection(id) {
     setLoading(false);
     if (id === 'photos') renderPhotos();
     if (id === 'images') renderImages();
+    if (id === 'pdfs')   renderPdfs();
     return Promise.resolve();
   }
 
@@ -2012,6 +2014,278 @@ function compressForSlot(file, callback) {
     image.src = e.target.result;
   };
   reader.readAsDataURL(file);
+}
+
+// ──────────────────────────────────────────────
+// PDF Packages Manager
+// ──────────────────────────────────────────────
+
+var PDF_SLOTS = [
+  { id: 'wedding',   label: 'Wedding Packages',   desc: 'Linked from the Weddings page "Download Packages PDF" button.',   file: 'wedding-packages.pdf'   },
+  { id: 'corporate', label: 'Corporate Packages',  desc: 'Linked from the Corporate page "Download Corporate Packages PDF" button.', file: 'corporate-packages.pdf' },
+  { id: 'social',    label: 'Social Event Packages', desc: 'Linked from the Social Events page "View Full Menus, Beverages & Add-Ons" button.', file: 'social-packages.pdf'    }
+];
+
+function renderPdfs() {
+  var area = document.getElementById('content-area');
+  area.innerHTML = '';
+  document.getElementById('save-btn').disabled = true;
+
+  var intro = document.createElement('p');
+  intro.style.cssText = 'margin-bottom:24px;color:#555;font-size:13.5px;line-height:1.7;max-width:680px;';
+  intro.textContent = 'Upload your PDF packages here. Each file replaces the previous version immediately — customers will download the new file the next time they click the button on the website. Maximum file size: 20 MB per PDF.';
+  area.appendChild(intro);
+
+  PDF_SLOTS.forEach(function(slot) {
+    var card = document.createElement('div');
+    card.style.cssText = 'background:#fff;border:1px solid #e0e0e0;border-radius:10px;overflow:hidden;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.06);';
+
+    // Card header
+    var hdr = document.createElement('div');
+    hdr.style.cssText = 'background:#f7f8fa;border-bottom:1px solid #e0e0e0;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;';
+
+    var hdrLeft = document.createElement('div');
+
+    var hdrTitle = document.createElement('div');
+    hdrTitle.style.cssText = 'font-size:14px;font-weight:700;color:#1C2B39;margin-bottom:3px;';
+    hdrTitle.textContent = slot.label;
+    hdrLeft.appendChild(hdrTitle);
+
+    var hdrFile = document.createElement('div');
+    hdrFile.style.cssText = 'font-size:11.5px;font-family:monospace;color:#888;';
+    hdrFile.textContent = '_docs/' + slot.file;
+    hdrLeft.appendChild(hdrFile);
+
+    hdr.appendChild(hdrLeft);
+
+    // Current file status badge
+    var badge = document.createElement('span');
+    badge.id = 'pdf-badge-' + slot.id;
+    badge.style.cssText = 'font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600;flex-shrink:0;';
+    badge.textContent = 'Checking…';
+    badge.style.background = '#f0f0f0';
+    badge.style.color = '#888';
+    hdr.appendChild(badge);
+
+    card.appendChild(hdr);
+
+    // Card body
+    var body = document.createElement('div');
+    body.style.cssText = 'padding:20px;';
+
+    var desc = document.createElement('p');
+    desc.style.cssText = 'font-size:13px;color:#666;line-height:1.6;margin-bottom:18px;';
+    desc.textContent = slot.desc;
+    body.appendChild(desc);
+
+    // Drop zone
+    var dropZone = document.createElement('div');
+    dropZone.style.cssText = 'border:2px dashed #ccc;border-radius:8px;padding:28px 20px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;margin-bottom:14px;';
+    dropZone.innerHTML =
+      '<input type="file" id="pdf-input-' + slot.id + '" accept="application/pdf,.pdf" style="display:none;">' +
+      '<div style="font-size:14px;color:#888;pointer-events:none;">' +
+        '<strong style="color:var(--green);">Click to choose</strong> or drag &amp; drop a PDF<br>' +
+        '<small style="display:block;margin-top:5px;font-size:11.5px;">PDF only · Max 20 MB</small>' +
+      '</div>';
+
+    var fileInput = dropZone.querySelector('#pdf-input-' + slot.id);
+
+    dropZone.addEventListener('dragover', function(e) { e.preventDefault(); dropZone.style.borderColor = '#1A5FAD'; dropZone.style.background = '#f0f6ff'; });
+    dropZone.addEventListener('dragleave', function() { dropZone.style.borderColor = '#ccc'; dropZone.style.background = ''; });
+    dropZone.addEventListener('drop', function(e) {
+      e.preventDefault();
+      dropZone.style.borderColor = '#ccc'; dropZone.style.background = '';
+      var file = e.dataTransfer.files && e.dataTransfer.files[0];
+      if (file) handlePdfSelected(slot.id, file, fileInput, uploadBtn, statusEl, badge);
+    });
+    dropZone.addEventListener('click', function(e) {
+      if (e.target !== fileInput) fileInput.click();
+    });
+
+    body.appendChild(dropZone);
+
+    // Upload button + status
+    var bottomRow = document.createElement('div');
+    bottomRow.style.cssText = 'display:flex;align-items:center;gap:16px;flex-wrap:wrap;';
+
+    var uploadBtn = document.createElement('button');
+    uploadBtn.type = 'button';
+    uploadBtn.textContent = 'Upload PDF';
+    uploadBtn.disabled = true;
+    uploadBtn.style.cssText = 'padding:10px 24px;background:var(--green);color:#fff;border:none;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;opacity:0.5;transition:opacity .15s;';
+    bottomRow.appendChild(uploadBtn);
+
+    var statusEl = document.createElement('div');
+    statusEl.style.cssText = 'font-size:13px;color:#555;flex:1;';
+    bottomRow.appendChild(statusEl);
+
+    body.appendChild(bottomRow);
+
+    // Current file actions: View + Remove (shown only when a file exists)
+    var fileActionsRow = document.createElement('div');
+    fileActionsRow.id = 'pdf-actions-' + slot.id;
+    fileActionsRow.style.cssText = 'display:none;align-items:center;gap:12px;margin-top:14px;padding-top:14px;border-top:1px solid #f0f0f0;flex-wrap:wrap;';
+
+    var viewLink = document.createElement('a');
+    viewLink.href = '/_docs/' + slot.file;
+    viewLink.target = '_blank';
+    viewLink.rel = 'noopener';
+    viewLink.textContent = 'View current PDF';
+    viewLink.style.cssText = 'font-size:13px;color:var(--green);font-weight:600;text-decoration:none;';
+    fileActionsRow.appendChild(viewLink);
+
+    var removeBtn = document.createElement('button');
+    removeBtn.type = 'button';
+    removeBtn.textContent = 'Remove PDF';
+    removeBtn.style.cssText = 'padding:6px 16px;background:#fff;color:var(--danger);border:1px solid var(--danger);border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;';
+    fileActionsRow.appendChild(removeBtn);
+
+    var removeStatus = document.createElement('span');
+    removeStatus.style.cssText = 'font-size:12px;color:#888;';
+    fileActionsRow.appendChild(removeStatus);
+
+    body.appendChild(fileActionsRow);
+    card.appendChild(body);
+    area.appendChild(card);
+
+    // Wire up file input
+    fileInput.addEventListener('change', function() {
+      var file = fileInput.files && fileInput.files[0];
+      if (file) handlePdfSelected(slot.id, file, fileInput, uploadBtn, statusEl, badge);
+    });
+
+    uploadBtn.addEventListener('mouseover', function() { if (!uploadBtn.disabled) uploadBtn.style.opacity = '0.88'; });
+    uploadBtn.addEventListener('mouseout',  function() { if (!uploadBtn.disabled) uploadBtn.style.opacity = '1'; });
+
+    // Wire up Remove button
+    removeBtn.addEventListener('click', (function(sid, fn, b, far, rs) {
+      return function() {
+        if (!confirm('Remove ' + fn + '? This cannot be undone.')) return;
+        removeBtn.disabled = true;
+        removeBtn.textContent = 'Removing…';
+        fetch('/api/admin-delete-pdf', {
+          method: 'POST',
+          headers: authHeaders({ 'Content-Type': 'application/json' }),
+          body: JSON.stringify({ slot: sid })
+        })
+        .then(function(r) { return r.json().then(function(j) { return { ok: r.ok, body: j }; }); })
+        .then(function(r) {
+          if (r.ok) {
+            far.style.display = 'none';
+            rs.textContent = '';
+            removeBtn.disabled = false;
+            removeBtn.textContent = 'Remove PDF';
+            checkPdfExists(sid, fn, b, far);
+            showToast(fn + ' removed.', 'success');
+          } else {
+            rs.textContent = r.body.error || 'Failed to remove.';
+            removeBtn.disabled = false;
+            removeBtn.textContent = 'Remove PDF';
+          }
+        })
+        .catch(function() {
+          rs.textContent = 'Network error.';
+          removeBtn.disabled = false;
+          removeBtn.textContent = 'Remove PDF';
+        });
+      };
+    })(slot.id, slot.file, badge, fileActionsRow, removeStatus));
+
+    // Check if file currently exists
+    checkPdfExists(slot.id, slot.file, badge, fileActionsRow);
+  });
+}
+
+function checkPdfExists(slotId, filename, badge, fileActionsRow) {
+  // Try fetching the PDF HEAD to see if it exists
+  fetch('/_docs/' + filename, { method: 'HEAD' })
+    .then(function(res) {
+      if (res.ok) {
+        badge.textContent = 'File uploaded';
+        badge.style.background = '#e8f5e9';
+        badge.style.color = '#27ae60';
+        if (fileActionsRow) fileActionsRow.style.display = 'flex';
+      } else {
+        badge.textContent = 'No file yet';
+        badge.style.background = '#fff3e0';
+        badge.style.color = '#e67e22';
+        if (fileActionsRow) fileActionsRow.style.display = 'none';
+      }
+    })
+    .catch(function() {
+      badge.textContent = 'No file yet';
+      badge.style.background = '#fff3e0';
+      badge.style.color = '#e67e22';
+      if (fileActionsRow) fileActionsRow.style.display = 'none';
+    });
+}
+
+function handlePdfSelected(slotId, file, fileInput, uploadBtn, statusEl, badge) {
+  // Validate type
+  if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) {
+    statusEl.style.color = '#c00';
+    statusEl.textContent = 'Please select a PDF file.';
+    return;
+  }
+  // Validate size
+  if (file.size > 20 * 1024 * 1024) {
+    statusEl.style.color = '#c00';
+    statusEl.textContent = 'File is too large (max 20 MB).';
+    return;
+  }
+
+  statusEl.style.color = '#555';
+  statusEl.textContent = 'Ready: ' + file.name + ' (' + Math.round(file.size / 1024) + ' KB)';
+  uploadBtn.disabled = false;
+  uploadBtn.style.opacity = '1';
+
+  // Replace click handler
+  uploadBtn.onclick = function() {
+    uploadBtn.disabled = true;
+    uploadBtn.style.opacity = '0.5';
+    statusEl.style.color = '#555';
+    statusEl.textContent = 'Reading file…';
+
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var base64 = e.target.result.split(',')[1];
+      statusEl.textContent = 'Uploading…';
+
+      fetch('/api/admin-upload-pdf', {
+        method: 'POST',
+        headers: authHeaders({ 'Content-Type': 'application/json' }),
+        body: JSON.stringify({ slot: slotId, data: base64 })
+      })
+      .then(function(res) { return res.json().then(function(j) { return { ok: res.ok, body: j }; }); })
+      .then(function(r) {
+        if (!r.ok) throw new Error(r.body.error || 'Upload failed');
+        statusEl.style.color = '#27ae60';
+        statusEl.textContent = '✓ Uploaded successfully — ' + r.body.sizeKb + ' KB. Customers will now download the new PDF.';
+        badge.textContent = 'File uploaded';
+        badge.style.background = '#e8f5e9';
+        badge.style.color = '#27ae60';
+        uploadBtn.disabled = true;
+        uploadBtn.style.opacity = '0.5';
+        fileInput.value = '';
+        var far = document.getElementById('pdf-actions-' + slotId);
+        if (far) far.style.display = 'flex';
+        showToast(r.body.filename + ' uploaded!', 'success');
+      })
+      .catch(function(err) {
+        statusEl.style.color = '#c00';
+        statusEl.textContent = 'Error: ' + err.message;
+        uploadBtn.disabled = false;
+        uploadBtn.style.opacity = '1';
+      });
+    };
+    reader.onerror = function() {
+      statusEl.style.color = '#c00';
+      statusEl.textContent = 'Could not read file.';
+      uploadBtn.disabled = false;
+      uploadBtn.style.opacity = '1';
+    };
+    reader.readAsDataURL(file);
+  };
 }
 
 // ──────────────────────────────────────────────

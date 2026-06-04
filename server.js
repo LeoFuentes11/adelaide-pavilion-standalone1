@@ -1,4 +1,4 @@
-/**
+﻿/**
  * server.js — Adelaide Pavilion standalone server
  *
  * Replaces Vercel serverless functions + vercel.json routing.
@@ -65,6 +65,9 @@ app.use((req, res, next) => {
     res.setHeader('Cache-Control', 'public, max-age=86400, stale-while-revalidate=604800');
   } else if (p.startsWith('/_data/')) {
     res.setHeader('Cache-Control', 'public, max-age=60, stale-while-revalidate=300');
+  } else if (p.startsWith('/_docs/')) {
+    res.setHeader('Cache-Control', 'public, max-age=300, stale-while-revalidate=600');
+    res.setHeader('Content-Type', 'application/pdf');
   }
   next();
 });
@@ -77,6 +80,8 @@ const adminSave         = require('./api/admin-save');
 const adminUpload       = require('./api/admin-upload');
 const adminDeletePhoto  = require('./api/admin-delete-photo');
 const adminReplaceImage = require('./api/admin-replace-image');
+const adminUploadPdf    = require('./api/admin-upload-pdf');
+const adminDeletePdf    = require('./api/admin-delete-pdf');
 const contact           = require('./api/contact');
 const db                = require('./db/index');
 
@@ -87,6 +92,8 @@ app.post('/api/admin-save',         adminSave);
 app.post('/api/admin-upload',       adminUpload);
 app.post('/api/admin-delete-photo', adminDeletePhoto);
 app.post('/api/admin-replace-image',adminReplaceImage);
+app.post('/api/admin-upload-pdf',   adminUploadPdf);
+app.post('/api/admin-delete-pdf',   adminDeletePdf);
 app.post('/api/contact',            contact);
 
 // ── Public CMS data — serve _data/*.json from SQLite (not static files) ────
