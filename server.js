@@ -20,10 +20,29 @@ const app  = express();
 const PORT = process.env.PORT || 3000;
 const ROOT = __dirname;
 
+// Trust exactly one upstream proxy hop so req.ip / req.secure reflect the real
+// client and protocol. When the app is exposed directly (no proxy), Express
+// ignores X-Forwarded-For, so the header can no longer be spoofed to bypass
+// rate limiting or poison logs.
+app.set('trust proxy', 1);
+
+// ── HTTPS enforcement (production only) ─────────────────────────────────────
+// No-op in dev (http://localhost). Behind a TLS-terminating proxy, req.secure
+// reflects X-Forwarded-Proto via the trust-proxy setting above.
+if (process.env.NODE_ENV === 'production') {
+  app.use((req, res, next) => {
+    if (req.secure) return next();
+    return res.redirect(308, 'https://' + req.headers.host + req.originalUrl);
+  });
+}
+
 // ── Body parsing ───────────────────────────────────────────────────────────
-// 10mb limit to handle base64-encoded image uploads from the admin panel
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+// Small default limit for parsed bodies; the base64 upload routes opt in to a
+// larger limit explicitly at registration time. Parsers are applied per-route
+// (not globally) so unauthenticated/static requests buffer nothing.
+const jsonSmall  = express.json({ limit: '512kb' });
+const jsonLarge  = express.json({ limit: '16mb' }); // base64 image / PDF uploads
+const formParser = express.urlencoded({ extended: true, limit: '512kb' });
 app.use(cookieParser());
 
 // ── Security headers (mirrors vercel.json headers block exactly) ───────────
@@ -85,16 +104,16 @@ const adminDeletePdf    = require('./api/admin-delete-pdf');
 const contact           = require('./api/contact');
 const db                = require('./db/index');
 
-app.post('/api/admin-login',        adminLogin);
+app.post('/api/admin-login',        formParser, adminLogin);
 app.get( '/api/admin-auth-check',   adminAuthCheck.handler);
 app.get( '/api/admin-content',      adminContent);
-app.post('/api/admin-save',         adminSave);
-app.post('/api/admin-upload',       adminUpload);
-app.post('/api/admin-delete-photo', adminDeletePhoto);
-app.post('/api/admin-replace-image',adminReplaceImage);
-app.post('/api/admin-upload-pdf',   adminUploadPdf);
-app.post('/api/admin-delete-pdf',   adminDeletePdf);
-app.post('/api/contact',            contact);
+app.post('/api/admin-save',         jsonSmall, adminSave);
+app.post('/api/admin-upload',       jsonLarge, adminUpload);
+app.post('/api/admin-delete-photo', jsonSmall, adminDeletePhoto);
+app.post('/api/admin-replace-image',jsonLarge, adminReplaceImage);
+app.post('/api/admin-upload-pdf',   jsonLarge, adminUploadPdf);
+app.post('/api/admin-delete-pdf',   jsonSmall, adminDeletePdf);
+app.post('/api/contact',            jsonSmall, contact);
 
 // ── Public CMS data — serve _data/*.json from SQLite (not static files) ────
 // Must be registered before express.static so these routes win.

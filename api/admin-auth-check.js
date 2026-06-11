@@ -12,7 +12,7 @@
 
 const fs   = require('fs');
 const path = require('path');
-const { getExpectedToken, isAuthenticated } = require('./_auth');
+const { issueToken, isAuthenticated } = require('./_auth');
 
 function serveAdminPage(res, token) {
   const filePath = path.join(__dirname, '..', 'admin', 'index.html');
@@ -50,7 +50,7 @@ function handler(req, res) {
   if (!isAuthenticated(req)) {
     return res.status(302).redirect('/admin-login.html?redirect=/admin/');
   }
-  return serveAdminPage(res, getExpectedToken());
+  return serveAdminPage(res, issueToken());
 }
 
 module.exports = { middleware, handler };

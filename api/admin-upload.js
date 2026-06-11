@@ -20,6 +20,17 @@ const MAX_BYTES = 4 * 1024 * 1024; // 4 MB
 
 const GALLERY_DIR = path.join(__dirname, '..', 'images', 'gallery');
 
+// Detect the real image type from magic bytes — never trust the client MIME.
+function sniffImageMime(buf) {
+  if (!buf || buf.length < 12) return null;
+  if (buf[0] === 0xFF && buf[1] === 0xD8 && buf[2] === 0xFF) return 'image/jpeg';
+  if (buf[0] === 0x89 && buf[1] === 0x50 && buf[2] === 0x4E && buf[3] === 0x47) return 'image/png';
+  if (buf[0] === 0x47 && buf[1] === 0x49 && buf[2] === 0x46) return 'image/gif';
+  if (buf.slice(0, 4).toString('ascii') === 'RIFF' &&
+      buf.slice(8, 12).toString('ascii') === 'WEBP') return 'image/webp';
+  return null;
+}
+
 function sanitizeFilename(name) {
   return name
     .replace(/\.[^.]+$/, '')         // strip extension
@@ -64,10 +75,17 @@ module.exports = function adminUpload(req, res) {
     return res.status(400).json({ error: 'File too large (max 4 MB). Please compress before uploading.' });
   }
 
+  // Verify the actual bytes match an allowed image type (rejects SVG and any
+  // non-image payload disguised with an image MIME/extension).
+  const sniffed = sniffImageMime(imageBuffer);
+  if (!sniffed) {
+    return res.status(400).json({ error: 'File content is not a valid JPEG, PNG, WebP, or GIF image.' });
+  }
+
   // Ensure gallery directory exists
   fs.mkdirSync(GALLERY_DIR, { recursive: true });
 
-  const ext      = EXT_MAP[mimeType] || 'jpg';
+  const ext      = EXT_MAP[sniffed];
   const ts       = Date.now();
   const safeName = sanitizeFilename(name);
   const filename = `${ts}-${safeName}.${ext}`;

@@ -23,6 +23,17 @@ function sanitizeSlot(slot) {
   return /^[a-zA-Z0-9_]+$/.test(slot);
 }
 
+// Detect the real image type from magic bytes — never trust the client MIME.
+function sniffImageMime(buf) {
+  if (!buf || buf.length < 12) return null;
+  if (buf[0] === 0xFF && buf[1] === 0xD8 && buf[2] === 0xFF) return 'image/jpeg';
+  if (buf[0] === 0x89 && buf[1] === 0x50 && buf[2] === 0x4E && buf[3] === 0x47) return 'image/png';
+  if (buf[0] === 0x47 && buf[1] === 0x49 && buf[2] === 0x46) return 'image/gif';
+  if (buf.slice(0, 4).toString('ascii') === 'RIFF' &&
+      buf.slice(8, 12).toString('ascii') === 'WEBP') return 'image/webp';
+  return null;
+}
+
 const findSlot   = db.prepare('SELECT src, label FROM images WHERE slot = ?');
 const updateSlot = db.prepare('UPDATE images SET src = ? WHERE slot = ?');
 
@@ -60,6 +71,13 @@ module.exports = function adminReplaceImage(req, res) {
     return res.status(400).json({ error: 'File too large (max 4 MB).' });
   }
 
+  // Verify the actual bytes match an allowed image type (rejects SVG and any
+  // non-image payload disguised with an image MIME/extension).
+  const sniffed = sniffImageMime(imageBuffer);
+  if (!sniffed) {
+    return res.status(400).json({ error: 'File content is not a valid JPEG, PNG, WebP, or GIF image.' });
+  }
+
   // Verify slot exists in DB
   const existing = findSlot.get(slot);
   if (!existing) {
@@ -69,7 +87,7 @@ module.exports = function adminReplaceImage(req, res) {
   // Ensure managed directory exists
   fs.mkdirSync(MANAGED_DIR, { recursive: true });
 
-  const ext      = EXT_MAP[mimeType] || 'jpg';
+  const ext      = EXT_MAP[sniffed];
   const ts       = Date.now();
   const filePath = path.join(MANAGED_DIR, `${ts}-${slot}.${ext}`);
   const imageSrc = `images/managed/${ts}-${slot}.${ext}`;

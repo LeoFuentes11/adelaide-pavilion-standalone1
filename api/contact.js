@@ -66,7 +66,16 @@ function validateFields(f) {
 /* ── Turnstile ─────────────────────────────────────────────── */
 async function verifyTurnstile(token, ip) {
   const secret = process.env.TURNSTILE_SECRET_KEY;
-  if (!secret) { console.warn('[contact] TURNSTILE_SECRET_KEY not set — skipping'); return true; }
+  if (!secret) {
+    // Fail closed in production: a missing secret must not silently disable
+    // bot protection on a live site. Only skip in non-production (local dev).
+    if (process.env.NODE_ENV === 'production') {
+      console.error('[contact] TURNSTILE_SECRET_KEY not set in production — rejecting');
+      return false;
+    }
+    console.warn('[contact] TURNSTILE_SECRET_KEY not set — skipping (dev only)');
+    return true;
+  }
   if (!token) return false;
   const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
     method: 'POST',
@@ -124,8 +133,9 @@ module.exports = async function contact(req, res) {
     return res.status(403).json({ error: 'Forbidden' });
   }
 
-  const ip = (req.headers['x-forwarded-for'] || req.socket?.remoteAddress || 'unknown')
-    .split(',')[0].trim();
+  // req.ip is derived from the trusted proxy hop, so it cannot be spoofed via
+  // a raw X-Forwarded-For header to bypass rate limiting.
+  const ip = req.ip || req.socket?.remoteAddress || 'unknown';
 
   if (isRateLimited(ip)) {
     return res.status(429).json({

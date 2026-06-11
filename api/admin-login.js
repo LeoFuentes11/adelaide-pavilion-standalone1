@@ -5,7 +5,7 @@
  */
 'use strict';
 
-const { makeSessionToken } = require('./_auth');
+const { issueToken, safeEqual } = require('./_auth');
 
 // In-memory rate limiting (resets on server restart — fine for low-volume admin)
 const loginAttempts = new Map();
@@ -37,7 +37,13 @@ function safeRedirect(redirect) {
 async function verifyTurnstile(token, ip) {
   const secret = process.env.TURNSTILE_SECRET_KEY;
   if (!secret) {
-    console.warn('[admin-login] TURNSTILE_SECRET_KEY not set — skipping Turnstile check');
+    // Fail closed in production so a config slip can't disable bot protection
+    // on the admin login. Skip only in non-production (local dev).
+    if (process.env.NODE_ENV === 'production') {
+      console.error('[admin-login] TURNSTILE_SECRET_KEY not set in production — rejecting');
+      return false;
+    }
+    console.warn('[admin-login] TURNSTILE_SECRET_KEY not set — skipping (dev only)');
     return true;
   }
   if (!token) return false;
@@ -67,8 +73,9 @@ module.exports = async function adminLogin(req, res) {
     return res.status(302).redirect('/admin-login.html?error=misconfigured');
   }
 
-  const ip = (req.headers['x-forwarded-for'] || req.socket?.remoteAddress || 'unknown')
-    .split(',')[0].trim();
+  // req.ip is derived from a trusted proxy hop (app.set('trust proxy')) and
+  // therefore cannot be spoofed by a raw X-Forwarded-For header.
+  const ip = req.ip || req.socket?.remoteAddress || 'unknown';
 
   if (isRateLimited(ip)) {
     return res.status(302).redirect('/admin-login.html?error=ratelimit');
@@ -87,13 +94,16 @@ module.exports = async function adminLogin(req, res) {
     return res.status(302).redirect(`/admin-login.html?redirect=${encodeURIComponent(dest)}&error=bot`);
   }
 
-  if (username !== ADMIN_USERNAME || password !== ADMIN_PASSWORD) {
+  // Constant-time credential check (both sides evaluated, no short-circuit leak)
+  const userOk = safeEqual(username, ADMIN_USERNAME);
+  const passOk = safeEqual(password, ADMIN_PASSWORD);
+  if (!userOk || !passOk) {
     const dest = safeRedirect(redirect);
     return res.status(302).redirect(`/admin-login.html?redirect=${encodeURIComponent(dest)}&error=invalid`);
   }
 
-  // Set session cookie
-  const sessionToken = makeSessionToken(ADMIN_USERNAME, ADMIN_PASSWORD);
+  // Set session cookie (expiring, signed token)
+  const sessionToken = issueToken();
   const isHttps = (req.headers['x-forwarded-proto'] || '').includes('https');
   const maxAge  = 60 * 60 * 24 * 7; // 7 days
   const secure  = isHttps ? '; Secure' : '';
