@@ -1,7 +1,7 @@
 {
   "entrees": [
     {
-      "name": "Thai Pumpkin Soup CMS TEST",
+      "name": "Thai Pumpkin Soup",
       "desc": "Thick, coriander, lemongrass, touch of chilli",
       "surcharge": ""
     },
@@ -103,7 +103,7 @@
       "surcharge": ""
     },
     {
-      "name": "Pork French Cut Lette",
+      "name": "Pork French Cutlet",
       "desc": "Char-grilled, Beurre Maître d'Hôtel, apple and fennel slaw",
       "surcharge": ""
     },
@@ -155,7 +155,7 @@
       "surcharge": ""
     },
     {
-      "name": "Brandy-Snap Basket Semifreddo",
+      "name": "Brandy-Snap Basket",
       "desc": "Boysenberry ice-cream, mixed berry compote",
       "surcharge": ""
     },

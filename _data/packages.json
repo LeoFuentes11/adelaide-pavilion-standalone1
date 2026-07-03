@@ -34,8 +34,8 @@
   "social_street_eats": 48,
   "corporate_breakfast_continental": 30,
   "corporate_breakfast_hot": 32,
-  "corporate_networking": 38,
-  "corporate_cocktail": 83,
+  "corporate_networking": 42,
+  "corporate_cocktail": 88,
   "children_menu1": 40,
   "children_menu1_label": "Option 1 — $40 per child (under 12)",
   "children_menu1_items": [
@@ -59,24 +59,22 @@
     "Soft Drinks & Orange Juice"
   ],
   "children_note": "Older children and young adults (9–17 years) may prefer to have the main menu. Supplier meals (main course from menu) are available at $50 per person.",
-  "bev_standard_2hr": "$24pp",
-  "bev_standard_3hr": "$28pp",
-  "bev_standard_4hr": "$33pp",
-  "bev_standard_5hr": "$38pp",
+  "bev_standard_2hr": "$28pp",
+  "bev_standard_3hr": "$33pp",
+  "bev_standard_4hr": "$38pp",
+  "bev_standard_5hr": "$43pp",
   "bev_standard_includes": [
     "House Beer",
     "Cascade Premium Light",
     "Svelte Sauvignon Blanc",
-    "Svelte Shiraz TESTING OBJECT",
+    "Svelte Shiraz",
     "Willowglen Sparkling Brut (on demand)",
     "Assorted Soft Drinks & Orange Juice"
   ],
   "bev_premium_surcharge": "Standard price + $10pp",
   "bev_premium_reds": [
     "Hedonist Shiraz (McLaren Vale)",
-    "Barristers Block Tempranillo Cab Shiraz (Adelaide Hills)",
-    "Tomich Hill Cabernet Sauvignon (Coonawarra)",
-    "Hedonist Grenache (McLaren Vale)"
+    "Barristers Block Tempranillo Cab Shiraz (Adelaide Hills)"
   ],
   "bev_premium_whites": [
     "Brothers at War Riesling (Barossa Valley)",
@@ -93,7 +91,8 @@
   "bev_deluxe_reds": [
     "Brothers at War Fist Fight Shiraz (Barossa Valley)",
     "Barristers Block Pinot Noir (Adelaide Hills)",
-    "Barristers Block Wrattonbully Cabernet Sauv."
+    "Barristers Block Wrattonbully Cabernet Sauv.",
+    "Hedonist Grenache (McLaren Vale)"
   ],
   "bev_deluxe_whites": [
     "Barristers Block Sauvignon Blanc (Adelaide Hills)",
@@ -203,7 +202,7 @@
   "social_cocktail_items": [
     "7 Hot Canapés — your selection",
     "6 Cold Canapés — your selection",
-    "Beverage packages from $24pp (separate)",
+    "Beverage packages available at an additional cost",
     "Upgrades available (min. spend applies)"
   ],
   "social_street_eats_items": [
@@ -241,7 +240,7 @@
     "Dedicated Event Coordinator",
     "AV Equipment included"
   ],
-  "lunch_r1_name": "Focaccia Lunch TESTING !!",
+  "lunch_r1_name": "Focaccia Lunch",
   "lunch_r1_desc": "Focaccia with meat & vegetable fillings, plus cocktail-sized savoury pastry",
   "lunch_r1_price": "$18.90pp",
   "lunch_r2_name": "Gourmet Salad Lunch",
