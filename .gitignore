@@ -28,3 +28,4 @@ Thumbs.db
 # Claude Code dev files — local only, never push
 CLAUDE.md
 .mcp.json
+.claude/
