@@ -162,8 +162,22 @@ app.get(['/admin', '/admin/'], adminAuthCheck.handler);
 app.use('/admin', adminAuthCheck.middleware, express.static(path.join(ROOT, 'admin')));
 
 // ── Static file serving ────────────────────────────────────────────────────
-// Serve everything else from the project root.
+// Serve everything else from the project root, but never leak server-side
+// source, dependencies, or the SQLite database — express.static(ROOT) alone
+// would happily hand out /server.js, /db/cms.db, /node_modules/*, etc.
 // index: false so we can handle / explicitly if needed.
+const BLOCKED_PREFIXES = [
+  '/server.js', '/package.json', '/package-lock.json', '/ecosystem.config.js',
+  '/README.md', '/CLAUDE.md',
+  '/db/', '/api/', '/node_modules/', '/logs/', '/_data/',
+];
+app.use((req, res, next) => {
+  const p = req.path;
+  if (BLOCKED_PREFIXES.some(bp => p === bp || p.startsWith(bp))) {
+    return res.status(404).sendFile(path.join(ROOT, 'index.html'));
+  }
+  next();
+});
 app.use(express.static(ROOT, {
   index: 'index.html',
   dotfiles: 'deny',       // never serve .env, .git, etc.
