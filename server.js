@@ -119,7 +119,7 @@ app.post('/api/contact',            jsonSmall, contact);
 // Must be registered before express.static so these routes win.
 const CONTENT_FILES = new Set([
   'contact', 'homepage', 'about', 'weddings', 'corporate',
-  'social', 'packages', 'menus'
+  'social', 'packages', 'menus', 'privacy'
 ]);
 app.get('/_data/:file.json', (req, res) => {
   const file = req.params.file;

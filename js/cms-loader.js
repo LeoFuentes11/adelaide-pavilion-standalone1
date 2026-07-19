@@ -28,6 +28,7 @@
     corporate: '_data/corporate.json',
     social:    '_data/social.json',
     packages:  '_data/packages.json',
+    privacy:   '_data/privacy.json',
     // gallery and contact have no page-scoped JSON
   };
 

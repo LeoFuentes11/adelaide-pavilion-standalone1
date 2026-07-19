@@ -10,7 +10,7 @@ const { isAuthenticated } = require('./_auth');
 const db = require('../db/index');
 
 const ALLOWED_FILES = [
-  'contact', 'homepage', 'about', 'weddings', 'corporate', 'social', 'packages', 'menus'
+  'contact', 'homepage', 'about', 'weddings', 'corporate', 'social', 'packages', 'menus', 'privacy'
 ];
 
 const upsertContent = db.prepare(`

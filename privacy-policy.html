@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Great+Vibes&family=Lato:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
+<body data-page="privacy">
 
 <nav id="navbar">
   <div class="nav-inner">
@@ -48,14 +48,121 @@
   <div class="container container-narrow">
     <div class="fade-up" style="max-width:760px;margin:0 auto;">
 
-      <p style="font-family:'Lato',sans-serif;font-size:0.88rem;color:#888;margin-bottom:40px;">Last updated: <span id="lastUpdated"></span></p>
+      <p style="font-family:'Lato',sans-serif;font-size:0.88rem;color:#888;margin-bottom:40px;">Last updated: <span data-cms="last_updated">20 July 2026</span></p>
 
-      <!-- ── CONTENT PLACEHOLDER ─────────────────────────────────────────── -->
-      <div style="background:#f9f6f1;border:2px dashed var(--gold);border-radius:6px;padding:32px;text-align:center;color:#999;font-family:'Lato',sans-serif;font-size:0.95rem;line-height:1.8;">
-        Privacy Policy content to be provided by Adelaide Pavilion.<br>
-        <span style="font-size:0.82rem;">Please send the text to your web developer to publish here.</span>
+      <style>
+        .tc-section { margin-bottom: 28px; }
+        .tc-heading { font-family:'Lato',sans-serif; font-size:0.72rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--green); font-weight:700; margin:0 0 8px; }
+        .tc-body { font-family:'Lato',sans-serif; font-size:0.9rem; color:#555; line-height:1.85; margin:0; }
+        .tc-body ol, .tc-body ul { padding-left:22px; margin:8px 0 0; }
+        .tc-body li { margin-bottom:5px; }
+      </style>
+
+      <div data-cms-html="content">
+
+        <div class="tc-section">
+          <p class="tc-body">Adelaide Pavilion (The Trustee for Alkyona Unit Trust, 71 291 135 625) runs a function centre at Veale Gardens, corner South Terrace and Peacock Road, Adelaide SA 5000. This policy explains what personal information we collect when you enquire about or book an event with us, what we do with it, and how you can get in touch about it.</p>
+          <p class="tc-body" style="margin-top:10px;">We handle personal information in line with the Australian Privacy Principles under the Privacy Act 1988 (Cth).</p>
+        </div>
+
+        <div class="tc-section">
+          <h3 class="tc-heading">What we collect</h3>
+          <p class="tc-body">For most people, this is just contact and event details:</p>
+          <p class="tc-body"><ul>
+            <li>your name, email address and phone number</li>
+            <li>your organisation, if you're enquiring on behalf of a business</li>
+            <li>the type of function you're planning, your preferred date and your estimated guest numbers</li>
+            <li>how you heard about us</li>
+            <li>anything else you write in the message field</li>
+            <li>as planning progresses: room preference, menu selections, run sheet, budget and supplier details</li>
+            <li>dietary requirements, allergies and accessibility needs for you or your guests</li>
+            <li>correspondence between us, including emails, enquiry form submissions and notes from phone calls or site visits</li>
+            <li>if you join our mailing list, your name and email address</li>
+          </ul></p>
+          <p class="tc-body" style="margin-top:10px;">Dietary requirements, allergies and accessibility needs: we only collect these when you give them to us, we use them solely to run your function safely, and we don't keep them for any other purpose.</p>
+          <p class="tc-body" style="margin-top:10px;">We don't take payments through our website. If you pay us by card, bank transfer or in person, those details are handled by our bank or payment terminal provider, not stored by us.</p>
+        </div>
+
+        <div class="tc-section">
+          <h3 class="tc-heading">How we collect it</h3>
+          <p class="tc-body">Usually directly from you, through our website enquiry form, by email, over the phone, at a site visit, or in the documents you send us while planning your event.</p>
+          <p class="tc-body" style="margin-top:10px;">Sometimes we receive it from someone else. If a friend or colleague books a function and gives us your details as a guest, or a wedding planner or event organiser deals with us on your behalf, we'll have your information without hearing from you first. You're welcome to contact us to ask what we hold.</p>
+        </div>
+
+        <div class="tc-section">
+          <h3 class="tc-heading">Why we collect it</h3>
+          <p class="tc-body"><ul>
+            <li>to answer your enquiry and prepare a quote</li>
+            <li>to plan, confirm and run your function</li>
+            <li>to invoice you and follow up on payment</li>
+            <li>to keep in touch afterwards, including asking for feedback</li>
+            <li>to understand which advertising and referral sources bring people to us, using the "how did you hear about us" field</li>
+            <li>to send you news and offers if you've joined our mailing list</li>
+            <li>to meet our obligations under food safety, liquor licensing and workplace laws</li>
+          </ul></p>
+        </div>
+
+        <div class="tc-section">
+          <h3 class="tc-heading">Who we share it with</h3>
+          <p class="tc-body"><strong>Suppliers and vendors for your function.</strong> Running an event often means working with people outside our team: photographers, florists, entertainers, cake makers, equipment hire, etc. We share only what those suppliers need to do their part on the day. We don't share your details with vendors for any other reason, and we don't sell or rent your information to anyone.</p>
+          <p class="tc-body" style="margin-top:10px;"><strong>Our service providers.</strong> Our website host, email provider, mailing list platform and accounting software all handle information in the ordinary course of us running the business.</p>
+          <p class="tc-body" style="margin-top:10px;"><strong>When the law requires it.</strong> For example, in response to a subpoena, a health or food safety investigation, or a request from a regulator.</p>
+        </div>
+
+        <div class="tc-section">
+          <h3 class="tc-heading">Our mailing list</h3>
+          <p class="tc-body">You'll only go on our mailing list if you ask to, or if you've held or enquired about a function with us and we think our news might be useful to you. Every email includes an unsubscribe link, and we act on unsubscribe requests promptly. You can also email us and ask to be taken off.</p>
+        </div>
+
+        <div class="tc-section">
+          <h3 class="tc-heading">Cookies and website analytics</h3>
+          <p class="tc-body">Our website uses cookies and analytics tools to understand how people find and use the site: which pages get visited, how long people stay, which links they click. This is aggregate information about site traffic, not something we use to identify you personally.</p>
+          <p class="tc-body" style="margin-top:10px;">You can block or delete cookies through your browser settings. Some parts of the site may not work as well if you do.</p>
+        </div>
+
+        <div class="tc-section">
+          <h3 class="tc-heading">Where we store it</h3>
+          <p class="tc-body">Enquiry and event records are kept in our email system, booking records and business software. Some of these are cloud services with servers outside Australia, which means your information may be stored or accessed overseas. We choose providers that maintain reasonable security standards and we take reasonable steps to make sure your information is handled consistently with this policy.</p>
+        </div>
+
+        <div class="tc-section">
+          <h3 class="tc-heading">How we protect it</h3>
+          <p class="tc-body">We restrict access to customer information to staff who need it for their work, use password protection and secure accounts, and keep our systems up to date. No system is completely secure, and we can't guarantee against every risk, but we take the protection of your information seriously.</p>
+        </div>
+
+        <div class="tc-section">
+          <h3 class="tc-heading">How long we keep it</h3>
+          <p class="tc-body">We keep enquiry and event records for as long as we need them for the purposes above and to meet our record-keeping obligations, generally seven years for anything with a financial record attached. After that we delete or de-identify it. Mailing list details are kept until you unsubscribe.</p>
+        </div>
+
+        <div class="tc-section">
+          <h3 class="tc-heading">Getting access to your information, or correcting it</h3>
+          <p class="tc-body">You can ask us what personal information we hold about you and request a copy. You can also ask us to correct anything that's wrong or out of date. Email us at <a href="mailto:contact@adelaidepavilion.com.au">contact@adelaidepavilion.com.au</a> and we'll respond within 30 days. There's no charge, though we may ask you to verify your identity first.</p>
+          <p class="tc-body" style="margin-top:10px;">There are limited situations where we can't give you access, for example, where doing so would reveal information about someone else. If that happens we'll explain why.</p>
+        </div>
+
+        <div class="tc-section">
+          <h3 class="tc-heading">If you have a complaint</h3>
+          <p class="tc-body">If you think we've mishandled your personal information, please tell us first. Email <a href="mailto:contact@adelaidepavilion.com.au">contact@adelaidepavilion.com.au</a> or phone <a href="tel:0882127444">(08) 8212 7444</a> and we'll look into it and come back to you within 30 days.</p>
+          <p class="tc-body" style="margin-top:10px;">If you're not satisfied with how we've handled it, you can take the matter to the Office of the Australian Information Commissioner:</p>
+          <p class="tc-body"><ul>
+            <li>Website: <a href="https://www.oaic.gov.au" target="_blank" rel="noopener">oaic.gov.au</a></li>
+            <li>Phone: 1300 363 992</li>
+            <li>Post: GPO Box 5218, Sydney NSW 2001</li>
+          </ul></p>
+        </div>
+
+        <div class="tc-section">
+          <h3 class="tc-heading">Changes to this policy</h3>
+          <p class="tc-body">We may update this policy from time to time. The current version will always be on this page, with the date it was last updated at the top.</p>
+        </div>
+
+        <div class="tc-section">
+          <h3 class="tc-heading">Contact us</h3>
+          <p class="tc-body">Adelaide Pavilion<br>Veale Gardens, cnr South Terrace &amp; Peacock Road, Adelaide SA 5000<br>Phone: <a href="tel:0882127444">(08) 8212 7444</a><br>Email: <a href="mailto:contact@adelaidepavilion.com.au">contact@adelaidepavilion.com.au</a></p>
+        </div>
+
       </div>
-      <!-- ── END PLACEHOLDER ─────────────────────────────────────────────── -->
 
     </div>
   </div>
@@ -105,9 +212,7 @@
   </div>
 </footer>
 
-<script>
-  document.getElementById('lastUpdated').textContent = new Date().toLocaleDateString('en-AU', { year: 'numeric', month: 'long', day: 'numeric' });
-</script>
 <script src="js/main.js" defer></script>
+<script src="js/cms-loader.js" defer></script>
 </body>
 </html>

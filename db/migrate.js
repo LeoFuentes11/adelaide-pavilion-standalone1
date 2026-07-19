@@ -16,7 +16,7 @@ const path = require('path');
 
 const DATA_DIR = path.join(__dirname, '..', '_data');
 
-const CONTENT_FILES = ['contact', 'homepage', 'about', 'weddings', 'corporate', 'social', 'packages', 'menus'];
+const CONTENT_FILES = ['contact', 'homepage', 'about', 'weddings', 'corporate', 'social', 'packages', 'menus', 'privacy'];
 
 let migrated = 0;
 let skipped = 0;

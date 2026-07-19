@@ -1164,6 +1164,19 @@ var SECTIONS = [
       }
     ]
   },
+  {
+    id: 'privacy',
+    label: 'Privacy Policy Page',
+    groups: [
+      {
+        title: 'Content',
+        fields: [
+          { key: 'last_updated', label: 'Last updated (display text)', type: 'string', hint: 'E.g. 18 July 2026' },
+          { key: 'content',      label: 'Policy content (HTML)', type: 'text', hint: 'Full policy body as HTML. Paste an updated policy here to replace it — use <h3 class="tc-heading">, <p class="tc-body"> and <ul><li> for sections and lists.' }
+        ]
+      }
+    ]
+  },
   { id: 'photos', label: 'Photos', special: true },
   { id: 'images', label: 'Site Images', special: true },
   { id: 'pdfs',   label: 'PDF Packages', special: true }

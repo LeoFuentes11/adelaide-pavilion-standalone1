@@ -10,7 +10,7 @@ const db = require('../db/index');
 
 const ALLOWED_FILES = [
   'contact', 'homepage', 'about', 'weddings', 'corporate',
-  'social', 'packages', 'menus', 'gallery', 'images'
+  'social', 'packages', 'menus', 'gallery', 'images', 'privacy'
 ];
 
 module.exports = function adminContent(req, res) {
